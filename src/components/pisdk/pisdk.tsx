@@ -75,13 +75,13 @@ const onIncompletePaymentFound = (payment: PaymentDTO) => {
 
 const onReadyForApproval = async (paymentId) => {
   console.log("Đợi xác nhận giao dịch", paymentId);
-  axios.post('/payments/approve', {paymentId}, config);
+  axios.post('/payments/approve', {paymentId,paymentData}, config);
 };
 
 const onReadyForCompletion = (paymentId, txid) => {
  
   console.log("Đợi hoàn thành giao dịch", paymentId, txid);
-  axios.post('/payments/complete', {paymentId, txid}, config);
+  axios.post('/payments/complete', {paymentId, txid, paymentData}, config);
 };
 
 
@@ -95,14 +95,13 @@ const onError = (error: Error) => {
   console.log("Lỗi ", error);
 }
 
-const ddd = async config => {
+const ddd = async (config) => {
   window.Pi.createPayment(config, {
-    // Callbacks you need to implement - read more about those in the detailed docs linked below:
-    onReadyForServerApproval: paymentId =>
+    onReadyForServerApproval: (paymentId) =>
       onReadyForApproval(paymentId),
     onReadyForServerCompletion: (paymentId, txid) =>
       onReadyForCompletion(paymentId, txid),
-    onCancel: onCancel,
+    onCancel:  (paymentId) =>  onCancel(paymentId),
     onError: onError,
   });
 }

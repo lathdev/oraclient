@@ -79,19 +79,14 @@ const Post = () => {
   );
   const tip = useCallback( async (e) => {
     e.preventDefault();
-    donatePi("Tip Post", 1, {To: "Piora"})
-  
-    // const option  ={
-    //   method: "post", 
-    //   url:``,
-    //   data: ''
-    // }
+    const res = await axios.get(`/api/v1/posts/${path}`);
+    
+    const userPi = res.data.post.author.userName;
     
 
-  //   const response = await axios(option)
-  //   setMessages(response.data.data)
-  //  if (response.data.status=='OK') setVisible(!visible)
-  //   setErr(false)
+   if(userPi) donatePi(`to ${userPi}`, 1, {To: "Piora"})
+  
+    
   },[])
 
   const handleUnVote = useCallback(
