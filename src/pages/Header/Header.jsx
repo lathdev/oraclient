@@ -301,10 +301,10 @@ const Header = () => {
                                                 <Link to="/messages">
                                                     <button className="icon-notify">
                                                         {countNotiMes === 0 ? (
-                                                            <i className="header__icon header__icon-top bx bxl-messenger"></i>
+                                                            <i className="header__icon header__icon-top bx bx-conversation"></i>
                                                         ) : (
                                                             <>
-                                                                <i className="header__icon header__icon-top bx bxl-messenger"></i>
+                                                                <i className="header__icon header__icon-top bx bx-conversation"></i>
                                                                 <span className="badge">{countNotiMes}</span>
                                                             </>
                                                         )}

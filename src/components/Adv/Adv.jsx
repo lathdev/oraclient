@@ -98,21 +98,21 @@ const Adv = () => {
                 <ul className="adv__about-list">
                     <li className="adv__about-item">
                         <Link to="/post/terms-of-use" className="adv__about-link">
-                            <span className="adv__about-text">Terms of use</span>
+                            <span className="adv__about-text">TERMS</span>
                         </Link>
                     </li>
                     <li className="adv__about-item">
                         <Link to="/post/privacy-policy" className="adv__about-link">
-                            <span className="adv__about-text">Policy</span>
+                            <span className="adv__about-text">POLICY</span>
                         </Link>
                     </li>
-                    <li className="adv__about-item">
+                    {/* <li className="adv__about-item">
                         <Link to="/" className="adv__about-link">
-                            <span className="adv__about-text">Fanpage </span>
+                            <span className="adv__about-text">FANPAGE</span>
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
-                <span className="adv__about-text">© 2023 Ora Lab.</span>
+                <span className="adv__about-text">© 2023 ORA LAB</span>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import axios from "axios";
 import "./usersettings.scss";
 import { userState$, passwordState$ } from "../../redux/selectors";
 import { useTranslation } from "react-i18next";
-
+import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
     // const changeLanguageHandler = (e) => {
@@ -249,6 +249,12 @@ const UserSettings = () => {
     useEffect(() => {
         document.title = `${t("user_setting")}`;
     }, [currentUser]);
+    const withDraw = useCallback(async (e) => {
+        e.preventDefault();
+        withdrawPi("katori0508", 1);
+
+
+    },[]);
     return (
         <div className="container">
             {isSuccessEmail ? (
@@ -663,7 +669,7 @@ const UserSettings = () => {
                                                 <div className="settings__flex-item">
                                                     <button
                                                         className="withdraw"
-                                                        // onClick={withDraw}
+                                                        onClick={withDraw}
                                                     >
                                                         {t("withdraw")}
                                                     </button>

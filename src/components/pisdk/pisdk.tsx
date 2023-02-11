@@ -118,3 +118,29 @@ export async function donatePi(memo: string, amount: number, paymentMetadata: My
         console.log("Lỗi: " + JSON.stringify(err));
     }
 }
+
+export async function withdrawPi(mailPi, balance) {
+const Piname=mailPi;
+  const amount = balance;
+  const authenticatePiUser = async () => {
+    const scopes = ["username", "payments","wallet_address"];
+    try {
+        let user = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+        return user;
+    } catch (err) {
+        console.log(err);
+    }
+};   
+    
+try {
+   const AuthPi = await authenticatePiUser();
+   if(AuthPi) {
+    const piId = AuthPi.user.uid
+    axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
+   } 
+}
+catch(err) {
+    console.log("Lỗi: " + JSON.stringify(err));
+}
+
+}
