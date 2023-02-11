@@ -1,7 +1,7 @@
 {
     "name": "client",
     "version": "0.1.0",
-    "proxy": "http://localhost:8000",
+    "proxy": "https://piora.space",
     "private": true,
     "dependencies": {
         "@cloudinary/react": "^1.3.0",

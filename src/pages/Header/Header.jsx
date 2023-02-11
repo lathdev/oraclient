@@ -384,10 +384,14 @@ const Header = () => {
                                                                             : currentUser.currentUser.userName}
                                                                     </p>
                                                                     <span className="header__dropdown-phone">
-                                                                        @
+                                                                    <Link
+                                                                        to="/user/settings#piBalance"
+                                                                        className="header__dropdown-link p-10"
+                                                                    > 
+                                                                    {t("balance")+": "}
                                                                         {currentUser.currentUser.mobile
                                                                             ? currentUser.currentUser.mobile
-                                                                            : currentUser.currentUser.userName}
+                                                                            : currentUser.currentUser.userName} </Link>
                                                                     </span>
                                                                 </div>
                                                             </Link>

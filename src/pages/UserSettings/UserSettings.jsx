@@ -242,7 +242,7 @@ const UserSettings = () => {
     }, [isSuccessEmail]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            toast.current.style.animation = "hide_slide 1s ease forwards";
+            // toast.current.style.animation = "hide_slide 1s ease forwards";
         }, 4000);
         return () => clearTimeout(timer);
     }, [isErr, isSuccess, isErrEmail, isSuccessEmail]);
@@ -655,7 +655,7 @@ const UserSettings = () => {
                                                         // }
                                                     />
                                                 </div>
-                                                <div className="settings__flex-item">
+                                                <div className="settings__flex-item" id="piBalance">
                                                     <label htmlFor="" className="settings__name">
                                                         {t("balance")}
                                                     </label>
