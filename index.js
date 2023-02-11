@@ -16,9 +16,7 @@ import notiMessage from "./routers/notiMessage.js";
 import { connect } from "./config/db.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { fileURLToPath } from "url";
-import { v2 as cloudinary } from "cloudinary";
-import mountPaymentsEndpoints from "./controllers/payments.js";
-import mountUserEndpoints from "./controllers/payments.js";
+
 dotenv.config();
 const app = express();
 const PORT = process.env.APP_PORT;
