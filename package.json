@@ -32,6 +32,8 @@
         "connected-react-router": "^6.9.2",
         "firebase": "^9.7.0",
         "i18next": "^22.4.9",
+        "i18next-browser-languagedetector": "^7.0.1",
+        "i18next-http-backend": "^2.1.1",
         "moment": "^2.29.3",
         "react": "^17.0.2",
         "react-cookie": "^4.1.1",
