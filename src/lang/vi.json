@@ -77,5 +77,9 @@
     "language": "Ngôn ngữ",
     "invited_by": "Được mời bởi",
     "balance": "Số dư",
-    "withdraw": "Rút về ví"
+    "withdraw": "Rút về ví",
+    "notPiBrowser": "Hãy sử dụng Pi Browser để truy cập!",
+    "dontmiss":  "ĐỪNG BỎ LỠ",
+    "foryou": "DÀNH CHO BẠN",
+    "maybeyoulike": "CÓ THỂ BẠN QUAN TÂM"
 }

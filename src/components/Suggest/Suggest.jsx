@@ -4,13 +4,15 @@ import "./suggest.scss";
 import { allPostsState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import DatePost from "../DatePost/DatePost";
+import { useTranslation } from "react-i18next";
 const Suggest = () => {
+    const { t } = useTranslation();
     const date = new Date();
     const posts = useSelector(allPostsState$);
     return (
         <section className="suggest container">
             <div className="suggest__wrapper">
-                <h3 className="title">DON'T MISS</h3>
+                <h3 className="title">{t("dontmiss")}</h3>
             </div>
             <div className="suggest__main">
                 <div className="grid">

@@ -119,9 +119,9 @@ export async function donatePi(memo: string, amount: number, paymentMetadata: My
     }
 }
 
-export async function withdrawPi(mailPi, balance) {
-const Piname=mailPi;
+export async function withdrawPi(balance, mail) {
   const amount = balance;
+  const pioraUser = mail;
   const authenticatePiUser = async () => {
     const scopes = ["username", "payments","wallet_address"];
     try {
@@ -136,7 +136,11 @@ try {
    const AuthPi = await authenticatePiUser();
    if(AuthPi) {
     const piId = AuthPi.user.uid
-    axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
+    const Piname = AuthPi.user.username
+    if (Piname===pioraUser)   axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
+    else alert("Not You!");
+
+  
    } 
 }
 catch(err) {

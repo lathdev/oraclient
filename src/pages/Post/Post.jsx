@@ -10,6 +10,7 @@ import Comment from "../../components/Comment/Comment";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 const Post = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -81,11 +82,16 @@ const Post = () => {
     );
     const tip = useCallback(async (e) => {
         e.preventDefault();
-        const res = await axios.get(`/api/v1/posts/${path}`);
+        const piB =isPiBrowser()
+        if (!piB) return alert("You need to use Pi Browser for tip!")
+        else {
+            const res = await axios.get(`/api/v1/posts/${path}`);
 
-        const userPi = res.data.post.author.userName;
-
-        if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
+            const userPi = res.data.post.author.userName;
+    
+            if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
+        }
+      
     }, []);
 
     const handleUnVote = useCallback(

@@ -8,7 +8,7 @@ import { Pisdk } from "../../components/pisdk/pisdk.tsx";
 
 import "./authregister.scss";
 import { useTranslation } from "react-i18next";
-
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser"
 const AuthRegister = () => {
     const navigate = useNavigate();
     const loginSuccess = useSelector(userState$);
@@ -38,20 +38,25 @@ const AuthRegister = () => {
     const handleAuthMail = useCallback(
         async (e) => {
             e.preventDefault();
-            const userPi = await Pisdk();
-            setisUserPi(userPi.username);
-            setEMail({ email: `${userPi.username}` });
-
-            const option = {
-                method: "post",
-                url: `/api/v1/auth/send`,
-                data: { email: `${userPi.username}` },
-            };
-
-            const response = await axios(option);
-            setMessages(response.data.data);
-            if (response.data.status == "OK") setVisible(!visible);
-            setErr(false);
+            const piB =isPiBrowser()
+            if (!piB) return alert(t("notPiBrowser"))
+            else {
+                const userPi = await Pisdk();
+                setisUserPi(userPi.username);
+                setEMail({ email: `${userPi.username}` });
+    
+                const option = {
+                    method: "post",
+                    url: `/api/v1/auth/send`,
+                    data: { email: `${userPi.username}` },
+                };
+    
+                const response = await axios(option);
+                setMessages(response.data.data);
+                if (response.data.status == "OK") setVisible(!visible);
+                setErr(false);
+            }
+        
         },
         [visible, email]
     );

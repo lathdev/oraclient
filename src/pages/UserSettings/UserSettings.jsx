@@ -7,6 +7,7 @@ import "./usersettings.scss";
 import { userState$, passwordState$ } from "../../redux/selectors";
 import { useTranslation } from "react-i18next";
 import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
     // const changeLanguageHandler = (e) => {
@@ -251,7 +252,13 @@ const UserSettings = () => {
     }, [currentUser]);
     const withDraw = useCallback(async (e) => {
         e.preventDefault();
-        withdrawPi("katori0508", 1);
+        const piB =isPiBrowser()
+        if (!piB) return alert(t("notPiBrowser"))
+        else {
+            const balance = await dataUser.mobile - 0.1
+            withdrawPi(balance, dataUser.mail);
+        }
+      
 
 
     },[]);

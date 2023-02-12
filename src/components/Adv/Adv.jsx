@@ -5,11 +5,16 @@ import { allPostsState$ } from "../../redux/selectors/";
 import DatePost from "../DatePost/DatePost";
 import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import "./adv.scss";
+import isPiBrowser from "../isPiBrowser/isPiBrowser";
+import { useTranslation } from "react-i18next";
 const Adv = () => {
+    const { t } = useTranslation();
     const posts = useSelector(allPostsState$);
     const donate = useCallback(async (e) => {
         e.preventDefault();
-        donatePi("Donate", 1, { To: "Piora" });
+        const piB =isPiBrowser()
+        if (!piB) return alert(t("notPiBrowser"))
+       else  donatePi("to Piora", 1, { To: "Piora" });
 
         // const option  ={
         //   method: "post",
@@ -25,7 +30,7 @@ const Adv = () => {
     return (
         <div className="adv">
             <div className="adv__donate box-shadow ">
-                <p className="adv__donate-content">Do you love Piora?</p>
+                <p className="adv__donate-content">{t("you_love_piora_and_want_to_help_us")}</p>
                 <Link to="/" className="adv__donate-link">
                     <button className="adv__donate-button" onClick={donate}>
                         <i className="bx bx-donate-heart  adv__donate-icon"></i>
@@ -34,7 +39,7 @@ const Adv = () => {
                 </Link>
             </div>
             <div className="adv__widget box-shadow ">
-                <p className="adv__widget-title">MAYBE YOU LIKE</p>
+                <p className="adv__widget-title">{t("maybeyoulike")}</p>
                 <div className="adv__widget-content">
                     {posts.data.slice(0, 5).map((post) => (
                         <div className="adv__widget-content-details">

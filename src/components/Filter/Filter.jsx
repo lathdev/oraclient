@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import PostItem from "../PostItem/PostItem";
 import "./filter.scss";
+import { useTranslation } from "react-i18next";
+
 const Filter = ({ posts }) => {
+    const { t } = useTranslation();
     const [flilterActive, setFilterActive] = useState(0);
     const [currentSort, setCurrentSort] = useState("view");
     const [tabActive, setTabActive] = useState(0);
@@ -71,7 +74,7 @@ const Filter = ({ posts }) => {
             ),
         },
         {
-            displayName: "NEW",
+            displayName: t("new"),
             path: "/?sort=news",
             icon: (
                 <svg fill="#718096" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
@@ -223,7 +226,7 @@ const Filter = ({ posts }) => {
         <section className="filter">
             <div className="filter__wrapper">
                 <div className="filter__bar">
-                    <h3 className="title">FOR YOU</h3>
+                    <h3 className="title">{t("foryou")}</h3>
                     <div className="filter__sort">
                         {fitterList.map((e, i) => (
                             <Link
