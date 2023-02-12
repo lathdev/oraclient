@@ -109,7 +109,7 @@ const Register = () => {
                             placeholder={t("invite_code")}
                             name="identification"
                             className="login__form-input"
-                            value={data.adress}
+                            value={data.identification}
                             onChange={(e) =>
                                 setData({
                                     ...data,

@@ -48,6 +48,22 @@ function* loginSaga(action) {
         console.log(error.response.data.message);
     }
 }
+function* loginPiSaga(action) {
+    try {
+        const currentuser = yield call(api.loginpi, action.payload);
+        yield put(actions.login.loginSuccess(currentuser.data));
+    } catch (error) {
+        yield put(actions.login.loginFailure(error.response.data.message));
+        console.log(error.response.data.message);
+    }
+}
+
+
+
+
+
+
+
 function* registerSaga(action) {
     try {
         const register = yield call(api.register, action.payload);
@@ -140,6 +156,7 @@ function* mySaga() {
     yield takeLatest(actions.updatePost.updatePostRequest, updatePostSaga);
     // AUTH
     yield takeLatest(actions.login.loginRequest, loginSaga);
+    yield takeLatest(actions.login.loginPiRequest, loginPiSaga);
     yield takeLatest(actions.register.registerRequest, registerSaga);
     yield takeLatest(actions.registerWithFacebook.registerWithFacebookRequest, registerWithFacebookSaga);
     yield takeLatest(actions.userUpdate.userUpdateRequest, userUpdateSaga);

@@ -40,6 +40,7 @@ export const updatePost = createActions({
 // AUTH
 export const login = createActions({
     loginRequest: (payload) => payload,
+    loginPiRequest: (payload) => payload,
     loginSuccess: (payload) => payload,
     loginFailure: (err) => err,
 });

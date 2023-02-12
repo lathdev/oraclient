@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const Login = () => {
     const [data, setData] = useState({ userName: "", password: "" });
     const [errMessage, setErrMessage] = useState(null);
-    const [isUserPi, setisUserPi] = useState(null);
+   
     const loginSuccess = useSelector(userState$);
 
     const { t } = useTranslation();
@@ -33,9 +33,10 @@ const Login = () => {
         try {
             e.preventDefault();
             const userPi = await Pisdk();
-            setisUserPi(userPi.username);
-            if (isUserPi) {
-                dispatch(actions.login.loginSuccess(isUserPi));
+          
+            if (userPi) {
+               
+                dispatch(actions.login.loginPiRequest({piUser: userPi.username, accessToken: userPi.uid}));
             }
         } catch (err) {
             dispatch(actions.login.loginFailure());

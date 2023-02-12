@@ -19,6 +19,7 @@ export const checkCurrentUser = () =>
         headers: { Authorization: `Bearer ${token}` },
     });
 export const login = (payload) => axios.post("/api/v1/auth/login", payload);
+export const loginpi = (payload) => axios.post("api/v1/auth/loginpi", payload);
 export const register = (payload) => axios.post("/api/v1/auth/register", payload);
 export const userUpdate = (payload) =>
     axios.put(`/api/v1/auth/update/`, payload, {
