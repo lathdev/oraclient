@@ -71,7 +71,7 @@ const Adv = () => {
                 </div>
             </div>
             <div className="adv__contact box-shadow ">
-                <p className="adv__contact-heading">LINK</p>
+                <p className="adv__contact-heading">{t("link")}</p>
                 <div className="adv__contact-social">
                     <ul className="adv__contact-social-list">
                         <li className="adv__contact-social-item"></li>
