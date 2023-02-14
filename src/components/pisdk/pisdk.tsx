@@ -136,8 +136,13 @@ try {
    const AuthPi = await authenticatePiUser();
    if(AuthPi) {
     const piId = AuthPi.user.uid
+  
     const Piname = AuthPi.user.username
-    if (Piname===pioraUser)   axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
+  console.log("Đang giao dịchhhhhh")
+    if (Piname===pioraUser)  { 
+        const withdrawtxid = await axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
+        if (withdrawtxid) alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
+}
     else alert("Not You!");
 
   

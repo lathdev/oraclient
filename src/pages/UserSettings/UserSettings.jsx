@@ -96,35 +96,7 @@ const UserSettings = () => {
             return stateObj;
         });
     };
-    const onInputEmailChange = (e) => {
-        const { name, value } = e.target;
-        setDataEmail((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-        validateInputEmail(e);
-    };
-    const validateInputEmail = (e) => {
-        let { name, value } = e.target;
-        setErrorMail((prev) => {
-            const stateObj = { ...prev, [name]: "" };
-            switch (name) {
-                case "mail":
-                    if (!/.+@.+\.[A-Za-z]+$/.test(value)) {
-                        stateObj[name] = "khum hợp lệ.";
-                    }
-                    break;
-                case "password":
-                    if (value.length < 6) {
-                        stateObj[name] = "Mật khẩu khum hợp lệ";
-                    }
-                    break;
-                default:
-                    break;
-            }
-            return stateObj;
-        });
-    };
+
     useEffect(() => {
         if (currentUser.currentUser) {
             setDataUser(currentUser.currentUser);
@@ -250,18 +222,22 @@ const UserSettings = () => {
     useEffect(() => {
         document.title = `${t("user_setting")}`;
     }, [currentUser]);
-    const withDraw = useCallback(async (e) => {
-        e.preventDefault();
+   async function withDraw() {
+
         const piB =isPiBrowser()
         if (!piB) return alert(t("notPiBrowser"))
-        else {
-            const balance = await dataUser.mobile - 0.1
-            withdrawPi(balance, dataUser.mail);
+        else 
+            {  
+         const aa = await currentUser.currentUser
+         if (aa.mobile&&aa.mail) {
+           const balance = aa.mobile - 0.1
+            const mail = aa.mail; 
+            withdrawPi(balance, mail); }
         }
       
 
 
-    },[]);
+    };
     return (
         <div className="container">
             {isSuccessEmail ? (

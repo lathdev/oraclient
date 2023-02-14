@@ -391,7 +391,7 @@ const Header = () => {
                                                                     {t("balance")+": "}
                                                                         {currentUser.currentUser.mobile
                                                                             ? currentUser.currentUser.mobile
-                                                                            : currentUser.currentUser.userName} </Link>
+                                                                            : "0" } Pi</Link>
                                                                     </span>
                                                                 </div>
                                                             </Link>
