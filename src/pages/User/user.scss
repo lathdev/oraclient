@@ -70,7 +70,7 @@
                             border-bottom: 1px solid #e2e8f0;
                             margin-bottom: 1rem;
                                 & span{
-                                    font-size: 15px;    
+                                    font-size: 15px;
                                     display: block;
                                     font-weight: 700;
                                     text-transform: uppercase;
@@ -109,7 +109,7 @@
                                 &.right{
                                     right: -1.5rem;
                                     top: 50%;
-                                    transform: translateY(-50%);                                        
+                                    transform: translateY(-50%);
                                 }
                                 &.left{
                                     left: -1.5rem;
@@ -121,7 +121,7 @@
                                     color: #969696;
                                 }
                         }
-                }    
+                }
                 &-content{
                     display: grid;
                     grid-gap: 1.2rem;
@@ -136,12 +136,15 @@
                     align-items: center;
                     justify-content: space-around;
                     align-content: center;
+                    @include mobile{
+                        margin-top:0;
+                    }
                 }
                 &-dynamic{
                     width: 340px;
                     display: grid;
                     grid-template-columns: minmax(0,1fr);
-                    position: sticky;
+                    //position: sticky;
                     // -webkit-transition: top .25s linear;
                 }
                 &-widget{
@@ -205,7 +208,7 @@
                                 &-item{
                                     padding:0 18px;
                                     height: 2.7rem;
-                                    display: flex;    
+                                    display: flex;
                                     justify-content: center;
                                     align-items: center;
                                     border: 1px solid rgb(226, 232, 240);
@@ -241,7 +244,7 @@
                             justify-content: center;
                             border-radius: 3px;
                             cursor: pointer;
-                            padding: 10px 16px;                  
+                            padding: 10px 16px;
                             height: 2.5rem;
                             background-color: #4299e1;
                             width: 100%;
@@ -250,7 +253,7 @@
                             margin: 10px 5px 0;
                             box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
                             font-weight: 700;
-                            box-shadow: 0 10px 15px -3px rgba(47,181,250,.05),0 4px 6px -2px rgba(47,181,250,.025);                                   
+                            box-shadow: 0 10px 15px -3px rgba(47,181,250,.05),0 4px 6px -2px rgba(47,181,250,.025);
                         }
 
                 }
@@ -259,6 +262,11 @@
                     grid-template-columns: minmax(0,1fr);
                     grid-gap: 1.2rem;
                     grid-template-rows: minmax(min-content,max-content);
+
+                    @include mobile{
+                        justify-content: center;
+                        margin-top:1rem;
+                    }
                 }
                 &-tabs{
                     background-color: $white;
@@ -272,7 +280,7 @@
                             display: flex;
                             align-items: center;
                             border-bottom: 1px solid rgba(226,232,240,1);
-                            overflow: initial;                        
+                            overflow: initial;
                             justify-content: space-between;
                         }
                         &-tab{
@@ -295,8 +303,8 @@
                             color: #333;
                         }
                 }
-             
-            
+
+
         }
 }
 .flow{

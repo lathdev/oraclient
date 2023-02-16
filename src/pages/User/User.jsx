@@ -197,11 +197,11 @@ useEffect(() => {
                 <div className="user__profile-sidebar">
                   <div
                     className="user__profile-dynamic"
-                    style={
-                      visible
-                        ? { height: "800px", maxHeight: "50%", top: "160px" }
-                        : { height: "800px", maxHeight: "50%", top: "-200px" }
-                    }
+                    // style={
+                    //   visible
+                    //     ? { height: "800px", maxHeight: "50%", top: "160px" }
+                    //     : { height: "800px", maxHeight: "50%", top: "-200px" }
+                    // }
                   >
                     <div className="user__profile-widget">
                       <div className="user__profile-widget-body">
@@ -424,18 +424,18 @@ useEffect(() => {
         <div className="main">
           <div className="user">
             <div className="user__cover">
-              <img src={currentUser.user.cover.slice(7)} alt="" />
+              <img src={currentUser?.user?.cover?.slice(7)} alt="" />
             </div>
             <div className="user__profile">
               <div className="user__profile-content">
                 <div className="user__profile-sidebar">
                   <div
                     className="user__profile-dynamic"
-                    style={
-                      visible
-                        ? { height: "800px", maxHeight: "50%", top: "160px" }
-                        : { height: "800px", maxHeight: "50%", top: "-200px" }
-                    }
+                    // style={
+                    //   visible
+                    //     ? { height: "800px", maxHeight: "50%", top: "160px" }
+                    //     : { height: "800px", maxHeight: "50%", top: "-200px" }
+                    // }
                   >
                     <div className="user__profile-widget">
                       <div className="user__profile-widget-body">
