@@ -419,7 +419,7 @@ const User = () => {
               <div className="main">
                   <div className="user">
                       <div className="user__cover">
-                          <img src={currentUser.user.cover.slice(7)} alt="" />
+                          <img src={currentUser?.user?.cover?.slice(7)} alt="" />
                       </div>
                       <div className="user__profile">
                           <div className="user__profile-content">
