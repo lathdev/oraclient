@@ -6,10 +6,11 @@ import * as actions from "../../redux/actions";
 import { userState$ } from "../../redux/selectors";
 import { Pisdk } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 const Login = () => {
     const [data, setData] = useState({ userName: "", password: "" });
     const [errMessage, setErrMessage] = useState(null);
-   
+    const piB =isPiBrowser()
     const loginSuccess = useSelector(userState$);
 
     const { t } = useTranslation();
@@ -68,7 +69,7 @@ const Login = () => {
                     <img src="/icons/singleLogo.png" alt="" />
                 </Link>
                 <p>{errMessage}</p>
-                <form action="" method="POST" className="login__form">
+         { !piB?    (     <form action="" method="POST" className="login__form">
                     <input
                         type="text"
                         placeholder={t("username")}
@@ -88,15 +89,17 @@ const Login = () => {
                     <button className="login__form-button" type="submit" onClick={onSubmit}>
                         {t("login")}
                     </button>
-                </form>
-                <form className="login__form">
+                </form> ) : (  <form className="login__form">
                     <p className="auth__logging-tilte">{t("or_login_with_pi_browser")}</p>
                     <div className="">
                         <button className="login__form-button" type="submit" value="Xác nhận" onClick={Pilogin}>
                             {t("auth_with_pi_browser")}
                         </button>
                     </div>
-                </form>
+                </form>)
+
+         }
+              
 
                 <Link to="/">
                     <p className="login__text link">{t("forgot_password")}</p>

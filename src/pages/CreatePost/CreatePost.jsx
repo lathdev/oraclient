@@ -23,7 +23,7 @@ const CreatePost = () => {
         title: "",
         content: "",
         description: "",
-        category: "625ebdc502fc384796865706",
+        category: "64d95dea763ef48b32485fb7",
         attachment: "",
     });
     useEffect(() => {
@@ -176,6 +176,7 @@ const CreatePost = () => {
                                             <select
                                                 id="selected-id"
                                                 className="modal__category-select"
+                                            
                                                 onChange={(e) =>
                                                     setData({
                                                         ...data,

@@ -6,8 +6,8 @@
     "username": "Tên người dùng",
     "password": "Mật khẩu",
     "login": "Đăng nhập",
-    "or_login_with_pi_browser": "Hoặc đăng nhập với Pi Browser",
-    "auth_with_pi_browser": "Xác thực với Pi Browser",
+    "or_login_with_pi_browser": "Đăng nhập với Pi Browser",
+    "auth_with_pi_browser": "Đăng nhập bằng Pi Browser",
     "forgot_password": "Quên mật khẩu?",
     "do_not_have_piora_account": "Chưa có tài khoản Piora?",
     "sign_up_now": "Đăng ký ngay",
@@ -82,5 +82,6 @@
     "dontmiss":  "ĐỪNG BỎ LỠ",
     "foryou": "DÀNH CHO BẠN",
     "maybeyoulike": "CÓ THỂ BẠN QUAN TÂM",
-    "link": "LIÊN KẾT"
+    "link": "LIÊN KẾT",
+    "nothinghere": "Không có thông báo"
 }

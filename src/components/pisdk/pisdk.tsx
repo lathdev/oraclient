@@ -1,4 +1,6 @@
 import axios from "axios";
+import React from "react";
+import Loader from "../Loader/Loader";
 
 export type User = AuthResult["user"];
 type AuthResult = {
@@ -141,7 +143,11 @@ try {
   console.log("Đang giao dịchhhhhh")
     if (Piname===pioraUser)  { 
         const withdrawtxid = await axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
-        if (withdrawtxid) alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
+        if (withdrawtxid) {
+            alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
+            return withdrawtxid.data.txid;
+        }
+    
 }
     else alert("Not You!");
 

@@ -8,6 +8,8 @@ import { userState$, passwordState$ } from "../../redux/selectors";
 import { useTranslation } from "react-i18next";
 import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
+import Loader from "../../components/Loader/Loader";
+
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
     // const changeLanguageHandler = (e) => {
@@ -31,6 +33,7 @@ const UserSettings = () => {
     const [isErr, setIsErr] = useState(null);
     const [isSuccessEmail, setIsSuccessEmail] = useState(null);
     const [isErrEmail, setIsErrEmail] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [dataEmail, setDataEmail] = useState({
         mail: "",
         password: "",
@@ -215,7 +218,7 @@ const UserSettings = () => {
     }, [isSuccessEmail]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            // toast.current.style.animation = "hide_slide 1s ease forwards";
+            toast.current.style.animation = "hide_slide 1s ease forwards";
         }, 4000);
         return () => clearTimeout(timer);
     }, [isErr, isSuccess, isErrEmail, isSuccessEmail]);
@@ -223,7 +226,7 @@ const UserSettings = () => {
         document.title = `${t("user_setting")}`;
     }, [currentUser]);
    async function withDraw() {
-
+setIsLoading(true);
         const piB =isPiBrowser()
         if (!piB) return alert(t("notPiBrowser"))
         else 
@@ -233,13 +236,20 @@ const UserSettings = () => {
            const balance = aa.mobile - 0.1
             const mail = aa.mail; 
             withdrawPi(balance, mail); }
+        
         }
       
 
 
     };
     return (
+        
         <div className="container">
+               {isLoading ? (
+               <Loader />
+            ) : (
+                ""
+            )}
             {isSuccessEmail ? (
                 <div className="toast-mess-container">
                     <button ref={toast} className={`alert-toast-message success`}>

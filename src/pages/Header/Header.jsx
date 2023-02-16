@@ -335,7 +335,7 @@ const Header = () => {
                                                                                   key={notification._id}
                                                                               />
                                                                           ))
-                                                                        : "Không có gì xem ở đây cả"}
+                                                                        : t("nothinghere") }
                                                                 </ul>
                                                             </div>
                                                             <footer className="header__notify-footer">

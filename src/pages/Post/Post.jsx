@@ -26,6 +26,7 @@ const Post = () => {
     const currentUser = useSelector(userState$);
     const location = useLocation();
     const [isUser, setIsUser] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [visiable, setVisiable] = useState(false);
     const [dataPost, setDataPost] = useState({});
     const [categoryPost, setCategoryPost] = useState({});
@@ -80,8 +81,8 @@ const Post = () => {
         },
         [dataPost._id, isVote]
     );
-    const tip = useCallback(async (e) => {
-        e.preventDefault();
+     async function tip()  {
+      
         const piB =isPiBrowser()
         if (!piB) return alert("You need to use Pi Browser for tip!")
         else {
@@ -92,7 +93,7 @@ const Post = () => {
             if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
         }
       
-    }, []);
+    };
 
     const handleUnVote = useCallback(
         async (e) => {
@@ -139,6 +140,17 @@ const Post = () => {
             }
         }
     }, [authPost, currentUser]);
+    useEffect(() => {
+        if (currentUser.currentUser) {
+            if (
+                currentUser.currentUser._id==='63eb04c5c38d69c8d78052a8'||
+                 currentUser.currentUser._id==='63eae6f5c38d69c8d780506e' ||
+                 currentUser.currentUser._id==='63eb6d41c38d69c8d78057e0'
+                 ) {
+                setIsAdmin(true);
+            }
+        }
+    }, [ currentUser]);
     const handleClickDelete = () => setVisiable(!visiable);
     const handleDelete = useCallback(
         async (e) => {
@@ -344,7 +356,7 @@ const Post = () => {
     }, [updateNoti]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            // toast.current.style.animation = "hide_slide 1s ease forwards";
+            toast.current.style.animation = "hide_slide 1s ease forwards";
         }, 4000);
         return () => clearTimeout(timer);
     }, [isSuccess]);
@@ -373,11 +385,11 @@ const Post = () => {
         <div className="mt-80">
             <div className="post__details-container">
                 {isSuccess ? (
-                    <div className="toast-mess-container">
-                        <button ref={toast} className={`alert-toast-message success`}>
-                            {isSuccess}
-                        </button>
-                    </div>
+                   <div className="toast-mess-container">
+                   <button ref={toast} className={`alert-toast-message success`}>
+                       {isSuccess}
+                   </button>
+               </div>
                 ) : (
                     ""
                 )}
@@ -415,7 +427,7 @@ const Post = () => {
                                 </Link>
                             </div>
                         </div>
-                        {isUser ? (
+                        {isUser || isAdmin ? (
                             <div className="flex-align-gap-10">
                                 <Link to={`/post/update/${path}`}>
                                     <span className="button-data edit">Edit</span>

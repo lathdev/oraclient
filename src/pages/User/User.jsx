@@ -9,6 +9,7 @@ import { userState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 const User = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -88,23 +89,19 @@ const User = () => {
         [currentUser]
     );
     //Donate Pi
-    const donate = useCallback(async (e) => {
-        e.preventDefault();
-        const donated = await donatePi("Donate", 0.01, {
-            To: currentUser.user._id,
-        });
-        console.log("Giao dich: ", donated);
-        // const option  ={
-        //   method: "post",
-        //   url:``,
-        //   data: ''
-        // }
+    async function tip()  {
+      
+        const piB =isPiBrowser()
+        if (!piB) return alert("You need to use Pi Browser for tip!")
+        else {
+           
 
-        //   const response = await axios(option)
-        //   setMessages(response.data.data)
-        //  if (response.data.status=='OK') setVisible(!visible)
-        //   setErr(false)
-    }, []);
+            const userPi = currentUser.user.userName
+    
+            if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
+        }
+      
+    };
     const handelUnFlow = useCallback(
         async (e) => {
             const token = localStorage.getItem("token");
@@ -315,12 +312,12 @@ const User = () => {
                                               </div>
                                               <div className="user__profile-widget-body">
                                                   <p>{t("do_you_love_this_author")}</p>
-                                                  <Link to="/" className="adv__donate-link">
-                                                      <button className="adv__donate-button" onClick={donate}>
+                                                  <div className="adv__donate-link">
+                                                      <button className="adv__donate-button" onClick={tip}>
                                                           <i className="bx bx-donate-heart  adv__donate-icon"></i>
                                                           {t("donate")}
                                                       </button>
-                                                  </Link>
+                                                  </div>
                                               </div>
                                           </div>
                                       </div>
