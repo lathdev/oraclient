@@ -201,12 +201,12 @@ const User = () => {
                                       style={
                                           visible
                                               ? {
-                                                    height: "800px",
+                                                 
                                                     maxHeight: "50%",
                                                     top: "160px",
                                                 }
                                               : {
-                                                    height: "800px",
+                                                   
                                                     maxHeight: "50%",
                                                     top: "-200px",
                                                 }
@@ -419,7 +419,7 @@ const User = () => {
               <div className="main">
                   <div className="user">
                       <div className="user__cover">
-                          <img src={currentUser.user.cover.slice(7)} alt="" />
+                          <img src={currentUser?.user?.cover?.slice(7)} alt="" />
                       </div>
                       <div className="user__profile">
                           <div className="user__profile-content">
@@ -429,12 +429,12 @@ const User = () => {
                                       style={
                                           visible
                                               ? {
-                                                    height: "800px",
+                                                 
                                                     maxHeight: "50%",
                                                     top: "160px",
                                                 }
                                               : {
-                                                    height: "800px",
+                                                    
                                                     maxHeight: "50%",
                                                     top: "-200px",
                                                 }
@@ -504,10 +504,13 @@ const User = () => {
                                                   <span className="user__profile-widget-title">{t("donate")}</span>
                                               </div>
                                               <div className="user__profile-widget-body">
-                                                  <p>Nếu muốn ủng hộ tác giả, các bạn có thể làm theo hướng dẫn sau.</p>
-                                                  <Link to="/" className="user__profile-widget-donate">
-                                                      <span>{t("donate")}</span>
-                                                  </Link>
+                                                  <p>{t("do_you_love_this_author")}</p>
+                                                  <div className="adv__donate-link">
+                                                      <button className="adv__donate-button" onClick={tip}>
+                                                          <i className="bx bx-donate-heart  adv__donate-icon"></i>
+                                                          {t("donate")}
+                                                      </button>
+                                                  </div>
                                               </div>
                                           </div>
                                       </div>
@@ -533,14 +536,20 @@ const User = () => {
                                   </div>
                                   {posts.posts.length !== 0 ? (
                                       <div className="user__profile-posts">
-                                          <div className="user__profile-posts-top">
+                                            <div className="user__profile-posts-top">
                                               <div className="user__profile-posts-head">
                                                   <div className="user__profile-posts-heading">
-                                                      <span>Bài viết nổi bật</span>
+                                                      <span>{t("feature_posts")}</span>
                                                   </div>
                                               </div>
-                                              <div className="p-4">
-                                                  <TrendingPosts posts={posts.posts} slice={5} slidesToShow={3} />
+                                              <div className="user__profile-posts-all-body">
+                                                  <div className="user__profile-posts-all-content">
+                                                      <div className="grid">
+                                                          {posts.posts.slice(0, 3).map((post) => (
+                                                              <PostItem post={post} key={post._id} />
+                                                          ))}
+                                                      </div>
+                                                  </div>
                                               </div>
                                           </div>
                                           <div className="user__profile-posts-top">

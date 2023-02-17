@@ -321,3 +321,23 @@
 .p-4 {
     padding: 1rem;
 }
+@include mobile {
+    .user__profile-sidebar {
+        display: block;
+        margin-top: -10px;
+    }
+.user__profile-dynamic {
+    display: block;
+    width: 100%;
+   height: 600px;
+}
+    .user__profile-posts-all-body {
+        padding: 0.5rem 0.5rem;
+    }
+body {
+    .user__profile-main {
+        display: block;
+    }
+}
+    
+}
