@@ -89,19 +89,15 @@ const User = () => {
         [currentUser]
     );
     //Donate Pi
-    async function tip()  {
-      
-        const piB =isPiBrowser()
-        if (!piB) return alert("You need to use Pi Browser for tip!")
+    async function tip() {
+        const piB = isPiBrowser();
+        if (!piB) return alert("You need to use Pi Browser for tip!");
         else {
-           
+            const userPi = currentUser.user.userName;
 
-            const userPi = currentUser.user.userName
-    
             if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
         }
-      
-    };
+    }
     const handelUnFlow = useCallback(
         async (e) => {
             const token = localStorage.getItem("token");
@@ -196,22 +192,7 @@ const User = () => {
                       <div className="user__profile">
                           <div className="user__profile-content">
                               <div className="user__profile-sidebar">
-                                  <div
-                                      className="user__profile-dynamic"
-                                      style={
-                                          visible
-                                              ? {
-                                                 
-                                                    maxHeight: "50%",
-                                                    top: "160px",
-                                                }
-                                              : {
-                                                   
-                                                    maxHeight: "50%",
-                                                    top: "-200px",
-                                                }
-                                      }
-                                  >
+                                  <div className="user__profile-dynamic">
                                       <div className="user__profile-widget">
                                           <div className="user__profile-widget-body">
                                               <div className="user__profile-widget-content">
@@ -424,22 +405,7 @@ const User = () => {
                       <div className="user__profile">
                           <div className="user__profile-content">
                               <div className="user__profile-sidebar">
-                                  <div
-                                      className="user__profile-dynamic"
-                                      style={
-                                          visible
-                                              ? {
-                                                 
-                                                    maxHeight: "50%",
-                                                    top: "160px",
-                                                }
-                                              : {
-                                                    
-                                                    maxHeight: "50%",
-                                                    top: "-200px",
-                                                }
-                                      }
-                                  >
+                                  <div className="user__profile-dynamic">
                                       <div className="user__profile-widget">
                                           <div className="user__profile-widget-body">
                                               <div className="user__profile-widget-content">
@@ -536,7 +502,7 @@ const User = () => {
                                   </div>
                                   {posts.posts.length !== 0 ? (
                                       <div className="user__profile-posts">
-                                            <div className="user__profile-posts-top">
+                                          <div className="user__profile-posts-top">
                                               <div className="user__profile-posts-head">
                                                   <div className="user__profile-posts-heading">
                                                       <span>{t("feature_posts")}</span>
