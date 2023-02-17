@@ -221,7 +221,7 @@ const UserSettings = () => {
     }, [isSuccessEmail]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (toast.current.style) {
+            if (toast.current?.style) {
                 toast.current.style.animation = "hide_slide 1s ease forwards";
             }
         }, 4000);

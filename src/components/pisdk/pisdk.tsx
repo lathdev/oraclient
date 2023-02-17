@@ -1,6 +1,4 @@
 import axios from "axios";
-import React from "react";
-import Loader from "../Loader/Loader";
 
 export type User = AuthResult["user"];
 type AuthResult = {

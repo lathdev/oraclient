@@ -44,6 +44,7 @@ function Modal() {
                         minHeight: "100px",
                         borderRadius: "4px",
                         border: "1px solid #ccc",
+                        padding: "10px",
 
                         display: "grid",
                         placeContent: "center",
