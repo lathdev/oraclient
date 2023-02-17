@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./comment.scss";
 import axios from "axios";
 import Reply from "../Reply/Reply";
-const Comment = ({ comment, postId }) => {
+const Comment = ({ comment, postId, isAdmin }) => {
     const [voteCount, setVoteCount] = useState(null);
     const [newReply, setNewReply] = useState(null);
     const [reply, setReply] = useState({});
@@ -86,6 +86,31 @@ const Comment = ({ comment, postId }) => {
         },
         [comment._id, reply]
     );
+    const handleDelete = useCallback(
+        async (e) => {
+            e.preventDefault();
+            try {
+                const token = localStorage.getItem("token");
+                
+                console.log("hehe",comment._id)
+                const option = {
+                    method: "post",
+                    url: `/api/v1/comment/delete`,
+                    data: {
+                        commentId: comment._id,
+                       
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                const res = await axios(option);
+              if (res) window.location.reload(false);
+               
+            } catch (err) {}
+        },
+        [comment._id]
+    );
     return (
         <div className="comment__child">
             <div className="comment__child-avt">
@@ -117,7 +142,18 @@ const Comment = ({ comment, postId }) => {
                             <div></div>
                             <span className="value">{voteCount}</span>
                         </div>
-                        <p onClick={handelVisible}>Reply</p>
+                        <p onClick={handelVisible}>Reply |</p>
+                        { isAdmin ? (
+                           <div> <Link to={`/`}
+                           onClick={handleDelete}
+                          >
+                         | Delete
+                  </Link></div>
+                        ) : (
+                            ""
+                        )}
+                      
+                       
                     </div>
                 </div>
             </div>

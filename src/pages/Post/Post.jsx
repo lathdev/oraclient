@@ -581,7 +581,7 @@ const Post = () => {
                                 <div className="comments__node">
                                     {comments.length > 0
                                         ? comments.map((comment) => (
-                                              <Comment postId={dataPost?._id} comment={comment} key={comment._id} />
+                                              <Comment postId={dataPost?._id} comment={comment} key={comment._id} isAdmin={isAdmin} />
                                           ))
                                         : ""}
                                 </div>
