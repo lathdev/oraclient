@@ -122,40 +122,39 @@ export async function donatePi(memo: string, amount: number, paymentMetadata: My
 }
 
 export async function withdrawPi(balance, mail) {
-  const amount = balance;
-  const pioraUser = mail;
-  const authenticatePiUser = async () => {
-    const scopes = ["username", "payments","wallet_address"];
-    try {
-        let user = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
-        return user;
-    } catch (err) {
-        console.log(err);
-    }
-};   
-    
-try {
-   const AuthPi = await authenticatePiUser();
-   if(AuthPi) {
-    const piId = AuthPi.user.uid
-  
-    const Piname = AuthPi.user.username
-  console.log("Đang giao dịchhhhhh")
-    if (Piname===pioraUser)  { 
-        const withdrawtxid = await axios.post("/payments/withdraw", { piId ,Piname , amount }, config);
-        if (withdrawtxid) {
-            alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
-            return withdrawtxid.data.txid;
+    const amount = balance;
+    const pioraUser = mail;
+    const authenticatePiUser = async () => {
+        const scopes = ["username", "payments", "wallet_address"];
+        try {
+            let user = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+            return user;
+        } catch (err) {
+            console.log(err);
+            throw new Error(err.message);
         }
-    
-}
-    else alert("Not You!");
+    };
 
-  
-   } 
-}
-catch(err) {
-    console.log("Lỗi: " + JSON.stringify(err));
-}
+    try {
+        const AuthPi = await authenticatePiUser();
+        if (AuthPi) {
+            const piId = AuthPi.user.uid;
 
+            const Piname = AuthPi.user.username;
+            console.log("Đang giao dịchhhhhh");
+            if (Piname === pioraUser) {
+                const withdrawtxid = await axios.post("/payments/withdraw", { piId, Piname, amount }, config);
+                if (withdrawtxid) {
+                    // alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
+                    return withdrawtxid.data.txid;
+                }
+            } else {
+                // alert("Not You!");
+                throw new Error("Not You!");
+            }
+        }
+    } catch (err) {
+        console.log("Lỗi: " + JSON.stringify(err));
+        throw new Error(err.message);
+    }
 }
