@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import Loader from "../../components/Loader/Loader";
+import { useModalContext } from "../../components/modal/ModalContext";
 
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
@@ -52,6 +53,8 @@ const UserSettings = () => {
         confirmPassword: "",
         oldPassword: "",
     });
+
+    const { openModal } = useModalContext();
     const onInputChange = (e) => {
         const { name, value } = e.target;
         setDataPassword((prev) => ({
@@ -218,38 +221,40 @@ const UserSettings = () => {
     }, [isSuccessEmail]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            toast.current.style.animation = "hide_slide 1s ease forwards";
+            if (toast.current.style) {
+                toast.current.style.animation = "hide_slide 1s ease forwards";
+            }
         }, 4000);
         return () => clearTimeout(timer);
     }, [isErr, isSuccess, isErrEmail, isSuccessEmail]);
     useEffect(() => {
         document.title = `${t("user_setting")}`;
     }, [currentUser]);
-   async function withDraw() {
-setIsLoading(true);
-        const piB =isPiBrowser()
-        if (!piB) return alert(t("notPiBrowser"))
-        else 
-            {  
-         const aa = await currentUser.currentUser
-         if (aa.mobile&&aa.mail) {
-           const balance = aa.mobile - 0.1
-            const mail = aa.mail; 
-            withdrawPi(balance, mail); }
-        
+
+    async function withDraw() {
+        setIsLoading(true);
+        const piB = isPiBrowser();
+        if (!piB) {
+            // alert(t("notPiBrowser"));
+            openModal(<div>{t("notPiBrowser")}</div>);
+        } else {
+            const aa = await currentUser.currentUser;
+            if (aa.mobile && aa.mail) {
+                const balance = aa.mobile - 0.1;
+                const mail = aa.mail;
+                try {
+                    const txId = await withdrawPi(balance, mail);
+                    openModal(<div>txid: {txId}</div>);
+                } catch (err) {
+                    openModal(<div>{err}</div>);
+                }
+            }
         }
-      
+    }
 
-
-    };
     return (
-        
         <div className="container">
-               {isLoading ? (
-               <Loader />
-            ) : (
-                ""
-            )}
+            {isLoading ? <Loader /> : ""}
             {isSuccessEmail ? (
                 <div className="toast-mess-container">
                     <button ref={toast} className={`alert-toast-message success`}>
@@ -660,10 +665,7 @@ setIsLoading(true);
                                                     />
                                                 </div>
                                                 <div className="settings__flex-item">
-                                                    <button
-                                                        className="withdraw"
-                                                        onClick={withDraw}
-                                                    >
+                                                    <button className="withdraw" onClick={withDraw}>
                                                         {t("withdraw")}
                                                     </button>
                                                 </div>
