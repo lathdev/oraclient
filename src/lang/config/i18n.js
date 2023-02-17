@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import XHR from "i18next-http-backend"
 import translationEN from "../en.json";
-import translationVI from "../en.json";
+import translationVI from "../vi.json";
 const resources = {
     en: {
         translation: translationEN,
