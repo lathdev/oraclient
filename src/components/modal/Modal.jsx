@@ -42,8 +42,8 @@ function Modal() {
                     style={{
                         minWidth: "300px",
                         minHeight: "100px",
-                        borderRadius: "4px",
-                        border: "1px solid #ccc",
+                        borderRadius: "5px",
+                        border: "1px solid #00f",
                         padding: "10px",
 
                         display: "grid",
@@ -67,7 +67,7 @@ function Modal() {
                         destroyModal();
                     }}
                 >
-                    X
+                    x
                 </div>
             </div>
         </Layout>

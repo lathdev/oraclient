@@ -233,7 +233,7 @@ const UserSettings = () => {
     }, [currentUser]);
 
     async function withDraw() {
-         
+        
         const piB = isPiBrowser();
         if (!piB) {
             openModal(<div>{t("notPiBrowser")}</div>);
@@ -248,12 +248,14 @@ const UserSettings = () => {
                     openModal(
                     <div  style={{
                        maxWidth: "300px",
-                      justify: "center"
+                     
                     }}>
-                        <p>Withdraw Success!</p>
+                        <p style={
+                        {   justifyContent: "center"
+                        }
+                      }><b>{t("success")}</b></p>
                       <p style={
-                        {    padding: "5px",
-                            width: "300px",
+                        {   
                             overflow: "scroll"
                         }
                       }> Txid: {txId}</p>

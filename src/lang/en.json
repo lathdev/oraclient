@@ -83,5 +83,12 @@
     "foryou": "FOR YOU",
     "maybeyoulike": "MAYBE YOU LIKE",
     "link": "LINK",
-    "nothinghere": "Nothing here"
+    "nothinghere": "Nothing here",
+    "resultsearch": "Result for:",
+    "users": "Users",
+    "choosechat": "Choose a user to start",
+    "choosetopic": "Please choose a topic",
+    "wewwillmakeitease": "We will make it easy for you to access the posts",
+    "searchbyname": "Search by name...",
+    "success": "Success!"
 }

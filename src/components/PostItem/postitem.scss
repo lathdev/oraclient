@@ -29,7 +29,7 @@
 
 .mobile-post-item {
   display: flex;
-  gap: 10px;
+  gap: 7px;
 
   .filter__content-img {
     width: 120px;
@@ -48,13 +48,13 @@
   }
 
   .filter__content-author {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 5px;
+    
   }
 
   .post-avt {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
   }
 
   .filter__content-img {
@@ -63,11 +63,18 @@
   }
 
   .content__bottom {
-    margin-top: auto;
+    
+   
+
   }
 
   .filter__content-container{
     display: flex;
     flex-direction: column;
+    justify-content: space-around
+  }
+  .filter__content-interactive {
+    gap: 0 10px;
+    
   }
 }

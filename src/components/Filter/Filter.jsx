@@ -247,7 +247,7 @@ const Filter = ({ posts }) => {
                     <div></div>
                 </div>
                 <div className="grid">
-                    <div className="row2">
+                    <div className="row">
                         <div className="col l-12">
                             <div className="filter__content">
                                 <div className="filter__content-details">

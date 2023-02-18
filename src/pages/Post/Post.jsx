@@ -449,6 +449,7 @@ const Post = () => {
                 </div>
                 <div className="post__tool-bar">
                     <div className="pull-left">
+                   
                         <div className="vote">
                             <div className="upvote" onClick={handleVote}>
                                 <div>
@@ -470,14 +471,14 @@ const Post = () => {
                                 </div>
                             </div>
                         </div>
-                       
-                        <div className="tip-post" onClick={tip}>
-                            <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
-                        </div>
+                      
                         <div className="view-count">{dataPost.views} views</div>
                     </div>
                     <div className="pull-right">
                         <div className="right-tools">
+                        <div className="tip-post" onClick={tip}>
+                            <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
+                        </div>
                             <Link to="/" className="tool">
                                 <FacebookShareButton url={shareUrl}>
                                     <FacebookIcon size={40} round={true}></FacebookIcon>
