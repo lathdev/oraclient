@@ -15,17 +15,6 @@ const Adv = () => {
         const piB =isPiBrowser()
         if (!piB) return alert(t("notPiBrowser"))
        else  donatePi("to Piora", 1, { To: "Piora" });
-
-        // const option  ={
-        //   method: "post",
-        //   url:``,
-        //   data: ''
-        // }
-
-        //   const response = await axios(option)
-        //   setMessages(response.data.data)
-        //  if (response.data.status=='OK') setVisible(!visible)
-        //   setErr(false)
     }, []);
     return (
         <div className="adv">
@@ -76,7 +65,7 @@ const Adv = () => {
                     <ul className="adv__contact-social-list">
                         <li className="adv__contact-social-item"></li>
                         <Link
-                            to="https://www.facebook.com/profile.php?id=100089642546736"
+                            to="https://facebook.com/profile.php?id=100089642546736"
                             className="adv__contact-social-link"
                         >
                             <i className="adv__contact-social-icon fb bx bxl-facebook-square"></i>
@@ -91,7 +80,7 @@ const Adv = () => {
                         </li>
 
                         <li className="adv__contact-item">
-                            <Link to="/" className="adv__contact-social-link">
+                            <Link to="mailto:contact@piora.space" className="adv__contact-social-link">
                                 <i className="adv__contact-social-icon chat bx bxs-conversation"></i>
                                 <span className="adv__contact-social-text">Feedback Piora</span>
                             </Link>
@@ -111,11 +100,6 @@ const Adv = () => {
                             <span className="adv__about-text">POLICY</span>
                         </Link>
                     </li>
-                    {/* <li className="adv__about-item">
-                        <Link to="/" className="adv__about-link">
-                            <span className="adv__about-text">FANPAGE</span>
-                        </Link>
-                    </li> */}
                 </ul>
                 <span className="adv__about-text">© 2023 ORA LAB</span>
             </div>

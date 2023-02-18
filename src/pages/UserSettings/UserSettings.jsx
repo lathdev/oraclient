@@ -10,6 +10,7 @@ import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import Loader from "../../components/Loader/Loader";
 import { useModalContext } from "../../components/modal/ModalContext";
+import { justify } from "@cloudinary/url-gen/qualifiers/textAlignment";
 
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
@@ -232,19 +233,32 @@ const UserSettings = () => {
     }, [currentUser]);
 
     async function withDraw() {
-        setIsLoading(true);
+         
         const piB = isPiBrowser();
         if (!piB) {
-            // alert(t("notPiBrowser"));
-            // openModal(<div>{t("notPiBrowser")}</div>);
+            openModal(<div>{t("notPiBrowser")}</div>);
         } else {
+            setIsLoading(true);
             const aa = await currentUser.currentUser;
             if (aa.mobile && aa.mail) {
                 const balance = aa.mobile - 0.1;
                 const mail = aa.mail;
                 try {
                     const txId = await withdrawPi(balance, mail);
-                    openModal(<div>txid: {txId}</div>);
+                    openModal(
+                    <div  style={{
+                       maxWidth: "300px",
+                      justify: "center"
+                    }}>
+                        <p>Withdraw Success!</p>
+                      <p style={
+                        {    padding: "5px",
+                            width: "300px",
+                            overflow: "scroll"
+                        }
+                      }> Txid: {txId}</p>
+
+                    </div>);
                 } catch (err) {
                     openModal(<div>{err}</div>);
                 } finally {
