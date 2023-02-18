@@ -236,7 +236,7 @@ const UserSettings = () => {
         const piB = isPiBrowser();
         if (!piB) {
             // alert(t("notPiBrowser"));
-            openModal(<div>{t("notPiBrowser")}</div>);
+            // openModal(<div>{t("notPiBrowser")}</div>);
         } else {
             const aa = await currentUser.currentUser;
             if (aa.mobile && aa.mail) {
@@ -247,11 +247,12 @@ const UserSettings = () => {
                     openModal(<div>txid: {txId}</div>);
                 } catch (err) {
                     openModal(<div>{err}</div>);
+                } finally {
+                    setIsLoading(false);
                 }
             }
         }
     }
-
     return (
         <div className="container">
             {isLoading ? <Loader /> : ""}
