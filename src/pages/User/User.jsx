@@ -137,6 +137,46 @@ const User = () => {
         },
         [userId]
     );
+    const handleBlockCmt = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockCmt";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/block/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+               
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleBlockAll = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockAll";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/block/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+              alert("OK");
+            } catch (err) {}
+        },
+        [userId]
+    );
     const getPostSaved = useCallback(
         async (e) => {
             try {
@@ -278,11 +318,13 @@ const User = () => {
                                                               <span>{t("chat")}</span>
                                                           </button>
                                                           {isAdmin ? ( <div className="admin__profile-widget-button"><button
-                                                              className="admin__profile-widget-button-item">
+                                                              className="admin__profile-widget-button-item"
+                                                              onClick={handleBlockAll}>
                                                               <span>Block All</span>
                                                           </button>
                                                             <button
-                                                            className="admin__profile-widget-button-item">
+                                                            className="admin__profile-widget-button-item"
+                                                            onClick={handleBlockCmt}>
                                                             <span>Block Cmt</span>
                                                         </button></div>
 

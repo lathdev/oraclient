@@ -139,7 +139,7 @@ export async function withdrawPi(balance, mail) {
             const piId = AuthPi.user.uid;
 
             const Piname = AuthPi.user.username;
-            console.log("Đang giao dịchhhhhh");
+            console.log("Đang giao dịch");
             if (Piname === pioraUser) {
                 const withdrawtxid = await axios.post("/payments/withdraw", { piId, Piname, amount }, config);
                 if (withdrawtxid) {
