@@ -247,7 +247,11 @@ const PostItem = ({ post }) => {
                                 </Link>
                                 {post.description && <span className="text-intro">{post.description}</span>}
                             </div>
-                            <div className="filter__content-author">
+                           
+                        </div>
+                        <div className={"content__bottom"}>
+
+                        <div className="filter__content-author">
                                 <div className="filter__content-author-user">
                                     <div className="post-avt">
                                         <Link to={`/user/${post.author.userName}`}>
@@ -269,8 +273,7 @@ const PostItem = ({ post }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className={"content__bottom"}>
+
                             <div className="filter__content-interactive">
                                 <div
                                     className="filter__content-interactive-container"
@@ -284,7 +287,7 @@ const PostItem = ({ post }) => {
                                     )}
                                     <span className="post-icon">{voteCount}</span>
                                 </div>
-                                <div className="filter__content-interactive-container">
+                                {/* <div className="filter__content-interactive-container">
                                     <svg
                                         fill="#969696"
                                         _ngcontent-serverapp-c41=""
@@ -300,13 +303,13 @@ const PostItem = ({ post }) => {
                                         ></path>
                                     </svg>
                                     <span className="post-icon">{post.views}</span>
-                                </div>
+                                </div> */}
                                 <Link to={`/post/${post.slug}`}>
                                     <div className="filter__content-interactive-container">
                                         <svg
                                             fill="#969696"
                                             color="#969696"
-                                            width="18"
+                                            width="14"
                                             height="19"
                                             viewBox="0 0 18 19"
                                             xmlns="http://www.w3.org/2000/svg"

@@ -20,7 +20,7 @@
     "min": "min",
     "read": "read",
     "content_allowed": "Content Allowed",
-    "policy": "Policy",
+    "policy": "POLICY",
     "you_love_piora_and_want_to_help_us": "You love Piora and want to help us?",
     "donate": "Donate",
     "MAY_BE_GOOD_FOR_YOU": "MAY BE GOOD FOR YOU",
@@ -90,5 +90,8 @@
     "choosetopic": "Please choose a topic",
     "wewwillmakeitease": "We will make it easy for you to access the posts",
     "searchbyname": "Search by name...",
-    "success": "Success!"
+    "success": "Success!",
+    "loading": "Processing withdraw, please wait",
+    "commentthispost": "Comment this post",
+    "reply": "Reply "
 }

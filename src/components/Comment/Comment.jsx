@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import "./comment.scss";
 import axios from "axios";
 import Reply from "../Reply/Reply";
+import { useTranslation } from "react-i18next";
 const Comment = ({ comment, postId, isAdmin }) => {
+    const { t } = useTranslation();
     const [voteCount, setVoteCount] = useState(null);
     const [newReply, setNewReply] = useState(null);
     const [reply, setReply] = useState({});
@@ -142,12 +144,12 @@ const Comment = ({ comment, postId, isAdmin }) => {
                             <div></div>
                             <span className="value">{voteCount}</span>
                         </div>
-                        <p onClick={handelVisible}>Reply |</p>
+                        <p style={{padding:"10px"}} onClick={handelVisible}>{t("reply")}</p>
                         { isAdmin ? (
                            <div> <Link to={`/`}
                            onClick={handleDelete}
                           >
-                         | Delete
+                        {t("delete")}
                   </Link></div>
                         ) : (
                             ""
@@ -164,7 +166,7 @@ const Comment = ({ comment, postId, isAdmin }) => {
                             <form action="" className="comment__form" onSubmit={handleSumit}>
                                 <input
                                     className="comment__form-data"
-                                    placeholder="Reply this comment"
+                                    placeholder={t("replythiscomment")}
                                     value={reply.content}
                                     onChange={(e) =>
                                         setReply({
@@ -174,7 +176,7 @@ const Comment = ({ comment, postId, isAdmin }) => {
                                     }
                                 ></input>
                                 <div className="comment__form-actions" onClick={handleSubmitReply}>
-                                    <div className="comment__form-actions-submit">Send</div>
+                                    <div className="comment__form-actions-submit">{t("send")}</div>
                                 </div>
                             </form>
                         </div>

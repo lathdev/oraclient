@@ -20,7 +20,7 @@
     "min": "phút",
     "read": "đọc",
     "content_allowed": "Nội quy",
-    "policy": "Pháp lý",
+    "policy": "PHÁP LÝ",
     "you_love_piora_and_want_to_help_us": "Bạn yêu mến Piora và muốn ủng hộ chúng mình?",
     "donate": "Ủng hộ",
     "MAY_BE_GOOD_FOR_YOU": "DÀNH CHO BẠN",
@@ -90,5 +90,9 @@
     "choosetopic": "Hãy chọn những chủ đề bạn quan tâm",
     "wewwillmakeitease": "Piora sẽ giúp bạn dễ dàng tiếp cận các bài viết",
     "searchbyname": "Tìm kiếm theo tên",
-    "success": "Thành công!"
+    "success": "Thành công!",
+    "loading": "Đang xử lý giao dịch, vui lòng chờ giây lát",
+    "commentthispost": "Bình luận bài viết này",
+    "reply": "Trả lời ",
+    "replythiscomment": "Trả lời bình luận này"
 }

@@ -557,17 +557,17 @@ const Post = () => {
                                     <input
                                         className="comment__form-data"
                                         ref={inputCmtRef}
-                                        placeholder="Comment this post"
+                                        placeholder={t("commentthispost")}
                                         value={dataComment.content}
                                         onChange={(e) => setDataComment({ ...dataComment, content: e.target.value })}
                                     ></input>
                                     <div className="comment__form-actions" onClick={handleSubmitComment}>
-                                        <div className="comment__form-actions-submit">Send</div>
+                                        <div className="comment__form-actions-submit">{t("send")}</div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div className="comment__nav-tab">
+                        {/* <div className="comment__nav-tab">
                             <div className="separator"></div>
                             <ul className="comment__nav-list">
                                 <li className="comment__nav-item active">
@@ -577,7 +577,7 @@ const Post = () => {
                                     <Link to="/">New</Link>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div className="comment__tree-view">
                             <div className="comments">
                                 <div className="comments__node">

@@ -73,7 +73,7 @@ const Adv = () => {
                         </Link>
 
                         <li className="adv__contact-item">
-                            <Link to="https://youtube.com/@piora2027" className="adv__contact-social-link">
+                            <Link to="https://www.youtube.com/@pioraofficial" className="adv__contact-social-link">
                                 <i className=" adv__contact-social-icon yt bx bxl-youtube"></i>
                                 <span className="adv__contact-social-text">Piora Youtube</span>
                             </Link>
@@ -92,12 +92,12 @@ const Adv = () => {
                 <ul className="adv__about-list">
                     <li className="adv__about-item">
                         <Link to="/post/terms-of-use" className="adv__about-link">
-                            <span className="adv__about-text">TERMS</span>
+                            <span className="adv__about-text">{t("TERMS_OF_USE")}</span>
                         </Link>
                     </li>
                     <li className="adv__about-item">
                         <Link to="/post/privacy-policy" className="adv__about-link">
-                            <span className="adv__about-text">POLICY</span>
+                            <span className="adv__about-text">{t("policy")}</span>
                         </Link>
                     </li>
                 </ul>

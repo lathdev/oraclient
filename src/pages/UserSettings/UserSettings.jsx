@@ -10,7 +10,6 @@ import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import Loader from "../../components/Loader/Loader";
 import { useModalContext } from "../../components/modal/ModalContext";
-import { justify } from "@cloudinary/url-gen/qualifiers/textAlignment";
 
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
@@ -36,14 +35,6 @@ const UserSettings = () => {
     const [isSuccessEmail, setIsSuccessEmail] = useState(null);
     const [isErrEmail, setIsErrEmail] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [dataEmail, setDataEmail] = useState({
-        mail: "",
-        password: "",
-    });
-    const [errorMail, setErrorMail] = useState({
-        mail: "",
-        password: "",
-    });
     const [dataPassword, setDataPassword] = useState({
         oldPassword: "",
         password: "",
@@ -85,16 +76,16 @@ const UserSettings = () => {
                     break;
                 case "password":
                     if (dataPassword.confirmPassword && value !== dataPassword.confirmPassword) {
-                        stateObj["confirmPassword"] = "Mật khẩu nhập lại khum chính xác.";
+                        stateObj["confirmPassword"] = "Mật khẩu nhập lại không chính xác.";
                     } else if (dataPassword.oldPassword && value === dataPassword.oldPassword) {
-                        stateObj[name] = "Mật khẩu mới khum được giống mật khẩu cũ";
+                        stateObj[name] = "Mật khẩu mới không được giống mật khẩu cũ";
                     } else if (value.length < 9) {
                         stateObj[name] = "Mật khẩu phải có tối thiểu 9 kí tự và ít hơn 100 kí tự.";
                     }
                     break;
                 case "confirmPassword":
                     if (dataPassword.password && value !== dataPassword.password) {
-                        stateObj[name] = "Mật khẩu nhập lại khum chính xác";
+                        stateObj[name] = "Mật khẩu nhập lại không chính xác";
                     }
                     break;
                 default:
@@ -233,38 +224,31 @@ const UserSettings = () => {
     }, [currentUser]);
 
     async function withDraw() {
-        
-        const piB = isPiBrowser();
-        if (!piB) {
-            openModal(<div>{t("notPiBrowser")}</div>);
-        } else {
-            setIsLoading(true);
-            const aa = await currentUser.currentUser;
-            if (aa.mobile && aa.mail) {
-                const balance = aa.mobile - 0.1;
+       const piB = isPiBrowser();
+        if (!piB) { 
+             openModal(<div>{t("notPiBrowser")}</div>);  } 
+        else {
+             const aa = await currentUser.currentUser;
+            if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
+       else if (aa.mobile && aa.mail) {
+                setIsLoading(true);
+                const balance = aa.mobile - 0.1; 
                 const mail = aa.mail;
                 try {
                     const txId = await withdrawPi(balance, mail);
                     openModal(
-                    <div  style={{
-                       maxWidth: "300px",
-                     
-                    }}>
-                        <p style={
-                        {   justifyContent: "center"
-                        }
-                      }><b>{t("success")}</b></p>
-                      <p style={
-                        {   
-                            overflow: "scroll"
-                        }
-                      }> Txid: {txId}</p>
-
-                    </div>);
+                        <div style={
+                            { width: "300px",
+                              padding: "10px"
+                        }}>
+                            <p style={{textAlign:"center"}}><b>{t("success")}</b></p>
+                            <p style={{overflowWrap:"break-word"}}> <b>Txid:</b> {txId}</p></div>);
                 } catch (err) {
                     openModal(<div>{err}</div>);
                 } finally {
                     setIsLoading(false);
+                    setDataUser({ ...dataUser, mobile: 0 });
+                   
                 }
             }
         }
@@ -692,14 +676,6 @@ const UserSettings = () => {
                                             <button className="settings__actions cancle">
                                                 <Link to="/">{t("cancel")}</Link>
                                             </button>
-                                            {/* <button
-                        type="submit"
-                        className={`settings__actions save ${!disableSave ? "active" : ""}`}
-                        onClick={onSave}
-                        disabled={disableSave}
-                      >
-                        Lưu
-                      </button> */}
                                             <button type="submit" className="settings__actions save" onClick={onSave}>
                                                 {t("save")}
                                             </button>

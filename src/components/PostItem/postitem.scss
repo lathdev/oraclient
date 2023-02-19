@@ -29,8 +29,8 @@
 
 .mobile-post-item {
   display: flex;
-  gap: 7px;
-
+  gap: 12px;
+  width: 100%;
   .filter__content-img {
     width: 120px;
     flex-shrink: 0;
@@ -49,6 +49,7 @@
 
   .filter__content-author {
     margin-top: 5px;
+    margin-bottom: 5px;
     
   }
 
@@ -64,17 +65,24 @@
 
   .content__bottom {
     
-   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
 
   }
 
   .filter__content-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-around
+    justify-content: space-evenly;
+    width: 100%;
+    
   }
   .filter__content-interactive {
     gap: 0 10px;
-    
+    justify-content: flex-end;
+  }
+  .filter__content-interactive-container {
+    max-height: 10px;
   }
 }

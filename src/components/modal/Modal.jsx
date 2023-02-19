@@ -40,10 +40,10 @@ function Modal() {
             >
                 <div
                     style={{
-                        minWidth: "300px",
-                        minHeight: "100px",
+                        maxWidth: "300px",
+                        minHeight: "120px",
                         borderRadius: "5px",
-                        border: "1px solid #00f",
+                        border: "1px solid #fff",
                         padding: "10px",
 
                         display: "grid",
