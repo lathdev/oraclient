@@ -24,6 +24,7 @@ const Post = () => {
     const [voteCountUpdate, setVoteCountUpdate] = useState([]);
     const [isSuccess, setIsSuccess] = useState(null);
     const currentUser = useSelector(userState$);
+    const isBlockCmt = currentUser?.currentUser?.isBlockedCmt;
     const location = useLocation();
     const [isUser, setIsUser] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -549,48 +550,54 @@ const Post = () => {
                         )}
                     </div>
                 </div>
-                <div className="comment__container">
-                    <section className="comment__section">
-                        <div>
-                            <div className="comment__form-container">
-                                <form className="comment__form" ref={inputCmtRef}>
-                                    <input
-                                        className="comment__form-data"
-                                        ref={inputCmtRef}
-                                        placeholder={t("commentthispost")}
-                                        value={dataComment.content}
-                                        onChange={(e) => setDataComment({ ...dataComment, content: e.target.value })}
-                                    ></input>
-                                    <div className="comment__form-actions" onClick={handleSubmitComment}>
-                                        <div className="comment__form-actions-submit">{t("send")}</div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        {/* <div className="comment__nav-tab">
-                            <div className="separator"></div>
-                            <ul className="comment__nav-list">
-                                <li className="comment__nav-item active">
-                                    <Link to="/">Hot</Link>
-                                </li>
-                                <li className="comment__nav-item">
-                                    <Link to="/">New</Link>
-                                </li>
-                            </ul>
-                        </div> */}
-                        <div className="comment__tree-view">
-                            <div className="comments">
-                                <div className="comments__node">
-                                    {comments.length > 0
-                                        ? comments.map((comment) => (
-                                              <Comment postId={dataPost?._id} comment={comment} key={comment._id} isAdmin={isAdmin} />
-                                          ))
-                                        : ""}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+
+{isBlockCmt? (<div className="comment__form block"><p>You have been blocked from commenting.</p>
+                                                        </div>):(
+ <div className="comment__container">
+ <section className="comment__section">
+     <div>
+         <div className="comment__form-container">
+             <form className="comment__form" ref={inputCmtRef}>
+                 <input
+                     className="comment__form-data"
+                     ref={inputCmtRef}
+                     placeholder={t("commentthispost")}
+                     value={dataComment.content}
+                     onChange={(e) => setDataComment({ ...dataComment, content: e.target.value })}
+                 ></input>
+                 <div className="comment__form-actions" onClick={handleSubmitComment}>
+                     <div className="comment__form-actions-submit">{t("send")}</div>
+                 </div>
+             </form>
+         </div>
+     </div>
+     {/* <div className="comment__nav-tab">
+         <div className="separator"></div>
+         <ul className="comment__nav-list">
+             <li className="comment__nav-item active">
+                 <Link to="/">Hot</Link>
+             </li>
+             <li className="comment__nav-item">
+                 <Link to="/">New</Link>
+             </li>
+         </ul>
+     </div> */}
+     <div className="comment__tree-view">
+         <div className="comments">
+             <div className="comments__node">
+                 {comments.length > 0
+                     ? comments.map((comment) => (
+                           <Comment postId={dataPost?._id} comment={comment} key={comment._id} isAdmin={isAdmin} />
+                       ))
+                     : ""}
+             </div>
+         </div>
+     </div>
+ </section>
+</div>
+      )}
+
+               
             </div>
             {visiable ? (
                 <div className="modal__delete">

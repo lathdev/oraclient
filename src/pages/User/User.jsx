@@ -23,6 +23,8 @@ const User = () => {
     const slider = useRef(null);
     const tab = searchParams.get("tab");
     const [userId, setUserId] = useState([]);
+    const [isBlockedPost, setisBlockedPost] = useState(false);
+    const [isBlockedCmt, setisBlockedCmt] = useState(false);
     const { username } = useParams();
     const [postsSaved, setPostsSaved] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -44,6 +46,8 @@ const User = () => {
     useEffect(() => {
         if (currentUser) {
             setUserId([currentUser.user._id]);
+            setisBlockedPost(currentUser.user.isBlockedAll)
+            setisBlockedCmt(currentUser.user.isBlockedCmt)
         }
     }, [currentUser]);
 
@@ -152,7 +156,29 @@ const User = () => {
                     },
                 };
                 await axios(option);
-               
+                alert("OK");
+            setisBlockedCmt(true)
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleUnBlockCmt = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockCmt";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/unblock/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+                alert("OK");
+                setisBlockedCmt(false)
             } catch (err) {}
         },
         [userId]
@@ -173,6 +199,28 @@ const User = () => {
                 };
                 await axios(option);
               alert("OK");
+            setisBlockedPost(true)
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleUnBlockAll = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockAll";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/unblock/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+              alert("OK");
+              setisBlockedPost(false);
             } catch (err) {}
         },
         [userId]
@@ -317,16 +365,29 @@ const User = () => {
                                                           >
                                                               <span>{t("chat")}</span>
                                                           </button>
-                                                          {isAdmin ? ( <div className="admin__profile-widget-button"><button
+                                                          {isAdmin ? ( 
+                                                        <div className="admin__profile-widget-button">
+                                                            {isBlockedPost ? (  <button
+                                                              className="admin__profile-widget-button-item"
+                                                              onClick={handleUnBlockAll}>
+                                                              <span>UnBlock Post</span>
+                                                          </button>) : (  <button
                                                               className="admin__profile-widget-button-item"
                                                               onClick={handleBlockAll}>
-                                                              <span>Block All</span>
-                                                          </button>
-                                                            <button
+                                                              <span>Block Post</span>
+                                                          </button>) }
+                                                          {isBlockedCmt ? (  <button
+                                                              className="admin__profile-widget-button-item"
+                                                              onClick={handleUnBlockCmt}>
+                                                              <span>UnBlock Cmt</span>
+                                                          </button>) : (  <button
                                                             className="admin__profile-widget-button-item"
                                                             onClick={handleBlockCmt}>
                                                             <span>Block Cmt</span>
-                                                        </button></div>
+                                                        </button>) }
+                                                           </div>
+
+
 
                                                           ) :("")} 
                                                       </div>
