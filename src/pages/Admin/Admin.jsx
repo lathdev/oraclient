@@ -23,18 +23,7 @@ const Admin = () => {
    
     let totalPosts = posts.data.length;
   const dataPost=posts;
-  async function deletePosts () {
-      
-            const token = localStorage.getItem("token");
-            const option = {
-                method: "delete",
-                url: `/api/v1/posts/${dataPost._id}`,
-                headers: {
-                    authorization: `Bearer ${token}`,
-                },
-            };
-           
-        }
+  
      
     
     return (

@@ -37,14 +37,18 @@
   }
 
   .title-post {
+    
+    max-height: 50px;
     font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: wrap;
   }
 
   .text-intro {
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .filter__content-author {
