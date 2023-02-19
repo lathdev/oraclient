@@ -204,6 +204,7 @@
                 margin: 15px 0;
                 display: flex;
                 justify-content: space-around;
+                flex-wrap: wrap;
                 &-item {
                     padding: 0 18px;
                     height: 2.7rem;
@@ -301,6 +302,33 @@
         }
     }
 }
+
+    .admin__profile-widget-button {
+        margin-top: 15px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .admin__profile-widget-button-item {
+        margin: 15px 15px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+                     padding: 0 18px;
+
+                    height: 2.7rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid rgb(255, 0, 0);
+                    border-radius: 0.25rem;
+                    background-color: #fff;
+                    cursor: pointer;
+                    text-transform: none;
+                    overflow: visible;
+                    font-size: 16px;
+    }
+
 .flow {
     display: flex;
     align-items: center;

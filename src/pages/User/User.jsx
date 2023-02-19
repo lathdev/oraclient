@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
+import { isDate } from "moment";
 const User = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ const User = () => {
     const [userId, setUserId] = useState([]);
     const { username } = useParams();
     const [postsSaved, setPostsSaved] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
     const sliderSettings = {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -44,6 +46,7 @@ const User = () => {
             setUserId([currentUser.user._id]);
         }
     }, [currentUser]);
+
     const getPostsByUser = useCallback(async () => {
         const option = {
             method: "get",
@@ -180,6 +183,17 @@ const User = () => {
         [notiId]
     );
     useEffect(() => {
+        if (userState.currentUser) {
+            if (
+                userState.currentUser._id==='63eb04c5c38d69c8d78052a8'||
+                userState.currentUser._id==='63eae6f5c38d69c8d780506e' ||
+                userState.currentUser._id==='63eb6d41c38d69c8d78057e0'
+                 ) {
+                setIsAdmin(true);
+            }
+        }
+    }, [ currentUser]);
+    useEffect(() => {
         updateNoti();
     }, [updateNoti]);
     return userState.currentUser
@@ -263,7 +277,18 @@ const User = () => {
                                                           >
                                                               <span>{t("chat")}</span>
                                                           </button>
+                                                          {isAdmin ? ( <div className="admin__profile-widget-button"><button
+                                                              className="admin__profile-widget-button-item">
+                                                              <span>Block All</span>
+                                                          </button>
+                                                            <button
+                                                            className="admin__profile-widget-button-item">
+                                                            <span>Block Cmt</span>
+                                                        </button></div>
+
+                                                          ) :("")} 
                                                       </div>
+                                                      
                                                   )}
                                                   <div className="user__profile-widget-stats">
                                                       <div>
@@ -442,6 +467,7 @@ const User = () => {
                                                       >
                                                           <span>{t("chat")}</span>
                                                       </button>
+                                                     
                                                   </div>
                                                   <div className="user__profile-widget-stats">
                                                       <div>
