@@ -93,5 +93,6 @@
     "success": "Success!",
     "loading": "Processing withdraw, please wait",
     "commentthispost": "Comment this post",
-    "reply": "Reply "
+    "reply": "Reply ",
+    "replythiscomment": "Reply this comment"
 }
