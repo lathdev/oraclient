@@ -291,9 +291,9 @@ const PostItem = ({ post }) => {
                                     <svg
                                         fill="#969696"
                                         _ngcontent-serverapp-c41=""
-                                        width="21"
+                                        width="14"
                                         height="14"
-                                        viewBox="0 0 21 14"
+                                        viewBox="0 0 20 10"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path

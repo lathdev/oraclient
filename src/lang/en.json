@@ -48,13 +48,14 @@
     "edit": "Edit",
     "delete": "Delete",
     "views": "views",
+    "view": "views",
     "comment_this_post": "Comment this post",
     "send": "Send",
     "hot": "Hot",
     "new": "New",
     "do_you_want_to_delete_post": "Do you want to delete post?",
     "cancel": "Cancel",
-    "invite_code": "Invite code",
+    "invite_code": "Invite code (Optional)",
     "register": "Register",
     "chat": "Chat",
     "follows": "Follows",
@@ -94,5 +95,7 @@
     "loading": "Processing withdraw, please wait",
     "commentthispost": "Comment this post",
     "reply": "Reply ",
-    "replythiscomment": "Reply this comment"
+    "replythiscomment": "Reply this comment",
+    "note1": "Your username will also be used as an invitation code, invite your friends to get 0.1% commission from rewards of referral.",
+    "note2": "Username of the person who invited you to Piora"
 }

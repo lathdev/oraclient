@@ -48,13 +48,14 @@
     "edit": "Sửa",
     "delete": "Xóa",
     "views": "Lượt xem",
+    "view": "lượt xem",
     "comment_this_post": "Bình luận bài viết này",
     "send": "Gửi",
     "hot": "Hot",
     "new": "Mới",
     "do_you_want_to_delete_post": "Xóa bài viết?",
     "cancel": "Hủy",
-    "invite_code": "Bạn được mời bởi",
+    "invite_code": "Bạn được mời bởi ai? (Không bắt buộc)",
     "register": "Đăng ký",
     "chat": "Chat",
     "follows": "Lượt theo dõi",
@@ -94,5 +95,7 @@
     "loading": "Đang xử lý giao dịch, vui lòng chờ giây lát",
     "commentthispost": "Bình luận bài viết này",
     "reply": "Trả lời ",
-    "replythiscomment": "Trả lời bình luận này"
+    "replythiscomment": "Trả lời bình luận này",
+    "note1": "Hãy sử dụng tên người dùng như mã mời bạn bè và nhận thưởng nhé!",
+    "note2": "Người giới thiệu của bạn sẽ được bonus 0.1% những gì bạn nhận được."
 }

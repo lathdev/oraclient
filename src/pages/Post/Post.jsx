@@ -85,7 +85,7 @@ const Post = () => {
      async function tip()  {
       
         const piB =isPiBrowser()
-        if (!piB) return alert("You need to use Pi Browser for tip!")
+        if (!piB) return alert(t("notPiBrowser"))
         else {
             const res = await axios.get(`/api/v1/posts/${path}`);
 
@@ -473,18 +473,18 @@ const Post = () => {
                             </div>
                         </div>
                       
-                        <div className="view-count">{dataPost.views} views</div>
+                        <div className="view-count">{dataPost.views} {t("view")}</div>
                     </div>
                     <div className="pull-right">
                         <div className="right-tools">
                         <div className="tip-post" onClick={tip}>
                             <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
                         </div>
-                            <Link to="/" className="tool">
+                            {/* <Link to="/" className="tool">
                                 <FacebookShareButton url={shareUrl}>
                                     <FacebookIcon size={40} round={true}></FacebookIcon>
                                 </FacebookShareButton>
-                            </Link>
+                            </Link> */}
                             <div className="bookmark">
                                 <Link to="/" title="Click to save post">
                                     <i className="bx bx-bookmarks"></i>
