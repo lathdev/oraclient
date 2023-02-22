@@ -555,9 +555,6 @@ const Header = () => {
                                 )}
                             </div>
                             <div className="header__member">
-                                {/* <Link to="/" className="header__title no-wrap">
-                  THÀNH VIÊN NỔI BẬT
-                </Link> */}
                             </div>
                             <div className="header__menu-category">
                                 <div className="header__menu-category-wrapper">

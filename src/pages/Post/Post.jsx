@@ -145,8 +145,8 @@ const Post = () => {
         if (currentUser.currentUser) {
             if (
                 currentUser.currentUser._id==='63eb04c5c38d69c8d78052a8'||
-                 currentUser.currentUser._id==='63eae6f5c38d69c8d780506e' ||
-                 currentUser.currentUser._id==='63eb6d41c38d69c8d78057e0'
+                 currentUser.currentUser._id==='63f3bd424fb92ea27f0431f8' ||
+                 currentUser.currentUser._id==='63f05ffea938efc90857be35'
                  ) {
                 setIsAdmin(true);
             }
