@@ -7,6 +7,7 @@ import * as actions from "../../redux/actions";
 import "./header.scss";
 import Notifications from "../../components/Notifications/Notifications";
 import { useTranslation } from "react-i18next";
+import useMediaQuery from "../../hooks/useMedia";
 const Header = () => {
     const listRef = useRef();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -253,6 +254,9 @@ const Header = () => {
     useEffect(() => {
         getNotificationsMessage();
     }, [getNotificationsMessage]);
+
+    const isMobile = useMediaQuery("(max-width: 600px)");
+
     return location.pathname !== "/category" ? (
         location.pathname !== "/login" &&
         location.pathname !== "/register" &&
@@ -335,7 +339,7 @@ const Header = () => {
                                                                                   key={notification._id}
                                                                               />
                                                                           ))
-                                                                        : t("nothinghere") }
+                                                                        : t("nothinghere")}
                                                                 </ul>
                                                             </div>
                                                             <footer className="header__notify-footer">
@@ -384,14 +388,16 @@ const Header = () => {
                                                                             : currentUser.currentUser.userName}
                                                                     </p>
                                                                     <span className="header__dropdown-phone">
-                                                                    <Link
-                                                                        to="/user/settings#piBalance"
-                                                                        className="header__dropdown-link p-10"
-                                                                    > 
-                                                                    {t("balance")+": "}
-                                                                        {currentUser.currentUser.mobile
-                                                                            ? currentUser.currentUser.mobile
-                                                                            : "0" } Pi</Link>
+                                                                        <Link
+                                                                            to="/user/settings#piBalance"
+                                                                            className="header__dropdown-link p-10"
+                                                                        >
+                                                                            {t("balance") + ": "}
+                                                                            {currentUser.currentUser.mobile
+                                                                                ? currentUser.currentUser.mobile
+                                                                                : "0"}{" "}
+                                                                            Pi
+                                                                        </Link>
                                                                     </span>
                                                                 </div>
                                                             </Link>
@@ -561,7 +567,14 @@ const Header = () => {
                             </div>
                             <div className="header__menu-category">
                                 <div className="header__menu-category-wrapper">
-                                    <div className="header__menu-category-icon left">
+                                    <div
+                                        className="header__menu-category-icon left"
+                                        onClick={() => {
+                                            if (isMobile) {
+                                                listRef.current.style.transform = `translateX(0)`;
+                                            }
+                                        }}
+                                    >
                                         <i className=" header__icon bx bx-chevron-left"></i>
                                     </div>
                                     <div className="header__menu-navbar">
@@ -575,7 +588,14 @@ const Header = () => {
                                             ))}
                                         </ul>
                                     </div>
-                                    <div className="header__menu-category-icon right">
+                                    <div
+                                        className="header__menu-category-icon right"
+                                        onClick={() => {
+                                            if (isMobile) {
+                                                listRef.current.style.transform = `translateX(-60px)`;
+                                            }
+                                        }}
+                                    >
                                         <i className="header__icon bx bx-chevron-right"></i>
                                     </div>
                                 </div>
