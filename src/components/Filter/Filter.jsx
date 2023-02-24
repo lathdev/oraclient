@@ -231,7 +231,7 @@ const Filter = ({ posts }) => {
     const handleSetPage = (i) => {
         setCurrentButton(i + 1);
         const ft = document.querySelector( '#filter' );
-        ft.scrollIntoView({ behavior: 'smooth' })
+        ft.scrollIntoView()
     };
   
     return (
