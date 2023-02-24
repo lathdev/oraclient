@@ -143,11 +143,9 @@ export async function withdrawPi(balance, mail) {
             if (Piname === pioraUser) {
                 const withdrawtxid = await axios.post("/payments/withdraw", { piId, Piname, amount }, config);
                 if (withdrawtxid) {
-                    // alert(`Withdraw Success, Txid: ${withdrawtxid.data.txid}`);
                     return withdrawtxid.data.txid;
                 }
             } else {
-                // alert("Not You!");
                 throw new Error("Not You!");
             }
         }

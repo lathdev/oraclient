@@ -117,7 +117,7 @@ const PostItem = ({ post }) => {
                                     </Link>
                                     <span className="time-read">4 min read</span>
                                 </div>
-                                <Link
+                                {/* <Link
                                     to={`/`}
                                     onClick={(e) => {
                                         handleSavePost(e, post._id);
@@ -130,7 +130,7 @@ const PostItem = ({ post }) => {
                                     ) : (
                                         <i className="bx bx-bookmark-alt"></i>
                                     )}
-                                </Link>
+                                </Link> */}
                             </div>
                             <div className="filter__content-main">
                                 <Link to={`/post/${post.slug}`}>

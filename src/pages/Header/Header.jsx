@@ -576,13 +576,20 @@ const Header = () => {
                                     </div>
                                     <div className="header__menu-navbar">
                                         <ul className="header__menu-list" ref={listRef}>
+                                        <li className="header__menu-item">
+                                                    <Link to={`/category/`} className="header__menu-link">
+                                                        All
+                                                    </Link>
+                                                </li>
                                             {categorise.data.map((e, i) => (
                                                 <li key={i._id} className="header__menu-item">
                                                     <Link to={`/category/${e.slug}`} className="header__menu-link">
                                                         {e.name}
                                                     </Link>
                                                 </li>
+                                                
                                             ))}
+                                           
                                         </ul>
                                     </div>
                                     <div

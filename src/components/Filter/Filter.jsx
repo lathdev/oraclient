@@ -4,8 +4,29 @@ import PostItem from "../PostItem/PostItem";
 import "./filter.scss";
 import { useTranslation } from "react-i18next";
 
+
 const Filter = ({ posts }) => {
     const { t } = useTranslation();
+    const timestamp = (date) => {
+       const Timing = new Date(date)
+      return Timing.getTime();
+    }
+    const sortTypes = {
+        vote: {
+            fn: (a, b) => (b.vote.length-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.8) -( a.vote.length-1) / 
+            Math.pow(((Date.now()-timestamp(a.createdAt))/(1000*3600))+2, 1.8),
+        },
+        view: {
+            fn: (a, b) =>  (b.views-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.8) -( a.views-1) / 
+            Math.pow(((Date.now()-timestamp(a.createdAt))/(1000*3600))+2, 1.8)
+        },
+        comment: {
+            fn: (a, b) => b.comment_count - a.comment_count,
+        },
+        default: {
+            fn: (a, b) => timestamp(b.createdAt) - timestamp(a.createdAt) ,
+        },
+    };
     const [flilterActive, setFilterActive] = useState(0);
     const [currentSort, setCurrentSort] = useState("view");
     const [tabActive, setTabActive] = useState(0);
@@ -18,7 +39,7 @@ const Filter = ({ posts }) => {
     }, [posts]);
     const indexOfLastPost = currentButton * PER_PAGE;
     const indexOfFirstPost = indexOfLastPost - PER_PAGE;
-    const currentActivityLists = computedActivityStreams.slice(indexOfFirstPost, indexOfLastPost);
+    const currentActivityLists = computedActivityStreams.sort(sortTypes[currentSort].fn).slice(indexOfFirstPost, indexOfLastPost);
     const tabRef = useRef();
     useEffect(() => {
         const handleScroll = () => {
@@ -36,16 +57,17 @@ const Filter = ({ posts }) => {
     }, []);
     const handleFilterActive = (index) => {
         if (index === 0) {
-            setCurrentSort("view");
-        }
-        if (index === 1) {
             setCurrentSort("default");
         }
+        if (index === 1) {
+            setCurrentSort("vote");
+          
+        }
         if (index === 2) {
-            setCurrentSort("comment");
+            setCurrentSort("view");
         }
         if (index === 3) {
-            setCurrentSort("vote");
+            setCurrentSort("comment");
         }
         setFilterActive(index);
     };
@@ -54,7 +76,20 @@ const Filter = ({ posts }) => {
     };
     const fitterList = [
         {
-            displayName: "HOT",
+            displayName: t("new"),
+            path: "/?sort=news",
+            icon: (
+                <svg fill="#718096" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        _ngcontent-serverapp-c41=""
+                        d="M2.42188 2.64062C4.0625 1 6.02865 0.179688 8.32031 0.179688C10.638 0.179688 12.6042 1 14.2188 2.64062C15.8594 4.25521 16.6797 6.20833 16.6797 8.5C16.6797 10.7917 15.8594 12.7578 14.2188 14.3984C12.6042 16.013 10.638 16.8203 8.32031 16.8203C6.02865 16.8203 4.0625 16.013 2.42188 14.3984C0.807292 12.7578 0 10.7917 0 8.5C0 6.20833 0.807292 4.25521 2.42188 2.64062ZM11.875 13.5L10.9375 9.47656L14.0234 6.78125L9.92188 6.42969L8.32031 2.67969L6.71875 6.46875L2.61719 6.78125L5.74219 9.47656L4.80469 13.5L8.32031 11.3906L11.875 13.5Z"
+                        className="cls-1"
+                    ></path>
+                </svg>
+            ),
+        },
+        {
+            displayName: "TOP",
             path: "/",
             icon: (
                 <svg
@@ -73,19 +108,7 @@ const Filter = ({ posts }) => {
                 </svg>
             ),
         },
-        {
-            displayName: t("new"),
-            path: "/?sort=news",
-            icon: (
-                <svg fill="#718096" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        _ngcontent-serverapp-c41=""
-                        d="M2.42188 2.64062C4.0625 1 6.02865 0.179688 8.32031 0.179688C10.638 0.179688 12.6042 1 14.2188 2.64062C15.8594 4.25521 16.6797 6.20833 16.6797 8.5C16.6797 10.7917 15.8594 12.7578 14.2188 14.3984C12.6042 16.013 10.638 16.8203 8.32031 16.8203C6.02865 16.8203 4.0625 16.013 2.42188 14.3984C0.807292 12.7578 0 10.7917 0 8.5C0 6.20833 0.807292 4.25521 2.42188 2.64062ZM11.875 13.5L10.9375 9.47656L14.0234 6.78125L9.92188 6.42969L8.32031 2.67969L6.71875 6.46875L2.61719 6.78125L5.74219 9.47656L4.80469 13.5L8.32031 11.3906L11.875 13.5Z"
-                        className="cls-1"
-                    ></path>
-                </svg>
-            ),
-        },
+     
         // {
         //     displayName: "GOOD",
         //     path: "/?sort=controversial",
@@ -100,8 +123,8 @@ const Filter = ({ posts }) => {
         //     ),
         // },
         {
-            displayName: "TOP ",
-            path: "/?sort=top",
+            displayName: "TREND",
+            path: "/?sort=topcomment",
             icon: (
                 <svg fill="#718096" width="13" height="15" viewBox="0 0 13 15" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -207,23 +230,12 @@ const Filter = ({ posts }) => {
     ];
     const handleSetPage = (i) => {
         setCurrentButton(i + 1);
+        const ft = document.querySelector( '#filter' );
+        ft.scrollIntoView({ behavior: 'smooth' })
     };
-    const sortTypes = {
-        vote: {
-            fn: (a, b) => b.vote - a.vote,
-        },
-        view: {
-            fn: (a, b) => b.views - a.views,
-        },
-        comment: {
-            fn: (a, b) => b.comment_count - a.comment_count,
-        },
-        default: {
-            fn: (a, b) => a,
-        },
-    };
+  
     return (
-        <section className="filter">
+        <section className="filter"  id="filter">
             <div className="filter__wrapper">
                 <div className="filter__bar">
                     <h3 className="title">{t("foryou")}</h3>
@@ -252,9 +264,12 @@ const Filter = ({ posts }) => {
                             <div className="filter__content">
                                 <div className="filter__content-details">
                                     <div className="grid">
-                                        {Array.isArray(currentActivityLists) &&
+                                        {Array
+                                        
+                                        .isArray(currentActivityLists) 
+                                        &&
                                             currentActivityLists
-                                                .sort(sortTypes[currentSort].fn)
+                                               
                                                 .map((post) => <PostItem post={post} key={post._id} />)}
                                     </div>
                                 </div>
@@ -265,7 +280,7 @@ const Filter = ({ posts }) => {
                 <div className="filter__pagination">
                     <ul className="filter__pagination-list">
                         {[...Array(page)].map((x, i) => (
-                            <li className="filter__pagination-item" onClick={() => handleSetPage(i)}>
+                           <li className="filter__pagination-item" onClick={() => handleSetPage(i)}>
                                 <span className={`filter__pagination-text ${currentButton === i + 1 ? "active" : ""}`}>
                                     {i + 1}
                                 </span>

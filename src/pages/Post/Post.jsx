@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import Comment from "../../components/Comment/Comment";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import { donatePi } from "../../components/pisdk/pisdk.tsx";
+import DatePost from "../../components/DatePost/DatePost";
 import { useTranslation } from "react-i18next";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 const Post = () => {
@@ -399,6 +400,7 @@ const Post = () => {
                         <Link to={`/category/${categoryPost.slug}`}>
                             <span className="post__details-category-name">{categoryPost.name}</span>
                         </Link>
+                      
                     </div>
                     <div className="post__details-title">
                         <h1>{dataPost.title}</h1>
@@ -419,6 +421,7 @@ const Post = () => {
                                         alt=""
                                     />
                                 </Link>
+                            
                             </div>
                             <div>
                                 <Link to={`/user/${authPost.userName}`}>
@@ -426,20 +429,30 @@ const Post = () => {
                                         {authPost.displayName ? authPost.displayName : authPost.userName}
                                     </p>
                                 </Link>
+                                <DatePost date={dataPost.createdAt}></DatePost>
                             </div>
                         </div>
-                        {isUser || isAdmin ? (
-                            <div className="flex-align-gap-10">
+                        <div className="flex-align-gap-10">
+                        {isUser ? (
+                           
                                 <Link to={`/post/update/${path}`}>
                                     <span className="button-data edit">Edit</span>
                                 </Link>
-                                <button className="btn-delete" onClick={handleClickDelete}>
-                                    <span className="button-data delete">Delete</span>
-                                </button>
-                            </div>
+                            
                         ) : (
                             ""
                         )}
+                                 {isUser || isAdmin ? (
+                         
+                                <button className="btn-delete" onClick={handleClickDelete}>
+                                    <span className="button-data delete">Delete</span>
+                                </button>
+                        
+                        ) : (
+                            ""
+                        )}
+                        
+                        </div>
                     </div>
                 </div>
                 <div className="post__details-content">
@@ -485,11 +498,11 @@ const Post = () => {
                                     <FacebookIcon size={40} round={true}></FacebookIcon>
                                 </FacebookShareButton>
                             </Link> */}
-                            <div className="bookmark">
+                            {/* <div className="bookmark">
                                 <Link to="/" title="Click to save post">
                                     <i className="bx bx-bookmarks"></i>
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

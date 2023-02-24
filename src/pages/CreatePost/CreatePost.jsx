@@ -220,7 +220,7 @@ const CreatePost = () => {
                                                                                             type="submit"
                                                                                             className="modal__button-content create"
                                                                                         >
-                                                                                            {t("save")}
+                                                                                            {t("post")}
                                                                                         </button>
                                                                                     </Link>
                                                                                 </div>
