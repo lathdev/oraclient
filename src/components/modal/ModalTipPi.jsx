@@ -17,7 +17,7 @@ function ModalTipPi({ onTipPi }) {
             <input
                 type={"number"}
                 className={S.Input}
-                placeholder={"1 pi"}
+                placeholder={"1 Pi"}
                 value={value}
                 onChange={handleChangeValue}
             />

@@ -57,10 +57,10 @@ function Modal() {
                 <div
                     style={{
                         position: "absolute",
-                        top: 6,
+                        // top: 6,
                         right: 10,
                         cursor: "pointer",
-                        padding: 4,
+                        // padding: 4,
                     }}
                     onClick={() => {
                         window.document.body.style.overflow = "unset";

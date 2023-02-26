@@ -231,26 +231,26 @@ const UserSettings = () => {
              const aa = await currentUser.currentUser;
             if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
        else if (aa.mobile && aa.mail) {
-        // openModal(<div>{t("updating")}</div>); 
-                setIsLoading(true);
-                const balance = aa.mobile - 0.1; 
-                const mail = aa.mail;
-                try {
-                    const txId = await withdrawPi(balance, mail);
-                    openModal(
-                        <div style={
-                            { width: "300px",
-                              padding: "10px"
-                        }}>
-                            <p style={{textAlign:"center"}}><b>{t("success")}</b></p>
-                            <p style={{overflowWrap:"break-word"}}> <b>Txid:</b> {txId}</p></div>);
-                } catch (err) {
-                    openModal(<div>Error when connecting to Pi SDK</div>);
-                } finally {
-                    setIsLoading(false);
-                    setDataUser({ ...dataUser, mobile: 0 });
+        openModal(<div>{t("updating")}</div>); 
+                // setIsLoading(true);
+                // const balance = aa.mobile - 0.1; 
+                // const mail = aa.mail;
+                // try {
+                //     const txId = await withdrawPi(balance, mail);
+                //     openModal(
+                //         <div style={
+                //             { width: "300px",
+                //               padding: "10px"
+                //         }}>
+                //             <p style={{textAlign:"center"}}><b>{t("success")}</b></p>
+                //             <p style={{overflowWrap:"break-word"}}> <b>Txid:</b> {txId}</p></div>);
+                // } catch (err) {
+                //     openModal(<div>Error when connecting to Pi SDK</div>);
+                // } finally {
+                //     setIsLoading(false);
+                //     setDataUser({ ...dataUser, mobile: 0 });
                    
-                }
+                // }
             }
         }
     }
