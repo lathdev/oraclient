@@ -4,13 +4,14 @@ import PostItem from "../PostItem/PostItem";
 import ReactPaginate from 'react-paginate';
 import "./filter.scss";
 import { useTranslation } from "react-i18next";
-
+import { useSearchParams } from "react-router-dom";
 const Filter = ({ posts }) => {
     const { t } = useTranslation();
  const timestamp = (date) => {
        const Timing = new Date(date)
       return Timing.getTime();
     }
+    const [searchParams] = useSearchParams();
     const sortTypes = {
         vote: {
             fn: (a, b) => (b.vote.length-1) / Math.pow(((Date.now()-timestamp(b.createdAt))/(1000*3600))+2, 1.8) -( a.vote.length-1) / 
@@ -23,10 +24,18 @@ const Filter = ({ posts }) => {
         comment: {
             fn: (a, b) => b.comment_count - a.comment_count,
         },
-        default: {
+        new: {
             fn: (a, b) => timestamp(b.createdAt) - timestamp(a.createdAt) ,
         },
     };
+    useEffect(() => {
+        const sortByQuery = searchParams.get('sort');
+        console.log("ss",sortByQuery)
+   setCurrentSort(sortByQuery)
+  if (sortByQuery==="vote")   setFilterActive(1);
+  else if (sortByQuery==="new")   setFilterActive(2);
+  else setFilterActive(0);
+      }, [searchParams]);
     const [flilterActive, setFilterActive] = useState(0);
     const [currentSort, setCurrentSort] = useState("view");
     const [page, setPage] = useState(0);
@@ -38,22 +47,9 @@ const Filter = ({ posts }) => {
     }, [posts]);
     const indexOfLastPost = currentButton * PER_PAGE;
     const indexOfFirstPost = indexOfLastPost - PER_PAGE;
-    const currentActivityLists = computedActivityStreams.sort(sortTypes[currentSort].fn).slice(indexOfFirstPost, indexOfLastPost);
-    const tabRef = useRef();
-    useEffect(() => {
-        const handleScroll = () => {
-            const moving = window.pageYOffset;
-            if (moving > 1250) {
-                tabRef.current.classList.add("active");
-            } else {
-                tabRef.current.classList.remove("active");
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+    const currentActivityLists = computedActivityStreams.sort(sortTypes[currentSort]?.fn).slice(indexOfFirstPost, indexOfLastPost);
+  
+
     const handleFilterActive = (index) => {
         if (index === 0) {
             setCurrentSort("view");
@@ -63,14 +59,14 @@ const Filter = ({ posts }) => {
           
         }
         if (index === 2) {
-            setCurrentSort("default");
+            setCurrentSort("new");
         }
         if (index === 3) {
             setCurrentSort("comment");
         }
         setFilterActive(index);
     };
-
+   
     const fitterList = [
         {
             displayName: "TREND",
@@ -97,7 +93,7 @@ const Filter = ({ posts }) => {
         },
         {
             displayName: t("new"),
-            path: "/?sort=news",
+            path: "/?sort=new",
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                 <path d="M2 12h2a7.986 7.986 0 0 1 2.337-5.663 7.91 7.91 0 0 1 2.542-1.71 8.12 8.12 0 0 1 6.13-.041A2.488 2.488 0 0 0 17.5 7C18.886 7 20 5.886 20 4.5S18.886 2 17.5 2c-.689 0-1.312.276-1.763.725-2.431-.973-5.223-.958-7.635.059a9.928 9.928 0 0 0-3.18 2.139 9.92 9.92 0 0 0-2.14 3.179A10.005 10.005 0 0 0 2 12zm17.373 3.122c-.401.952-.977 1.808-1.71 2.541s-1.589 1.309-2.542 1.71a8.12 8.12 0 0 1-6.13.041A2.488 2.488 0 0 0 6.5 17C5.114 17 4 18.114 4 19.5S5.114 22 6.5 22c.689 0 1.312-.276 1.763-.725A9.965 9.965 0 0 0 12 22a9.983 9.983 0 0 0 9.217-6.102A9.992 9.992 0 0 0 22 12h-2a7.993 7.993 0 0 1-.627 3.122z"/>
@@ -105,9 +101,9 @@ const Filter = ({ posts }) => {
                 </svg>
             ),
         },
-      
-     
     ];
+
+    
    const handlePageClick = (e) => {
         const selectedPage = e.selected;
        setCurrentButton(selectedPage+1);
