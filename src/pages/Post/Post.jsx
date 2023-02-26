@@ -12,6 +12,8 @@ import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import DatePost from "../../components/DatePost/DatePost";
 import { useTranslation } from "react-i18next";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
+import { useModalContext } from "../../components/modal/ModalContext";
+import ModalTipPi from "./ModalTipPi";
 const Post = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -42,6 +44,8 @@ const Post = () => {
     const [newComment, setNewComment] = useState(null);
     const [isVote, setIsVote] = useState(false);
     const [isUnVote, setIsUnVote] = useState(false);
+
+    const { openModal, destroyModal } = useModalContext();
     const path = location.pathname.split("/")[2];
     const getPost = useCallback(async () => {
         const res = await axios.get(`/api/v1/posts/${path}`);
@@ -83,19 +87,26 @@ const Post = () => {
         },
         [dataPost._id, isVote]
     );
-     async function tip()  {
-      
-        const piB =isPiBrowser()
-        if (!piB) return alert(t("notPiBrowser"))
+    async function tip() {
+        const piB = isPiBrowser();
+        if (!piB) return alert(t("notPiBrowser"));
         else {
             const res = await axios.get(`/api/v1/posts/${path}`);
 
             const userPi = res.data.post.author.userName;
-    
-            if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
+
+            openModal(
+                <ModalTipPi
+                    onTipPi={(pi) => {
+                        if (userPi) {
+                            donatePi(`to ${userPi}`, pi, { To: "Piora" });
+                            destroyModal();
+                        }
+                    }}
+                />
+            );
         }
-      
-    };
+    }
 
     const handleUnVote = useCallback(
         async (e) => {
@@ -145,14 +156,14 @@ const Post = () => {
     useEffect(() => {
         if (currentUser.currentUser) {
             if (
-                currentUser.currentUser._id==='63eb04c5c38d69c8d78052a8'||
-                 currentUser.currentUser._id==='63f3bd424fb92ea27f0431f8' ||
-                 currentUser.currentUser._id==='63f05ffea938efc90857be35'
-                 ) {
+                currentUser.currentUser._id === "63eb04c5c38d69c8d78052a8" ||
+                currentUser.currentUser._id === "63f3bd424fb92ea27f0431f8" ||
+                currentUser.currentUser._id === "63f05ffea938efc90857be35"
+            ) {
                 setIsAdmin(true);
             }
         }
-    }, [ currentUser]);
+    }, [currentUser]);
     const handleClickDelete = () => setVisiable(!visiable);
     const handleDelete = useCallback(
         async (e) => {
@@ -387,11 +398,11 @@ const Post = () => {
         <div className="mt-80">
             <div className="post__details-container">
                 {isSuccess ? (
-                   <div className="toast-mess-container">
-                   <button ref={toast} className={`alert-toast-message success`}>
-                       {isSuccess}
-                   </button>
-               </div>
+                    <div className="toast-mess-container">
+                        <button ref={toast} className={`alert-toast-message success`}>
+                            {isSuccess}
+                        </button>
+                    </div>
                 ) : (
                     ""
                 )}
@@ -400,7 +411,6 @@ const Post = () => {
                         <Link to={`/category/${categoryPost.slug}`}>
                             <span className="post__details-category-name">{categoryPost.name}</span>
                         </Link>
-                      
                     </div>
                     <div className="post__details-title">
                         <h1>{dataPost.title}</h1>
@@ -421,7 +431,6 @@ const Post = () => {
                                         alt=""
                                     />
                                 </Link>
-                            
                             </div>
                             <div>
                                 <Link to={`/user/${authPost.userName}`}>
@@ -433,25 +442,20 @@ const Post = () => {
                             </div>
                         </div>
                         <div className="flex-align-gap-10">
-                        {isUser ? (
-                           
+                            {isUser ? (
                                 <Link to={`/post/update/${path}`}>
                                     <span className="button-data edit">Edit</span>
                                 </Link>
-                            
-                        ) : (
-                            ""
-                        )}
-                                 {isUser || isAdmin ? (
-                         
+                            ) : (
+                                ""
+                            )}
+                            {isUser || isAdmin ? (
                                 <button className="btn-delete" onClick={handleClickDelete}>
                                     <span className="button-data delete">Delete</span>
                                 </button>
-                        
-                        ) : (
-                            ""
-                        )}
-                        
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                 </div>
@@ -463,7 +467,6 @@ const Post = () => {
                 </div>
                 <div className="post__tool-bar">
                     <div className="pull-left">
-                   
                         <div className="vote">
                             <div className="upvote" onClick={handleVote}>
                                 <div>
@@ -485,14 +488,16 @@ const Post = () => {
                                 </div>
                             </div>
                         </div>
-                      
-                        <div className="view-count">{dataPost.views} {t("view")}</div>
+
+                        <div className="view-count">
+                            {dataPost.views} {t("view")}
+                        </div>
                     </div>
                     <div className="pull-right">
                         <div className="right-tools">
-                        <div className="tip-post" onClick={tip}>
-                            <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
-                        </div>
+                            <div className="tip-post" onClick={tip}>
+                                <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
+                            </div>
                             {/* <Link to="/" className="tool">
                                 <FacebookShareButton url={shareUrl}>
                                     <FacebookIcon size={40} round={true}></FacebookIcon>
@@ -564,27 +569,32 @@ const Post = () => {
                     </div>
                 </div>
 
-{isBlockCmt? (<div className="comment__form block"><p>You have been blocked from commenting.</p>
-                                                        </div>):(
- <div className="comment__container">
- <section className="comment__section">
-     <div>
-         <div className="comment__form-container">
-             <form className="comment__form" ref={inputCmtRef}>
-                 <input
-                     className="comment__form-data"
-                     ref={inputCmtRef}
-                     placeholder={t("commentthispost")}
-                     value={dataComment.content}
-                     onChange={(e) => setDataComment({ ...dataComment, content: e.target.value })}
-                 ></input>
-                 <div className="comment__form-actions" onClick={handleSubmitComment}>
-                     <div className="comment__form-actions-submit">{t("send")}</div>
-                 </div>
-             </form>
-         </div>
-     </div>
-     {/* <div className="comment__nav-tab">
+                {isBlockCmt ? (
+                    <div className="comment__form block">
+                        <p>You have been blocked from commenting.</p>
+                    </div>
+                ) : (
+                    <div className="comment__container">
+                        <section className="comment__section">
+                            <div>
+                                <div className="comment__form-container">
+                                    <form className="comment__form" ref={inputCmtRef}>
+                                        <input
+                                            className="comment__form-data"
+                                            ref={inputCmtRef}
+                                            placeholder={t("commentthispost")}
+                                            value={dataComment.content}
+                                            onChange={(e) =>
+                                                setDataComment({ ...dataComment, content: e.target.value })
+                                            }
+                                        ></input>
+                                        <div className="comment__form-actions" onClick={handleSubmitComment}>
+                                            <div className="comment__form-actions-submit">{t("send")}</div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {/* <div className="comment__nav-tab">
          <div className="separator"></div>
          <ul className="comment__nav-list">
              <li className="comment__nav-item active">
@@ -595,22 +605,25 @@ const Post = () => {
              </li>
          </ul>
      </div> */}
-     <div className="comment__tree-view">
-         <div className="comments">
-             <div className="comments__node">
-                 {comments.length > 0
-                     ? comments.map((comment) => (
-                           <Comment postId={dataPost?._id} comment={comment} key={comment._id} isAdmin={isAdmin} />
-                       ))
-                     : ""}
-             </div>
-         </div>
-     </div>
- </section>
-</div>
-      )}
-
-               
+                            <div className="comment__tree-view">
+                                <div className="comments">
+                                    <div className="comments__node">
+                                        {comments.length > 0
+                                            ? comments.map((comment) => (
+                                                  <Comment
+                                                      postId={dataPost?._id}
+                                                      comment={comment}
+                                                      key={comment._id}
+                                                      isAdmin={isAdmin}
+                                                  />
+                                              ))
+                                            : ""}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                )}
             </div>
             {visiable ? (
                 <div className="modal__delete">
