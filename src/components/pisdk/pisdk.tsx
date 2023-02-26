@@ -41,7 +41,6 @@ type PaymentDTO = {
 type MyPaymentMetadata = {};
 type Direction = "user_to_app" | "app_to_user";
 type AppNetwork = "Pi Network" | "Pi Testnet";
-// type Scope = "username" | "payments" | "wallet_address"
 const config = { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } };
 declare global {
     interface Window {
@@ -139,7 +138,7 @@ export async function withdrawPi(balance, mail) {
             const piId = AuthPi.user.uid;
 
             const Piname = AuthPi.user.username;
-            console.log("Đang giao dịch");
+            console.log("Loading payment...");
             if (Piname === pioraUser) {
                 const withdrawtxid = await axios.post("/payments/withdraw", { piId, Piname, amount }, config);
                 if (withdrawtxid) {
@@ -150,7 +149,7 @@ export async function withdrawPi(balance, mail) {
             }
         }
     } catch (err) {
-        console.log("Lỗi: " + JSON.stringify(err));
+        console.log("Error: " + JSON.stringify(err));
         throw new Error(err.message);
     }
 }
