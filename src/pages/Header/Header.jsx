@@ -31,6 +31,26 @@ const Header = () => {
     const location = useLocation();
     const path = location.pathname.split("/")[3];
     const { t, i18n } = useTranslation();
+    async function markAsRead()  {     
+       
+            console.log("Noti")
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                    const option = {
+                    method: "get",
+                    url: `/api/v1/notifications/readall`,
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                 axios(option);
+            
+           } catch (err) {}
+        }
+    };
+
+  
     useEffect(() => {
         if (listRef.current) {
             const slider = listRef.current;
@@ -230,6 +250,7 @@ const Header = () => {
             );
         }
     }, [notifications, countNotifications]);
+ 
     useEffect(() => {
         if (notiId) {
             getAllNotifications();
@@ -327,11 +348,16 @@ const Header = () => {
                                                 {showNotify && (
                                                     <div className="header__notify">
                                                         <div className="header__notify-container">
+                                                            
                                                             <header className="header__notify-header">
                                                                 <h3>{t("notification")}</h3>
+                                                         
                                                             </header>
+                                                         
                                                             <div className="header__notify-wrapper">
+                                                             
                                                                 <ul className="header__notify-list">
+                                                            
                                                                     {notifications.length !== 0
                                                                         ? notifications.map((notification) => (
                                                                               <Notifications
@@ -343,7 +369,8 @@ const Header = () => {
                                                                 </ul>
                                                             </div>
                                                             <footer className="header__notify-footer">
-                                                                <p>{t("more")}</p>
+                                                          
+                                                                <p onClick={markAsRead()}>{t("markasread")}</p>
                                                             </footer>
                                                         </div>
                                                     </div>

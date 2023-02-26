@@ -157,7 +157,7 @@ const CreatePost = () => {
                                                                             {error ? (
                                                                                 <div className="toast-mess-container">
                                                                                     <button ref={toast} className={`alert-toast-message err`}>
-                                                                                        {error}
+                                                                                        {t(error)}
                                                                                     </button>
                                                                                 </div>
                                                                             ) : (

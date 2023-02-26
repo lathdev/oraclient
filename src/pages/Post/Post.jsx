@@ -158,7 +158,8 @@ const Post = () => {
             if (
                 currentUser.currentUser._id === "63eb04c5c38d69c8d78052a8" ||
                 currentUser.currentUser._id === "63f3bd424fb92ea27f0431f8" ||
-                currentUser.currentUser._id === "63f05ffea938efc90857be35"
+                currentUser.currentUser._id === "63f05ffea938efc90857be35" ||
+                currentUser.currentUser._id === "63f76c461109e2acffb84849"
             ) {
                 setIsAdmin(true);
             }
@@ -400,7 +401,7 @@ const Post = () => {
                 {isSuccess ? (
                     <div className="toast-mess-container">
                         <button ref={toast} className={`alert-toast-message success`}>
-                            {isSuccess}
+                            {t(isSuccess)}
                         </button>
                     </div>
                 ) : (
@@ -609,14 +610,16 @@ const Post = () => {
                                 <div className="comments">
                                     <div className="comments__node">
                                         {comments.length > 0
-                                            ? comments.map((comment) => (
-                                                  <Comment
-                                                      postId={dataPost?._id}
-                                                      comment={comment}
-                                                      key={comment._id}
-                                                      isAdmin={isAdmin}
-                                                  />
-                                              ))
+                                            ? comments
+                                                  .sort((a, b) => b.voteCount.length - a.voteCount.length)
+                                                  .map((comment) => (
+                                                      <Comment
+                                                          postId={dataPost?._id}
+                                                          comment={comment}
+                                                          key={comment._id}
+                                                          isAdmin={isAdmin}
+                                                      />
+                                                  ))
                                             : ""}
                                     </div>
                                 </div>

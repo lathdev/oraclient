@@ -276,7 +276,8 @@ const User = () => {
             if (
                 userState.currentUser._id==='63eb04c5c38d69c8d78052a8'||
                 userState.currentUser._id==='63f3bd424fb92ea27f0431f8' ||
-                userState.currentUser._id==='63f05ffea938efc90857be35'
+                userState.currentUser._id==='63f05ffea938efc90857be35'||
+                userState.currentUser._id==='63f76c461109e2acffb84849'
                  ) {
                 setIsAdmin(true);
             }

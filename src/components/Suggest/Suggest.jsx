@@ -1,26 +1,30 @@
-import React, { useEffect } from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import "./suggest.scss";
 import { allPostsState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import DatePost from "../DatePost/DatePost";
 import { useTranslation } from "react-i18next";
+import { HomeLoader } from "../Loader/Loader";
 const Suggest = () => {
-    const { t } = useTranslation();
-    const date = new Date();
-    const posts = useSelector(allPostsState$);
-    
-    return (
-        <section className="suggest container">
-            <div className="suggest__wrapper">
+ const { t } = useTranslation();
+    const posts = useSelector(allPostsState$)
+ if (!posts.data.length) return (<HomeLoader />);
+   return (
+      <section className="suggest container">
+        <div className="suggest__wrapper">
                 <h3 className="title">{t("dontmiss")}</h3>
             </div>
             <div className="suggest__main">
+     
                 <div className="grid">
                     <div className="row">
+               
                         <div className="col c-12 m-5 l-5">
-                            {posts.data.slice(-69).sort((a, b) => b.views - a.views).slice(0,1).map((post, idx)=> (
+                            { posts.data.slice(-69).sort((a, b) => b.views - a.views).slice(0,1).map((post, idx)=> (
+                                
                                 <div className="suggest__content" key={idx}>
+                                  
                                     <div className="suggest__content-img-left">
                                         <Link to={`/post/${post.slug}`}>
                                             <img
@@ -144,6 +148,7 @@ const Suggest = () => {
                                                     <div className="row">
                                                         <div className="col l-4 c-12 ">
                                                             <div>
+                                                                
                                                                 <Link to="/">
                                                                     <img
                                                                         src={
