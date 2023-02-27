@@ -1,4 +1,6 @@
 .Banner {
+
+  width: 100%;
   background: linear-gradient(25deg, #0045a7 10%, #054cb3 20%, #eeeeee 95%);
 }
 
@@ -26,13 +28,13 @@
 
 .H1 {
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #cfe9ff;
   font-size: xx-large;
   // font-size: 60px;
 }
 
 .Para {
-  font-size: 20px;
+  font-size: medium;
   color: white;
 }
 
@@ -43,7 +45,7 @@
   color: white;
 
 
-  padding: 10px 20px;
+  padding: 10px 50px;
   cursor: pointer;
 
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
