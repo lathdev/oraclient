@@ -3,7 +3,7 @@
 }
 
 .Container {
-  height: 600px;
+  height: 500px;
   padding: 0 60px;
   display: flex;
   flex-direction: column;
@@ -11,12 +11,13 @@
   justify-content: center;
 
 
-  //@media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 600px) {
+    height: 400px;
   //  flex-direction: column;
   //  justify-content: unset;
   //  gap: 40px;
   //  align-items: flex-start;
-  //}
+  }
 }
 
 .Top {
@@ -26,7 +27,8 @@
 .H1 {
   margin-bottom: 20px;
   color: #ffffff;
-  font-size: 60px;
+  font-size: xx-large;
+  // font-size: 60px;
 }
 
 .Para {
@@ -35,10 +37,11 @@
 }
 
 .Button {
-  background-color: #3A57E0;
+  background-color: #162881;
   border-radius: 9999rem;
-  font-size: 32px;
+  font-size: 20px;
   color: white;
+
 
   padding: 10px 20px;
   cursor: pointer;

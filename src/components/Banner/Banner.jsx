@@ -19,11 +19,11 @@ function Banner() {
         <div className={S.Banner}>
             <div className={S.Container}>
                 <div className={S.Top}>
-                    <h1 className={S.H1}>Piora | Social Network for Pioneer</h1>
-                    <p className={S.Para}>Piora is a social network for people who want to share their ideas and ...</p>
+                    <h1 className={S.H1}>Piora | Social Network for Pioneers</h1>
+                    <p className={S.Para}>Write - Share - Connection - Contemplation</p>
                 </div>
                 <button className={S.Button} onClick={handleGetStarted}>
-                    Get Started
+                    Start
                 </button>
             </div>
         </div>
