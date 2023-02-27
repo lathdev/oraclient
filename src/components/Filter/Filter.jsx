@@ -29,16 +29,17 @@ const Filter = ({ posts }) => {
             fn: (a, b) => timestamp(b.createdAt) - timestamp(a.createdAt) ,
         },
     };
+    const [currentSort, setCurrentSort] = useState("view");
     useEffect(() => {
         const sortByQuery = searchParams.get('sort');
-   setCurrentSort(sortByQuery)
+  if (sortByQuery) setCurrentSort(sortByQuery)
   if (sortByQuery==="vote")   setFilterActive(1);
   else if (sortByQuery==="new")   setFilterActive(2);
   else setFilterActive(0);
       }, [searchParams]);
       
     const [flilterActive, setFilterActive] = useState(0);
-    const [currentSort, setCurrentSort] = useState("view");
+ 
     const [page, setPage] = useState(0);
     const [currentButton, setCurrentButton] = useState(1);
     const PER_PAGE = 10;

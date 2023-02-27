@@ -1,10 +1,10 @@
 import React from "react";
 import S from "./ModalTipPi.module.scss";
 import axios from "axios";
-
+import { useTranslation } from "react-i18next";
 function ModalTipPi({ onTipPi }) {
     const [value, setValue] = React.useState("");
-
+    const { t } = useTranslation();
     const handleChangeValue = (e) => {
         setValue(e.target.value);
     };
@@ -13,7 +13,8 @@ function ModalTipPi({ onTipPi }) {
         onTipPi(+value ? +value : 1);
     };
     return (
-        <div>
+        <div style={{textAlign:"center"}}>
+            <p style={{paddingBottom:"12px"}}>{t("insertpitip")}</p>
             <input
                 type={"number"}
                 className={S.Input}
@@ -22,7 +23,7 @@ function ModalTipPi({ onTipPi }) {
                 onChange={handleChangeValue}
             />
             <button className={S.Button} onClick={handleTipPi}>
-                Tip
+                {t("confirm")}
             </button>
         </div>
     );
