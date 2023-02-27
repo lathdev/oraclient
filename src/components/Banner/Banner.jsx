@@ -10,7 +10,7 @@ function Banner() {
 
     const handleGetStarted = () => {
         if (currentUser.currentUser) {
-            navigate("/post/create");
+            navigate("/post/create/");
         } else {
             navigate("/login");
         }
