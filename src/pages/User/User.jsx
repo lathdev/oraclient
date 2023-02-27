@@ -11,7 +11,7 @@ import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import { isDate } from "moment";
-import ModalTipPi from "../../components/modal/ModalTipPi";
+import ModalTipPi from "../../components/modal/variants/ModalTipPi/ModalTipPi";
 import { useModalContext } from "../../components/modal/ModalContext";
 const User = () => {
     const { t } = useTranslation();
