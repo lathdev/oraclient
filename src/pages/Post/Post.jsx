@@ -13,7 +13,7 @@ import DatePost from "../../components/DatePost/DatePost";
 import { useTranslation } from "react-i18next";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import { useModalContext } from "../../components/modal/ModalContext";
-import ModalTipPi from "../../components/modal/ModalTipPi";
+import ModalTipPi from "../../components/modal/variants/ModalTipPi/ModalTipPi";
 const Post = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();

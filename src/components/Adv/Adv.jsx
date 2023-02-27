@@ -7,7 +7,7 @@ import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import "./adv.scss";
 import isPiBrowser from "../isPiBrowser/isPiBrowser";
 import { useTranslation } from "react-i18next";
-import ModalTipPi from "../modal/ModalTipPi";
+import ModalTipPi from "../modal/variants/ModalTipPi/ModalTipPi";
 import { useModalContext } from "../modal/ModalContext";
 const Adv = () => {
     const { t } = useTranslation();
