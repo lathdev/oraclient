@@ -1,6 +1,8 @@
 @use "../../scss/" as *;
 
 .header {
+    margin-left: 5px;
+    margin-right: 5px;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +14,7 @@
     box-shadow: 0 10px 15px -3px rgba(47, 181, 250, 0.05), 0 4px 6px -2px rgba(47, 181, 250, 0.025);
   
     &__container {
-    
+     
         max-width: 100%;
         margin: 0 auto;
     }
