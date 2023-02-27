@@ -17,6 +17,11 @@ const UserSettings = () => {
     //   const languageValue = e.target.value
     //   i18n.changeLanguage(languageValue);
     // }
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    let nowWithdraw = date.toString() + month.toString() + year.toString()
     const dispatch = useDispatch();
     const toast = useRef(null);
     const currentUser = useSelector(userState$);
@@ -71,21 +76,21 @@ const UserSettings = () => {
             switch (name) {
                 case "oldPassword":
                     if (value.length < 9) {
-                        stateObj[name] = "Mật khẩu phải có tối thiểu 9 kí tự và ít hơn 100 kí tự.";
+                        stateObj[name] = "At least 9 characters";
                     }
                     break;
                 case "password":
                     if (dataPassword.confirmPassword && value !== dataPassword.confirmPassword) {
-                        stateObj["confirmPassword"] = "Mật khẩu nhập lại không chính xác.";
+                        stateObj["confirmPassword"] = "Please confirm password again";
                     } else if (dataPassword.oldPassword && value === dataPassword.oldPassword) {
-                        stateObj[name] = "Mật khẩu mới không được giống mật khẩu cũ";
+                        stateObj[name] = "New password must be different from the old password";
                     } else if (value.length < 9) {
-                        stateObj[name] = "Mật khẩu phải có tối thiểu 9 kí tự và ít hơn 100 kí tự.";
+                        stateObj[name] = "At least 9 characters";
                     }
                     break;
                 case "confirmPassword":
                     if (dataPassword.password && value !== dataPassword.password) {
-                        stateObj[name] = "Mật khẩu nhập lại không chính xác";
+                        stateObj[name] = "New password must be different from the old password";
                     }
                     break;
                 default:
@@ -225,32 +230,39 @@ const UserSettings = () => {
 
     async function withDraw() {
        const piB = isPiBrowser();
+       const limit = window.localStorage.getItem('important');
         if (!piB) { 
              openModal(<div>{t("notPiBrowser")}</div>);  } 
+
+            else if (limit===nowWithdraw) {
+                openModal(<div>{t("limittime")}</div>); 
+                console.log(nowWithdraw);
+             }
         else {
              const aa = await currentUser.currentUser;
             if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
        else if (aa.mobile && aa.mail) {
-        openModal(<div>{t("updating")}</div>); 
-                // setIsLoading(true);
-                // const balance = aa.mobile - 0.1; 
-                // const mail = aa.mail;
-                // try {
-                //     const txId = await withdrawPi(balance, mail);
-                //     openModal(
-                //         <div style={
-                //             { width: "300px",
-                //               padding: "10px"
-                //         }}>
-                //             <p style={{textAlign:"center"}}><b>{t("success")}</b></p>
-                //             <p style={{overflowWrap:"break-word"}}> <b>Txid:</b> {txId}</p></div>);
-                // } catch (err) {
-                //     openModal(<div>Error when connecting to Pi SDK</div>);
-                // } finally {
-                //     setIsLoading(false);
-                //     setDataUser({ ...dataUser, mobile: 0 });
+        // openModal(<div>{t("updating")}</div>); 
+                setIsLoading(true);
+                const balance = aa.mobile - 0.1; 
+                const mail = aa.mail;
+                try {
+                    window.localStorage.setItem('important', nowWithdraw);
+                    const txId = await withdrawPi(balance, mail);
+                    openModal(
+                        <div style={
+                            { width: "300px",
+                              padding: "10px"
+                        }}>
+                            <p style={{textAlign:"center"}}><b>{t("success")}</b></p>
+                            <p style={{overflowWrap:"break-word"}}> <b>Txid:</b> {txId}</p></div>);
+                } catch (err) {
+                    openModal(<div>Error when connecting to Pi SDK</div>);
+                } finally {
+                    setIsLoading(false);
+                    setDataUser({ ...dataUser, mobile: 0 });
                    
-                // }
+                }
             }
         }
     }

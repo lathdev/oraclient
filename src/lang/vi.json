@@ -108,5 +108,6 @@
     "authpidone": "Auth with Pi Account success",
     "dublicatedpiacc": "Tài khoản Pi Network này đã được sử dụng",
     "markasread": "Đánh dấu đã đọc",
-    "insertpitip": "Nhập số lượng Pi ủng hộ:"
+    "insertpitip": "Nhập số lượng Pi ủng hộ:",
+    "limittime": "Để tránh giao dịch spam làm nghẽn hệ thống, bạn chỉ có thể rút tiền một lần trong ngày"
 }

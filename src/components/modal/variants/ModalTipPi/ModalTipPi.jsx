@@ -11,6 +11,7 @@ function ModalTipPi({ onTipPi }) {
 
     const handleTipPi = async () => {
         onTipPi(+value ? +value : 1);
+        window.document.body.style.overflow = "unset";
     };
     return (
         <div style={{textAlign:"center"}}>
