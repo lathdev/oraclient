@@ -10,7 +10,11 @@ function ModalTipPi({ onTipPi }) {
     };
 
     const handleTipPi = async () => {
-        onTipPi(+value ? +value : 1);
+        let _pi = 1;
+        if (value > 0) {
+            _pi = value;
+        }
+        onTipPi(_pi);
     };
     return (
         <div>
