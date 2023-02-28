@@ -18,7 +18,7 @@ const UserSettings = () => {
     //   i18n.changeLanguage(languageValue);
     // }
     let newDate = new Date()
-    let date = newDate.getDate();
+    let date = newDate.getUTCDate();
     let month = newDate.getMonth() + 1;
     let year = newDate.getFullYear();
     let nowWithdraw = date.toString() + month.toString() + year.toString()
@@ -230,24 +230,20 @@ const UserSettings = () => {
 
     async function withDraw() {
        const piB = isPiBrowser();
-       const limit = window.localStorage.getItem('important');
+     
         if (!piB) { 
              openModal(<div>{t("notPiBrowser")}</div>);  } 
-
-            else if (limit===nowWithdraw) {
-                openModal(<div>{t("limittime")}</div>); 
-                console.log(nowWithdraw);
-             }
         else {
              const aa = await currentUser.currentUser;
-            if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
+             if (aa.lastWithdraw==nowWithdraw)   openModal(<div>{t("limittime")}</div>);
+         else if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
        else if (aa.mobile && aa.mail) {
         // openModal(<div>{t("updating")}</div>); 
                 setIsLoading(true);
                 const balance = aa.mobile - 0.1; 
                 const mail = aa.mail;
                 try {
-                    window.localStorage.setItem('important', nowWithdraw);
+                   
                     const txId = await withdrawPi(balance, mail);
                     openModal(
                         <div style={
@@ -260,6 +256,7 @@ const UserSettings = () => {
                     openModal(<div>Error when connecting to Pi SDK</div>);
                 } finally {
                     setIsLoading(false);
+                    aa.lastWithdraw = nowWithdraw;
                     setDataUser({ ...dataUser, mobile: 0 });
                    
                 }
