@@ -29,13 +29,13 @@ body {
     @include mobile {
         
         margin-bottom: 3rem;
-        margin-left: 12px;
-        margin-right: 12px;
+      
         header {
             max-width: 100%;
         }
         body {
             max-width: 100%;
+         
         }
         .post-icon {
             font-size: 12px;

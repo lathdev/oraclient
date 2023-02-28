@@ -40,8 +40,8 @@ function Modal() {
             >
                 <div
                     style={{
-                        maxWidth: "300px",
-                        minHeight: "120px",
+                        maxWidth: "369px",
+                        minHeight: "140px",
                         borderRadius: "5px",
                         border: "1px solid #fff",
                         padding: "10px",
