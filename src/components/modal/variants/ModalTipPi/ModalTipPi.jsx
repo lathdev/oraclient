@@ -9,8 +9,12 @@ function ModalTipPi({ onTipPi }) {
         setValue(e.target.value);
     };
 
-    const handleTipPi = async () => {
-        onTipPi(+value ? +value : 1);
+    const handleTipPi = () => {
+        let _pi = 1;
+        if (value > 0) {
+            _pi = value;
+        }
+        onTipPi(_pi);
         window.document.body.style.overflow = "unset";
     };
     return (
