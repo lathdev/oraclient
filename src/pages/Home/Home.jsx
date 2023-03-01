@@ -35,7 +35,7 @@ const Home = () => {
     //   getPostSaved()
     // },[getPostSaved])
     useEffect(() => {
-        document.title = "Piora | Social Network for Pioneer";
+        document.title = "Ora | Social Network for Pioneer";
     }, []);
     return (
         <main className="main">

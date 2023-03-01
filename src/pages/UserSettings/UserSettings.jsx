@@ -13,10 +13,10 @@ import { useModalContext } from "../../components/modal/ModalContext";
 
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
-    // const changeLanguageHandler = (e) => {
-    //   const languageValue = e.target.value
-    //   i18n.changeLanguage(languageValue);
-    // }
+    const changeLanguageHandler = (e) => {
+      const languageValue = e.target.value
+      i18n.changeLanguage(languageValue);
+    }
     let newDate = new Date()
     let date = newDate.getUTCDate();
     let month = newDate.getMonth() + 1;
@@ -633,13 +633,10 @@ const UserSettings = () => {
                                                         {t("language")}
                                                     </label>
                                                     <select
-                                                        value={dataUser.adress}
+                                                        value={localStorage.getItem('i18nextLng')}
                                                         className="settings__input"
                                                         onChange={(e) =>
-                                                            setDataUser({
-                                                                ...dataUser,
-                                                                adress: e.target.value,
-                                                            })
+                                                            changeLanguageHandler(e)
                                                         }
                                                     >
                                                         <option value="en">English</option>
