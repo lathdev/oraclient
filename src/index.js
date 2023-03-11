@@ -11,10 +11,11 @@ import { CookiesProvider } from "react-cookie";
 import "./lang/config/i18n";
 import Modal from "./components/modal";
 import { ModalProvider } from "./components/modal/ModalContext";
-
+import ReactGA from 'react-ga4';
 const sagaMiddleware = createSagaMiddleware();
 const store = legacy_createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(mySaga);
+ReactGA.initialize('G-MP2DWJQTGP')
 ReactDOM.render(
     <CookiesProvider>
         <Provider store={store}>

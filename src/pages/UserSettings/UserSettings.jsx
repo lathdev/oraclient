@@ -6,7 +6,7 @@ import axios from "axios";
 import "./usersettings.scss";
 import { userState$, passwordState$ } from "../../redux/selectors";
 import { useTranslation } from "react-i18next";
-import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
+import { withdrawPi, Pisdk } from "../../components/pisdk/pisdk.tsx";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 import {Loader} from "../../components/Loader/Loader";
 import { useModalContext } from "../../components/modal/ModalContext";
@@ -235,12 +235,11 @@ const UserSettings = () => {
              openModal(<div>{t("notPiBrowser")}</div>);  } 
         else {
              const aa = await currentUser.currentUser;
-             if (aa.lastWithdraw==nowWithdraw)   openModal(<div>{t("limittime")}</div>);
-         else if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
+             if (aa.lastWithdraw===nowWithdraw)   openModal(<div>{t("limittime")}</div>);
+         else if (aa.mobile===0)   openModal(<div>{t("0 Pi")}</div>);
        else if (aa.mobile && aa.mail) {
-        // openModal(<div>{t("updating")}</div>); 
                 setIsLoading(true);
-                const balance = aa.mobile; 
+                const balance = aa.mobile-0.001; 
                 const mail = aa.mail;
                 try {
                    

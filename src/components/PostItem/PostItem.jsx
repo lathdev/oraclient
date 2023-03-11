@@ -100,7 +100,7 @@ const PostItem = ({ post }) => {
                             <Link to={`/post/${post.slug}`} className="filter__content-link">
                                 <img
                                     src={
-                                        post.attachment ? `https://${post.attachment.slice(7)}` : "/images/home-bg.png"
+                                        post.attachment  ?  post.attachment.indexOf(",")!==-1 ? post.attachment.slice(0,post.attachment.indexOf(",")) : post.attachment : "/images/home-bg.png"
                                     }
                                     alt="Ảnh của bài viết"
                                     className="filter__content-img-item"
@@ -223,7 +223,7 @@ const PostItem = ({ post }) => {
                             <Link to={`/post/${post.slug}`} className="filter__content-link">
                                 <img
                                     src={
-                                        post.attachment ? `https://${post.attachment.slice(7)}` : "/images/home-bg.png"
+                                        post.attachment  ?  post.attachment.indexOf(",")!==-1 ? post.attachment.slice(0,post.attachment.indexOf(",")) : post.attachment : "/images/home-bg.png"
                                     }
                                     alt="Ảnh của bài viết"
                                     className="filter__content-img-item"
