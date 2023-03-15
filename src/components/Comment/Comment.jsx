@@ -4,7 +4,7 @@ import "./comment.scss";
 import axios from "axios";
 import Reply from "../Reply/Reply";
 import { useTranslation } from "react-i18next";
-const Comment = ({ comment, postId, isAdmin }) => {
+const Comment = ({ comment, postId, isAdmin, currentUser }) => {
     const { t } = useTranslation();
     const [voteCount, setVoteCount] = useState(null);
     const [newReply, setNewReply] = useState(null);
@@ -12,6 +12,7 @@ const Comment = ({ comment, postId, isAdmin }) => {
     const [replies, setReplies] = useState([]);
     const [activeReply, setActiveReply] = useState(false);
     const [voteCountUpdate, setVoteCountUpdate] = useState([]);
+    const [isUserCmt, setIsUserCmt] = useState(false);
     let date = new Date(comment.createdAt);
     const handleVote = useCallback(
         async (e) => {
@@ -88,6 +89,14 @@ const Comment = ({ comment, postId, isAdmin }) => {
         },
         [comment._id, reply]
     );
+    useEffect(() => {
+        if (currentUser.currentUser) {
+       
+            if (comment.author._id === currentUser.currentUser._id) {
+                setIsUserCmt(true);
+            }
+        }
+    }, [comment, currentUser]);
     const handleDelete = useCallback(
         async (e) => {
             e.preventDefault();
@@ -145,7 +154,7 @@ const Comment = ({ comment, postId, isAdmin }) => {
                             <span className="value">{voteCount}</span>
                         </div>
                         <p style={{padding:"10px"}} onClick={handelVisible}>{t("reply")}</p>
-                        { isAdmin ? (
+                        { isAdmin||isUserCmt ? (
                            <div> <Link to={`/`}
                            onClick={handleDelete}
                           >
@@ -164,7 +173,7 @@ const Comment = ({ comment, postId, isAdmin }) => {
                     <div className="reply-comment">
                         <div className="reply-comment-form">
                             <form action="" className="comment__form" onSubmit={handleSumit}>
-                                <input
+                                <textarea
                                     className="comment__form-data"
                                     placeholder={t("replythiscomment")}
                                     value={reply.content}
@@ -174,7 +183,7 @@ const Comment = ({ comment, postId, isAdmin }) => {
                                             content: e.target.value,
                                         })
                                     }
-                                ></input>
+                                ></textarea>
                                 <div className="comment__form-actions" onClick={handleSubmitReply}>
                                     <div className="comment__form-actions-submit">{t("send")}</div>
                                 </div>

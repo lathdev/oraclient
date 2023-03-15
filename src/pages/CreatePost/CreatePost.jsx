@@ -153,6 +153,7 @@ const handleBeforeUnload = (e) => {
                                                             <form action="" method="POST" onSubmit={onSubmit}>
                                                                 <div className="post__container">
                                                                     <div
+                                                                    style={{textAlign:"center"}}
                                                                         suppressContentEditableWarning
                                                                         placeholder={t("_YOUR_TITLE_HERE_")}
                                                                         className="post__title"
@@ -165,7 +166,9 @@ const handleBeforeUnload = (e) => {
                                                                             })
                                                                         }
                                                                     ></div>
+                                                                     <p>{t("yourcontenthere")}</p>
                                                                     <div className="post__content">
+                                                              
                                                                         <div id="editorjs" />
                                                                     </div>
                                                                     <div className="post__button">

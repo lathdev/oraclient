@@ -19,7 +19,7 @@
 
     &__title {
         border-radius: 5px 10px;
-        border: solid slateblue;
+        border: solid rgb(30, 11, 151);
         margin-bottom: 20px;
         font-size: 25px;
         font-family: $font-mon;
@@ -37,10 +37,13 @@
     }
 
     &__content {
-        // border-right: 4px solid slateblue;
-        // border-top: 2px solid slateblue;;
+
+        border-radius: 5px 10px;
+        margin-top: 20px;
+        border: solid rgb(25, 8, 133);
         font-size: 18px;
-        height: 50%;
+        min-height: 269px;
+        height: auto;
         z-index: 2;
 
         &:empty::before {
@@ -259,3 +262,7 @@
         }
     }
 }
+// .ce-block__content,
+// .ce-toolbar__content {
+//    height: 300px;
+// }

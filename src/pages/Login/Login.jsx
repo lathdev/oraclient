@@ -101,9 +101,9 @@ const Login = () => {
                     </form>
                 )}
 
-                {/* <Link to="/">
+                <Link to="/resetpassword">
                     <p className="login__text link">{t("forgot_password")}</p>
-                </Link> */}
+                </Link>
                 <span className="login__text">{t("do_not_have_piora_account")}</span>
                 <Link to="/register">
                     <span className="login__text link"> {t("sign_up_now")}</span>

@@ -42,7 +42,7 @@ const Filter = ({ posts }) => {
  
     const [page, setPage] = useState(0);
     const [currentButton, setCurrentButton] = useState(1);
-    const PER_PAGE = 10;
+    const PER_PAGE = 14;
     const computedActivityStreams = useMemo(() => {
         setPage(Math.ceil(posts.length / PER_PAGE));
         return posts;

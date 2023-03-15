@@ -17,7 +17,7 @@ import axios from "axios";
 const Config = () => {
     return {
         holder: "editorjs",
-        placeholder: "_Your content here_",
+        placeholder: "\"Hi, Ora on Pi - Write, Connect, Earn Pi\"",
         tools: {
             embed: Embed,
             table: Table,

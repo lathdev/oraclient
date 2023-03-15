@@ -30,6 +30,7 @@ const Post = () => {
     const isBlockCmt = currentUser?.currentUser?.isBlockedCmt;
     const location = useLocation();
     const [isUser, setIsUser] = useState(false);
+  
     const [isAdmin, setIsAdmin] = useState(false);
     const [visiable, setVisiable] = useState(false);
     const [dataPost, setDataPost] = useState({});
@@ -395,6 +396,32 @@ const Post = () => {
             setIsVote(true);
         }
     }, [currentUser, dataPost]);
+
+    const commentNotofication = useCallback(async () => {
+        if (newComment) {
+           
+            const token = localStorage.getItem("token");
+            try {
+                const option = {
+                    method: "post",
+                    url: `/api/v1/notifications/`,
+                    data: {
+                        postId: newComment.comment.post,
+                        commentId: newComment.comment._id,
+                        user: authPost._id
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+                navigate(`/post/${post.post.data.slug}`);
+            } catch (err) {}
+        }
+    }, [newComment, navigate]);
+    useEffect(() => {
+        commentNotofication();
+    }, [commentNotofication]);
     return (
         <div className="mt-80">
             <div className="post__details-container">
@@ -579,8 +606,9 @@ const Post = () => {
                         <section className="comment__section">
                             <div>
                                 <div className="comment__form-container">
-                                    <form className="comment__form" ref={inputCmtRef}>
-                                        <input
+                                    <form className="comment__form" ref={inputCmtRef} onSubmit={e => { e.preventDefault(); }}>
+                                        <textarea
+                                         
                                             className="comment__form-data"
                                             ref={inputCmtRef}
                                             placeholder={t("commentthispost")}
@@ -588,7 +616,7 @@ const Post = () => {
                                             onChange={(e) =>
                                                 setDataComment({ ...dataComment, content: e.target.value })
                                             }
-                                        ></input>
+                                        ></textarea>
                                         <div className="comment__form-actions" onClick={handleSubmitComment}>
                                             <div className="comment__form-actions-submit">{t("send")}</div>
                                         </div>
@@ -618,6 +646,7 @@ const Post = () => {
                                                           comment={comment}
                                                           key={comment._id}
                                                           isAdmin={isAdmin}
+                                                          currentUser={currentUser}
                                                       />
                                                   ))
                                             : ""}

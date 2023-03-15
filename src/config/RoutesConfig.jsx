@@ -14,6 +14,7 @@ import Search from "../pages/Search/Search";
 import AuthRegister from "../pages/AuthRegister/AuthRegister";
 import Messages from "../pages/Messages/Messages";
 import Admin from "../pages/Admin/Admin";
+import ResetPassword from "../pages/Login/ResetPassword";
 const RoutesConfig = () => {
     return (
         <Routes>
@@ -23,6 +24,7 @@ const RoutesConfig = () => {
             <Route path="/post/update/:slug" element={<EditPost />} />
             <Route path="/post/:slug" element={<Post />} />
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/resetpassword" element={<ResetPassword />}></Route>
             <Route path="/register" element={<AuthRegister />}></Route>
             <Route path="/tao-tai-khoan" element={<Register />}></Route>
             <Route path="/search" element={<Search />}></Route>
@@ -30,6 +32,7 @@ const RoutesConfig = () => {
             <Route path="/user/settings" element={<UserSettings />}></Route>
             <Route path="/messages/" element={<Messages />}></Route>
             <Route path="/hiiulanh/" element={<Admin />}></Route>
+           
             <Route path="/messages/?uid=:uid" element={<Messages />}></Route>
             <Route path="/" element={<Home />} />
         </Routes>

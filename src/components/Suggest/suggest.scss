@@ -11,6 +11,10 @@
         padding-top: 20px;
     }
     &__content {
+        @include mobile {
+            margin-bottom: 69px;
+        }
+
         margin-bottom: 30px;
         &-right {
             display: flex;
