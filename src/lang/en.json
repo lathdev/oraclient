@@ -102,7 +102,7 @@
     "post": "Post",
     "updating": "Due to the error when interacting with Pi SDK, this feature is temporarily suspended to upgrade, your balance is safe.",
     "titlelimit": "The title must contain more than 10 characters",
-    "contentlimit": "The content must contain at least two paragraphs",
+    "contentlimit": "The content must contain more than 100 characters",
     "dubpost": "This post has existed",
     "createdpost": "Created post",
     "authpidone": "Auth with Pi Account success",

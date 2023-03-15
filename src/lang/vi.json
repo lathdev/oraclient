@@ -102,7 +102,7 @@
     "post": "Đăng bài",
     "updating": "Do lỗi khi tương tác với Pi SDK, tính năng rút tạm thời ngưng hoạt động để nâng cấp, số dư của bạn vẫn an toàn.",
     "titlelimit": "Tiêu đề phải chứa hơn 10 ký tự",
-    "contentlimit": "Nội dung phải chứa ít nhất hai đoạn văn và ít nhất 50 ký tự",
+    "contentlimit": "Nội dung phải chứa ít nhất 100 ký tự",
     "dubpost": "Bài viết này đã tồn tại",
     "createdpost": "Đăng bài thành công",
     "authpidone": "Xác thực Pi Account thành công",

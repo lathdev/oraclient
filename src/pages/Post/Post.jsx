@@ -647,6 +647,7 @@ const Post = () => {
                                                           key={comment._id}
                                                           isAdmin={isAdmin}
                                                           currentUser={currentUser}
+                                                          slug={dataPost?.slug}
                                                       />
                                                   ))
                                             : ""}

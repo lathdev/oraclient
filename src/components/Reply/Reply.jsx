@@ -1,10 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-const Reply = ({ reply, visible }) => {
+import { useTranslation } from "react-i18next";
+const Reply = ({ reply, visible, currentUser, isAdmin }) => {
     let date = new Date(reply.createdAt);
     const [voteCountReply, setVoteCountReply] = useState(null);
     const [voteCountReplyUpdate, setVoteCountReplyUpdate] = useState([]);
+    const [isUserCmt, setIsUserCmt] = useState(false);
+    const { t } = useTranslation();
     useEffect(() => {
         if (reply.voteCount) {
             setVoteCountReply(reply.voteCount.length);
@@ -26,11 +29,42 @@ const Reply = ({ reply, visible }) => {
         setVoteCountReplyUpdate(res.data.data.voteCount);
     }, []);
     console.log(voteCountReply);
+    const handleDelete = useCallback(
+        async (e) => {
+            e.preventDefault();
+            try {
+                const token = localStorage.getItem("token");              
+                console.log("hehe",reply._id)
+                const option = {
+                    method: "post",
+                    url: `/api/v1/reply/reply/delete/`,
+                    data: {
+                        replyId: reply._id,                     
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                const res = await axios(option);
+              if (res) window.location.reload(false);
+               
+            } catch (err) {}
+        },
+        [reply._id]
+    );
     useEffect(() => {
         if (voteCountReplyUpdate) {
             setVoteCountReply(voteCountReplyUpdate.length);
         }
     }, [voteCountReplyUpdate]);
+    useEffect(() => {
+        if (currentUser.currentUser) {
+       
+            if (reply.author._id === currentUser.currentUser._id) {
+                setIsUserCmt(true);
+            }
+        }
+    }, [reply, currentUser]);
     return (
         <div className="comment-node">
             <div className="comment__child-avt">
@@ -59,8 +93,19 @@ const Reply = ({ reply, visible }) => {
                                     <i className="bx bxs-up-arrow"></i>
                                 </div>
                             </div>
-                            <div></div>
+                            <div>
+                          
+                            </div>
                             <span className="value">{voteCountReply ? voteCountReply : reply.voteCount.length}</span>
+                            { isAdmin||isUserCmt ? (
+                           <div> <Link to={`/`}
+                           onClick={handleDelete}
+                          >
+                        {t("delete")}
+                  </Link></div>
+                        ) : (
+                            ""
+                        )}
                         </div>
                     </div>
                 </div>

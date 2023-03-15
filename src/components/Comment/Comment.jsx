@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./comment.scss";
 import axios from "axios";
 import Reply from "../Reply/Reply";
 import { useTranslation } from "react-i18next";
-const Comment = ({ comment, postId, isAdmin, currentUser }) => {
+const Comment = ({ comment, postId, isAdmin, currentUser, slug }) => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const [voteCount, setVoteCount] = useState(null);
     const [newReply, setNewReply] = useState(null);
     const [reply, setReply] = useState({});
@@ -42,6 +43,7 @@ const Comment = ({ comment, postId, isAdmin, currentUser }) => {
                 };
                 const res = await axios(option);
                 setReplies(res.data.data.reply);
+               
             } catch (err) {}
         }
     }, [comment._id]);
@@ -122,6 +124,32 @@ const Comment = ({ comment, postId, isAdmin, currentUser }) => {
         },
         [comment._id]
     );
+    const replyNotofication = useCallback(async () => {
+        if (newReply) {
+            const token = localStorage.getItem("token");
+            try {
+                const option = {
+                    method: "post",
+                    url: `/api/v1/notifications/`,
+                    data: {
+                        postId: newReply.post,
+                        replyId: newReply._id,
+                        user: comment.author._id,
+                        commentId: newReply.parent_id,
+
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+                navigate(`/post/${slug}`);
+            } catch (err) {}
+        }
+    }, [newReply, navigate]);
+    useEffect(() => {
+        replyNotofication();
+    }, [replyNotofication]);
     return (
         <div className="comment__child">
             <div className="comment__child-avt">
@@ -196,7 +224,13 @@ const Comment = ({ comment, postId, isAdmin, currentUser }) => {
             )}
             <div className="comments-reply">
                 {replies?.reverse().map((reply) => (
-                    <Reply reply={reply} visible={handelVisible} key={reply._id} />
+                    <Reply 
+                    currentUser={currentUser}
+                    reply={reply} 
+                    visible={handelVisible} 
+                    key={reply._id}
+                    isAdmin={isAdmin}
+                     />
                 ))}
             </div>
         </div>
