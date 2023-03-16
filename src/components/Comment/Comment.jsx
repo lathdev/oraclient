@@ -104,8 +104,6 @@ const Comment = ({ comment, postId, isAdmin, currentUser, slug }) => {
             e.preventDefault();
             try {
                 const token = localStorage.getItem("token");
-                
-                console.log("hehe",comment._id)
                 const option = {
                     method: "post",
                     url: `/api/v1/comment/delete`,

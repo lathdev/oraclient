@@ -29,6 +29,7 @@ const CreatePost = () => {
         description: "",
         category: "64d95dea763ef48b32485fb7",
         attachment: "",
+        lang: localStorage.getItem("i18nextLng")
     });
 //AntiLeft
 

@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useCallback, useEffect} from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./suggest.scss";
 import { allPostsState$ } from "../../redux/selectors";
@@ -8,8 +9,16 @@ import { useTranslation } from "react-i18next";
 import { HomeLoader } from "../Loader/Loader";
 const Suggest = () => {
  const { t } = useTranslation();
- const random = Math.floor(Math.random() * 30);
+ const random = Math.floor(Math.random() * 19);
     const posts = useSelector(allPostsState$)
+    const [pinPost, setPinPost] = useState(null)
+    const getPinPost = useCallback(async () => {
+        const res = await axios.get(`/api/v1/posts/welcome-to-piora/`);
+        setPinPost(res.data.post);
+    }, []);
+    useEffect(() => {
+        getPinPost();
+    }, [getPinPost]);
  if (!posts.data.length) return (<HomeLoader />);
    return (
       <section className="suggest container">
@@ -22,18 +31,18 @@ const Suggest = () => {
                     <div className="row">
                
                         <div className="col c-12 m-5 l-5">
-                            { posts.data.slice(-3,-2).map((post, idx)=> (
+                           
                                 
-                                <div className="suggest__content" key={idx}>
+                                <div className="suggest__content">
                                   
                                     <div className="suggest__content-img-left">
-                                        <Link to={`/post/${post.slug}`}>
+                                        <Link to={`/post/${pinPost?.slug}`}>
                                             <img
                                                 src={
-                                                    post.attachment  ? 
-                                                     post.attachment.indexOf(",")!==-1 ?
-                                                      post.attachment.slice(0,post.attachment.indexOf(",")) 
-                                                      : post.attachment 
+                                                    pinPost?.attachment  ? 
+                                                     pinPost?.attachment.indexOf(",")!==-1 ?
+                                                      pinPost?.attachment.slice(0,pinPost.attachment.indexOf(",")) 
+                                                      : pinPost?.attachment 
                                                       : "/images/home-bg.png"
                                                 }
                                                 alt=""
@@ -43,8 +52,8 @@ const Suggest = () => {
                                     <div className="suggest__content-details">
                                         <div className="suggest__content-details-heading">
                                             <div>
-                                                <Link to={`/category/${post.category.slug}`}>
-                                                    <span className="title-category">{post.category.name}</span>
+                                                <Link to={`/category/${pinPost?.category.slug}`}>
+                                                    <span className="title-category">{pinPost?.category.name}</span>
                                                 </Link>
                                                 <span className="time-read">4 min read</span>
                                             </div>
@@ -53,23 +62,23 @@ const Suggest = () => {
                                             </div> */}
                                         </div>
                                         <div className="suggest__content-details-main">
-                                            <Link to={`/post/${post.slug}`}>
-                                                <h3 className="title-post">{post.title}</h3>
+                                            <Link to={`/post/${pinPost?.slug}`}>
+                                                <h3 className="title-post">{pinPost?.title}</h3>
                                             </Link>
                                             <div className="suggest__content-details-desc">
                                                 <h3 className="suggest__content-details-desc-text">
-                                                    {post.description}
+                                                    {pinPost?.description}
                                                 </h3>
                                             </div>
                                         </div>
                                         <div className="suggest__content-details-post">
                                             <div className="suggest__content-details-post-user">
                                                 <div className="post-avt">
-                                                    <Link to={`/user/${post.author.userName}`}>
+                                                    <Link to={`/user/${pinPost?.author.userName}`}>
                                                         <img
                                                             src={
-                                                                post.author.avatar
-                                                                    ? `https://${post.author.avatar.slice(7)}`
+                                                                pinPost?.author.avatar
+                                                                    ? `https://${pinPost.author.avatar.slice(7)}`
                                                                     : "/icons/avatar.png"
                                                             }
                                                             alt=""
@@ -78,14 +87,14 @@ const Suggest = () => {
                                                     </Link>
                                                 </div>
                                                 <div>
-                                                    <Link to={`/user/${post.author.userName}`}>
+                                                    <Link to={`/user/${pinPost?.author.userName}`}>
                                                         <p className="post-username">
-                                                            {post.author.displayName
-                                                                ? post.author.displayName
-                                                                : post.author.userName}
+                                                            {pinPost?.author.displayName
+                                                                ? pinPost?.author.displayName
+                                                                : pinPost?.author.userName}
                                                         </p>
                                                     </Link>
-                                                    <DatePost date={post.createdAt}></DatePost>
+                                                    <DatePost date={pinPost?.createdAt}></DatePost>
                                                 </div>
                                             </div>
 
@@ -111,10 +120,10 @@ const Suggest = () => {
                                                 className=" cls-1"
                                             ></path>
                                         </svg>
-                                        <span className="post-icon">{post.views}</span>
+                                        <span className="post-icon">{pinPost?.views}</span>
                                                 </div>
                                            
-                                                <Link to={`/post/${post.slug}`}>
+                                                <Link to={`/post/${pinPost?.slug}`}>
                                                     <div className="suggest-icon-container">
                                                         <svg
                                                             fill="#969696"
@@ -131,7 +140,7 @@ const Suggest = () => {
                                                             ></path>
                                                         </svg>
                                                         <span className="post-icon-suggest-text">
-                                                            {post.comment_count}
+                                                            {pinPost?.comment_count}
                                                         </span>
                                                     </div>
                                                 </Link>
@@ -139,7 +148,7 @@ const Suggest = () => {
                                         </div>
                                     </div>
                                 </div>
-                            ))}
+                            
                         </div>
                         <div className="col c-12 m-7 l-7" id="slideBar">
                             <div className="gird">

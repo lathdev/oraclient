@@ -36,6 +36,7 @@ const Home = () => {
     useEffect(() => {
         document.title = "Ora | Social Network for Pioneer";
     }, []);
+   
     return (
        
         <main className="main">

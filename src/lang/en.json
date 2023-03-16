@@ -104,7 +104,7 @@
     "titlelimit": "The title must contain more than 10 characters",
     "contentlimit": "The content must contain more than 100 characters",
     "dubpost": "This post has existed",
-    "createdpost": "Created post",
+    "postcreated": "Created post",
     "authpidone": "Auth with Pi Account success",
     "dublicatedpiacc": "This Pi Account exist in Piora",
     "markasread": "Mark all as read",

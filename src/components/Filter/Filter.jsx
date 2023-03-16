@@ -109,7 +109,6 @@ const Filter = ({ posts }) => {
     
    const handlePageClick = (e) => {
         const selectedPage = e.selected;
-        console.log("page", selectedPage+1)
        setCurrentButton(selectedPage+1);
        navigate({
         search: `?sort=${currentSort}&page=${selectedPage+1}`

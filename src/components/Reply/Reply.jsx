@@ -28,13 +28,11 @@ const Reply = ({ reply, visible, currentUser, isAdmin }) => {
         const res = await axios(option);
         setVoteCountReplyUpdate(res.data.data.voteCount);
     }, []);
-    console.log(voteCountReply);
     const handleDelete = useCallback(
         async (e) => {
             e.preventDefault();
             try {
                 const token = localStorage.getItem("token");              
-                console.log("hehe",reply._id)
                 const option = {
                     method: "post",
                     url: `/api/v1/reply/reply/delete/`,

@@ -1,8 +1,10 @@
 import axios from "axios";
 const token = localStorage.getItem("token");
-
+const lang = localStorage.getItem("i18nextLng")
 // Post
-export const getAllPosts = () => axios.get(`/api/v1/posts`);
+export const getAllPosts = () => axios.get(`/api/v1/posts`,  {
+    headers: { Authorization: lang },
+});
 export const getPost = () => axios.get(`/api/v1/posts/`);
 export const createPost = (payload) =>
     axios.post(`/api/v1/posts`, payload, {

@@ -12,6 +12,7 @@ import { useModalContext } from "../modal/ModalContext";
 const Adv = () => {
     const { t } = useTranslation();
     const posts = useSelector(allPostsState$);
+    const postsByLang = posts.data.filter(post => post.lang===localStorage.getItem("i18nextLng"))
     const { openModal, destroyModal } = useModalContext();
 
     const donate = useCallback(async (e) => {
@@ -43,7 +44,7 @@ const Adv = () => {
             <div className="adv__widget box-shadow ">
                 <p className="adv__widget-title">{t("maybeyoulike")}</p>
                 <div className="adv__widget-content">
-                    {posts.data.slice(0, 5).map((post) => (
+                    {postsByLang.slice(0, 5).map((post) => (
                         <div className="adv__widget-content-details">
                             <div className="adv__widget-avt">
                                 <Link to={`/user/${post.author.userName}`}>

@@ -104,7 +104,7 @@
     "titlelimit": "Tiêu đề phải chứa hơn 10 ký tự",
     "contentlimit": "Nội dung phải chứa ít nhất 100 ký tự",
     "dubpost": "Bài viết này đã tồn tại",
-    "createdpost": "Đăng bài thành công",
+    "postcreated": "Đăng bài thành công",
     "authpidone": "Xác thực Pi Account thành công",
     "dublicatedpiacc": "Tài khoản Pi Network này đã được sử dụng",
     "markasread": "Đánh dấu đã đọc",

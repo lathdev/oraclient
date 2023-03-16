@@ -33,7 +33,6 @@ const Header = () => {
     const { t, i18n } = useTranslation();
     async function markAsRead()  {     
        
-            console.log("Noti")
         const token = localStorage.getItem("token");
         if (token) {
             try {
