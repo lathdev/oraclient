@@ -6,12 +6,28 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import XHR from "i18next-http-backend"
 import translationEN from "../en.json";
 import translationVI from "../vi.json";
+import translationZH from "../zh.json";
+import translationJA from "../ja.json";
+import translationKO from "../ko.json";
+import translationRU from "../ru.json";
 const resources = {
     en: {
         translation: translationEN,
     },
     vi: {
         translation: translationVI,
+    },
+    zh: {
+        translation: translationZH,
+    },
+    ja: {
+        translation: translationJA,
+    },
+    ko: {
+        translation: translationKO,
+    },
+    ru: {
+        translation: translationRU,
     },
 };
 i18n.use(XHR)

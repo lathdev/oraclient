@@ -7,7 +7,7 @@ $text-menu-color: #666;
 $text-color-desc: #161616;
 $boder-color: #e2e8f0;
 $hover-color: rgba(237, 242, 247, 1);
-$background-color: rgba(226, 232, 240, 1);
+$background-color: rgb(233, 236, 239);
 $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 $mobile-width: 600px;
 $tablet-width: 1024px;
@@ -15,8 +15,9 @@ $header-height: 130px;
 $width-70: 70%;
 $width-15: 15%;
 $max-width: 1180px;
-$font-mon: "Montserrat", sans-serif;
+$font-mon:  "Noto Sans", sans-serif;
 $font-no: "Noto Sans", sans-serif;
+
 .title {
     position: relative;
     font-size: 18px;
@@ -25,7 +26,7 @@ $font-no: "Noto Sans", sans-serif;
     padding-left: 10px;
     border-left: 3px solid $blue;
     &-category {
-        font-size: 13px;
+        font-size: 12px;
         color: $black;
         position: relative;
         text-transform: uppercase;
@@ -58,7 +59,7 @@ $font-no: "Noto Sans", sans-serif;
     font-size: 13px;
 }
 .time-read {
-    font-size: 13px;
+    font-size: 12px;
     color: $gray;
 }
 .post-icon {
@@ -122,6 +123,7 @@ $font-no: "Noto Sans", sans-serif;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    font-family: $font-mon;
     font-weight: normal;
     font-size: 1rem;
     overflow-wrap: break-word;

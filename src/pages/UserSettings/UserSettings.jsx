@@ -16,6 +16,7 @@ const UserSettings = () => {
     const changeLanguageHandler = (e) => {
       const languageValue = e.target.value
       i18n.changeLanguage(languageValue);
+      setLang(e.target.value)
     }
     let newDate = new Date()
     let date = newDate.getUTCDate();
@@ -24,6 +25,7 @@ const UserSettings = () => {
     let nowWithdraw = date.toString() + month.toString() + year.toString()
     const dispatch = useDispatch();
     const toast = useRef(null);
+    const [lang, setLang] = useState("en")
     const currentUser = useSelector(userState$);
     const userPassword = useSelector(passwordState$);
     const [preview, setPreview] = useState();
@@ -262,6 +264,12 @@ const UserSettings = () => {
             }
         }
     }
+    const getLang = useCallback(() => {
+       setLang(localStorage.getItem("i18nextLng").slice(0,2))
+    }, [localStorage]);
+    useEffect(() => {
+        getLang();
+    }, [getLang]);
     return (
         <div className="container">
             {isLoading ? <Loader /> : ""}
@@ -632,7 +640,7 @@ const UserSettings = () => {
                                                         {t("language")}
                                                     </label>
                                                     <select
-                                                        value={localStorage.getItem('i18nextLng')}
+                                                        value={lang}
                                                         className="settings__input"
                                                         onChange={(e) =>
                                                             changeLanguageHandler(e)
@@ -640,6 +648,10 @@ const UserSettings = () => {
                                                     >
                                                         <option value="en">English</option>
                                                         <option value="vi">Tiếng Việt</option>
+                                                        <option value="zh">中国</option>
+                                                        <option value="ko">한국인</option>
+                                                        <option value="ja">日本</option>
+                                                        <option value="ru">Русский</option>
                                                     </select>
                                                 </div>
 

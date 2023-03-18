@@ -1,6 +1,11 @@
 import axios from "axios";
+// import { getI18n } from "react-i18next";
+// console.log(getI18n)
 const token = localStorage.getItem("token");
-const lang = localStorage.getItem("i18nextLng")
+let ip = localStorage.getItem("i18nextLng")?.slice(0,2);
+let lang;
+if (ip) lang = ip;
+else lang = "all";
 // Post
 export const getAllPosts = () => axios.get(`/api/v1/posts`,  {
     headers: { Authorization: lang },

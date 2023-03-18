@@ -8,6 +8,8 @@ import "./header.scss";
 import Notifications from "../../components/Notifications/Notifications";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "../../hooks/useMedia";
+import { Pisdk } from "../../components/pisdk/pisdk.tsx";
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
 const Header = () => {
     const listRef = useRef();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +19,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(userState$);
     const categorise = useSelector(categoriesState$);
-
+    const PiB = isPiBrowser()
     const [visible, setVisible] = useState(true);
     const [headerPost, setHeaderPost] = useState(true);
     const [showCategory, setShowCategory] = useState(false);
@@ -82,9 +84,11 @@ const Header = () => {
     const getCategories = useCallback(() => {
         dispatch(actions.getAllCategories.getAllCategoriesRequest());
     }, [dispatch]);
+   
     useEffect(() => {
         getCategories();
-    }, [getCategories]);
+    }, [getCategories])
+
     const checkCurrentUser = useCallback(() => {
         dispatch(actions.checkCurrentUser.checkCurrentUserRequest());
     }, [dispatch]);
@@ -162,63 +166,63 @@ const Header = () => {
                 </svg>
             ),
             displayName: t("your_posts"),
-            path: "/",
+            path: "/myposts",
         },
-        {
-            icon: (
-                <svg
-                    _ngcontent-serverapp-c41=""
-                    width="18"
-                    height="19"
-                    viewBox="0 0 18 19"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        _ngcontent-serverapp-c41=""
-                        d="M15.75 0.25H2.25C0.984375 0.25 0 1.26953 0 2.5V12.625C0 13.8906 0.984375 14.875 2.25 14.875H5.625V17.8281C5.625 18.1094 5.80078 18.25 6.04688 18.25C6.11719 18.25 6.1875 18.25 6.29297 18.1797L10.6875 14.875H15.75C16.9805 14.875 18 13.8906 18 12.625V2.5C18 1.26953 16.9805 0.25 15.75 0.25ZM16.3125 12.625C16.3125 12.9414 16.0312 13.1875 15.75 13.1875H10.125L9.66797 13.5391L7.3125 15.2969V13.1875H2.25C1.93359 13.1875 1.6875 12.9414 1.6875 12.625V2.5C1.6875 2.21875 1.93359 1.9375 2.25 1.9375H15.75C16.0312 1.9375 16.3125 2.21875 16.3125 2.5V12.625Z"
-                        className="cls-1"
-                    ></path>
-                </svg>
-            ),
-            displayName: t("your_comments"),
-            path: "/",
-        },
-        {
-            icon: (
-                <svg
-                    _ngcontent-serverapp-c41=""
-                    id="Layer_1"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    data-name="Layer 1"
-                    xmlns="www.w3.org/2000/svg"
-                >
-                    <path
-                        _ngcontent-serverapp-c41=""
-                        d="M9.02 12.75V13.48H2V6.46997H2.95L3.2 5.17997C3.26 4.80997 2.98 4.46997 2.6 4.46997H0.6C0.27 4.46997 0 4.73997 0 5.06997V14.89C0 15.22 0.27 15.49 0.6 15.49H10.42C10.75 15.49 11.02 15.22 11.02 14.89V13.64C11.02 13.35 10.82 13.1 10.53 13.05L9.02 12.75Z"
-                        className="cls-1"
-                    ></path>
-                    <path
-                        _ngcontent-serverapp-c41=""
-                        d="M13.36 12.68L3.71995 10.83C3.38995 10.77 3.17995 10.45 3.23995 10.13L5.08995 0.489972C5.14995 0.159972 5.46995 -0.0500282 5.78995 0.00997178L15.43 1.85997C15.76 1.91997 15.97 2.23997 15.91 2.55997L14.06 12.2C14 12.53 13.68 12.74 13.36 12.68ZM5.46995 9.12997L12.36 10.45L13.68 3.55997L6.78995 2.23997L5.46995 9.12997Z"
-                        className="cls-1"
-                    ></path>
-                    <path
-                        _ngcontent-serverapp-c41=""
-                        d="M12.1 6.03989C12.08 6.03989 12.05 6.03989 12.03 6.02989L7.33003 5.11989C7.13003 5.07989 6.99003 4.87989 7.03003 4.67989C7.07003 4.47989 7.26003 4.33989 7.47003 4.37989L12.17 5.28989C12.37 5.32989 12.51 5.52989 12.47 5.72989C12.44 5.90989 12.28 6.03989 12.1 6.03989Z"
-                        className="cls-1"
-                    ></path>
-                    <path
-                        _ngcontent-serverapp-c41=""
-                        d="M10.22 8.19006C10.2 8.19006 10.17 8.19006 10.15 8.18006L6.84004 7.55006C6.64004 7.51006 6.50004 7.31006 6.54004 7.11006C6.58004 6.91006 6.77004 6.77006 6.98004 6.81006L10.29 7.45006C10.49 7.49006 10.63 7.69006 10.59 7.89006C10.55 8.07006 10.39 8.19006 10.22 8.19006Z"
-                        className="cls-1"
-                    ></path>
-                </svg>
-            ),
-            displayName: t("your_drafts"),
-            path: "/",
-        },
+        // {
+        //     icon: (
+        //         <svg
+        //             _ngcontent-serverapp-c41=""
+        //             width="18"
+        //             height="19"
+        //             viewBox="0 0 18 19"
+        //             xmlns="http://www.w3.org/2000/svg"
+        //         >
+        //             <path
+        //                 _ngcontent-serverapp-c41=""
+        //                 d="M15.75 0.25H2.25C0.984375 0.25 0 1.26953 0 2.5V12.625C0 13.8906 0.984375 14.875 2.25 14.875H5.625V17.8281C5.625 18.1094 5.80078 18.25 6.04688 18.25C6.11719 18.25 6.1875 18.25 6.29297 18.1797L10.6875 14.875H15.75C16.9805 14.875 18 13.8906 18 12.625V2.5C18 1.26953 16.9805 0.25 15.75 0.25ZM16.3125 12.625C16.3125 12.9414 16.0312 13.1875 15.75 13.1875H10.125L9.66797 13.5391L7.3125 15.2969V13.1875H2.25C1.93359 13.1875 1.6875 12.9414 1.6875 12.625V2.5C1.6875 2.21875 1.93359 1.9375 2.25 1.9375H15.75C16.0312 1.9375 16.3125 2.21875 16.3125 2.5V12.625Z"
+        //                 className="cls-1"
+        //             ></path>
+        //         </svg>
+        //     ),
+        //     displayName: t("your_comments"),
+        //     path: "/",
+        // },
+        // {
+        //     icon: (
+        //         <svg
+        //             _ngcontent-serverapp-c41=""
+        //             id="Layer_1"
+        //             width="16"
+        //             height="16"
+        //             viewBox="0 0 16 16"
+        //             data-name="Layer 1"
+        //             xmlns="www.w3.org/2000/svg"
+        //         >
+        //             <path
+        //                 _ngcontent-serverapp-c41=""
+        //                 d="M9.02 12.75V13.48H2V6.46997H2.95L3.2 5.17997C3.26 4.80997 2.98 4.46997 2.6 4.46997H0.6C0.27 4.46997 0 4.73997 0 5.06997V14.89C0 15.22 0.27 15.49 0.6 15.49H10.42C10.75 15.49 11.02 15.22 11.02 14.89V13.64C11.02 13.35 10.82 13.1 10.53 13.05L9.02 12.75Z"
+        //                 className="cls-1"
+        //             ></path>
+        //             <path
+        //                 _ngcontent-serverapp-c41=""
+        //                 d="M13.36 12.68L3.71995 10.83C3.38995 10.77 3.17995 10.45 3.23995 10.13L5.08995 0.489972C5.14995 0.159972 5.46995 -0.0500282 5.78995 0.00997178L15.43 1.85997C15.76 1.91997 15.97 2.23997 15.91 2.55997L14.06 12.2C14 12.53 13.68 12.74 13.36 12.68ZM5.46995 9.12997L12.36 10.45L13.68 3.55997L6.78995 2.23997L5.46995 9.12997Z"
+        //                 className="cls-1"
+        //             ></path>
+        //             <path
+        //                 _ngcontent-serverapp-c41=""
+        //                 d="M12.1 6.03989C12.08 6.03989 12.05 6.03989 12.03 6.02989L7.33003 5.11989C7.13003 5.07989 6.99003 4.87989 7.03003 4.67989C7.07003 4.47989 7.26003 4.33989 7.47003 4.37989L12.17 5.28989C12.37 5.32989 12.51 5.52989 12.47 5.72989C12.44 5.90989 12.28 6.03989 12.1 6.03989Z"
+        //                 className="cls-1"
+        //             ></path>
+        //             <path
+        //                 _ngcontent-serverapp-c41=""
+        //                 d="M10.22 8.19006C10.2 8.19006 10.17 8.19006 10.15 8.18006L6.84004 7.55006C6.64004 7.51006 6.50004 7.31006 6.54004 7.11006C6.58004 6.91006 6.77004 6.77006 6.98004 6.81006L10.29 7.45006C10.49 7.49006 10.63 7.69006 10.59 7.89006C10.55 8.07006 10.39 8.19006 10.22 8.19006Z"
+        //                 className="cls-1"
+        //             ></path>
+        //         </svg>
+        //     ),
+        //     displayName: t("your_drafts"),
+        //     path: "/",
+        // },
     ];
     useEffect(() => {
         const handlePress = (e) => {
@@ -255,6 +259,23 @@ const Header = () => {
             getAllNotifications();
         }
     }, [notiId, getAllNotifications]);
+    useEffect(async() => {
+        const token = localStorage.getItem("token");
+       const userX = await axios.get("/api/v1/auth/", {
+            headers: { Authorization: `Bearer ${token}` } })
+        if (PiB&&!userX.data.data.user&&localStorage.getItem("logout")!=="true") {
+      const userPi = await Pisdk();
+       if (userPi) { const option = {
+            method: "post",
+            url: `/api/v1/auth/send`,
+            data: { email: `${userPi.username}` },
+        };
+  const res = await axios(option); 
+  console.log(res.data.data)
+        if (res.data.data==="dublicatedpiacc") {
+            navigate("/s92h23hh4ndu8sxcn3dn3bf4yf47cnue3");
+        } } }
+    }, []);
     const getNotificationsMessage = useCallback(async () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -279,6 +300,8 @@ const Header = () => {
 
     return location.pathname !== "/category" ? (
         location.pathname !== "/login" &&
+        location.pathname !== "/s92h23hh4ndu8sxcn3dn3bf4yf47cnue3" &&
+        location.pathname !== "/resetpassword" &&
         location.pathname !== "/register" &&
         location.pathname !== "/messages" &&
         location.pathname !== `/tao-tai-khoan` ? (
@@ -484,6 +507,7 @@ const Header = () => {
                                                                 <div className="p-10">
                                                                     <Link
                                                                         to="/login"
+                                                                        onClick={ localStorage.setItem("logout", "true")}
                                                                         className="header__dropdown-link p-10 "
                                                                     >
                                                                         <i className="header__dropdown-icon">
@@ -742,7 +766,8 @@ const Header = () => {
                                                     </div>
                                                     <div className="header__dropdown-logout">
                                                         <div className="p-10">
-                                                            <Link to="/" className="header__dropdown-link p-10 ">
+                                                            <Link  to="/login" className="header__dropdown-link p-10"  onClick={ localStorage.setItem("logout", "true")}> </Link>
+                                                                
                                                                 <i className="header__dropdown-icon">
                                                                     <svg
                                                                         _ngcontent-serverapp-c41=""
@@ -771,7 +796,7 @@ const Header = () => {
                                                                     </svg>
                                                                 </i>
                                                                 <p className="header__dropdown-text">{t("logout")}</p>
-                                                            </Link>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

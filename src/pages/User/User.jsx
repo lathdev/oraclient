@@ -30,7 +30,10 @@ const User = () => {
     const { username } = useParams();
     const [postsSaved, setPostsSaved] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
-
+    const timestamp = (date) => {
+        const Timing = new Date(date)
+       return Timing.getTime();
+     }
     const { openModal, destroyModal } = useModalContext();
     const sliderSettings = {
         slidesToShow: 3,
@@ -531,7 +534,7 @@ const User = () => {
                                               <div className="user__profile-posts-all-body">
                                                   <div className="user__profile-posts-all-content">
                                                       <div className="grid">
-                                                          {posts.posts.map((post) => (
+                                                          {posts.posts.sort((a,b) => timestamp(b.createdAt) - timestamp(a.createdAt)).map((post) => (
                                                               <PostItem post={post} key={post._id} />
                                                           ))}
                                                       </div>
@@ -679,7 +682,7 @@ const User = () => {
                                               <div className="user__profile-posts-all-body">
                                                   <div className="user__profile-posts-all-content">
                                                       <div className="grid">
-                                                          {posts.posts.slice(0, 10).map((post) => (
+                                                          {posts.posts.slice(0, 10).reserve().map((post) => (
                                                               <PostItem post={post} key={post._id} />
                                                           ))}
                                                       </div>

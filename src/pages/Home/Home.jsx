@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
 import { allPostsState$ } from "../../redux/selectors";
 import { Banner } from "../../components/Banner";
+
 const Home = () => {
     const [postsByCate] = useState(null);
     const dispatch = useDispatch();
@@ -13,12 +14,12 @@ const Home = () => {
     useEffect(() => {
         dispatch(actions.getAllPosts.getAllPostsRequest());
     }, [dispatch]);
+
     // const getPostSaved = useCallback( async (e) => {
     //   const token = localStorage.getItem("token");
     //   try{
     //     const option = {
     //       method: "get",
-    //      ủl
     //       headers: {
     //         authorization: `Bearer ${token}`,
     //       },
@@ -36,11 +37,10 @@ const Home = () => {
     useEffect(() => {
         document.title = "Ora | Social Network for Pioneer";
     }, []);
-   
     return (
        
         <main className="main">
-       
+      
             <Banner />
             <div className="container">
                 <Suggest />

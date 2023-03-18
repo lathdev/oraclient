@@ -11,6 +11,8 @@ const Footer = () => {
         location.pathname !== "/register" &&
         location.pathname !== "/category" &&
         location.pathname !== "/search" &&
+        location.pathname !== "/resetpassword" &&
+        location.pathname !== "/s92h23hh4ndu8sxcn3dn3bf4yf47cnue3" &&
         location.pathname !== `/tao-tai-khoan` &&
         location.pathname !== `/messages` &&
         location.pathname !== `/post/update/${path}` ? (

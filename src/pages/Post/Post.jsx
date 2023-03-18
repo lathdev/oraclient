@@ -30,7 +30,7 @@ const Post = () => {
     const isBlockCmt = currentUser?.currentUser?.isBlockedCmt;
     const location = useLocation();
     const [isUser, setIsUser] = useState(false);
-  
+    const [sortCmt, setSortCmt] = useState("vote")
     const [isAdmin, setIsAdmin] = useState(false);
     const [visiable, setVisiable] = useState(false);
     const [dataPost, setDataPost] = useState({});
@@ -45,7 +45,10 @@ const Post = () => {
     const [newComment, setNewComment] = useState(null);
     const [isVote, setIsVote] = useState(false);
     const [isUnVote, setIsUnVote] = useState(false);
-
+    const timestamp = (date) => {
+        const Timing = new Date(date)
+       return Timing.getTime();
+     }
     const { openModal, destroyModal } = useModalContext();
     const path = location.pathname.split("/")[2];
     const getPost = useCallback(async () => {
@@ -524,7 +527,7 @@ const Post = () => {
                     <div className="pull-right">
                         <div className="right-tools">
                             <div className="tip-post" onClick={tip}>
-                                <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
+                            <img src="/icons/tip.png" alt="" width="27px" />
                             </div>
                             {/* <Link to="/" className="tool">
                                 <FacebookShareButton url={shareUrl}>
@@ -623,23 +626,23 @@ const Post = () => {
                                     </form>
                                 </div>
                             </div>
-                            {/* <div className="comment__nav-tab">
+                            <div className="comment__nav-tab">
          <div className="separator"></div>
          <ul className="comment__nav-list">
-             <li className="comment__nav-item active">
-                 <Link to="/">Hot</Link>
+             <li className={`comment__nav-item ${sortCmt==="vote" ? "active" : ""}`}>
+                 <Link onClick={() => setSortCmt("vote")}>Hot</Link>
              </li>
-             <li className="comment__nav-item">
-                 <Link to="/">New</Link>
+             <li className={`comment__nav-item ${sortCmt==="new" ? "active" : ""}`}>
+                 <Link onClick={() => setSortCmt("new")}>New</Link>
              </li>
          </ul>
-     </div> */}
+     </div>
                             <div className="comment__tree-view">
                                 <div className="comments">
                                     <div className="comments__node">
                                         {comments.length > 0
                                             ? comments
-                                                  .sort((a, b) => b.voteCount.length - a.voteCount.length)
+                                                  .sort(sortCmt==="vote" ? (a, b) => b.voteCount.length - a.voteCount.length : (a,b) => timestamp(b.createdAt) - timestamp(a.createdAt))
                                                   .map((comment) => (
                                                       <Comment
                                                           postId={dataPost?._id}

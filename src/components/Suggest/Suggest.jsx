@@ -150,13 +150,14 @@ const Suggest = () => {
                                 </div>
                             
                         </div>
+                       
                         <div className="col c-12 m-7 l-7" id="slideBar">
-                            <div className="gird">
+                            <div className="grid">
                                 <div className="row">
                                     {posts.data.sort((a, b) => b.vote.length - a.vote.length).slice(random,random+3).map((post, idx) => (
                                         <div className="col l-12" key={idx}>
                                             <div className="suggest__content">
-                                                <div className="grid">
+                                                <div className="grid su">
                                                     <div className="row">
                                                         <div className="col l-4 c-12 ">
                                                             <div>
@@ -292,6 +293,7 @@ const Suggest = () => {
                                 }
                             </div>
                         </div>
+                       
                     </div>
                 </div>
             </div>

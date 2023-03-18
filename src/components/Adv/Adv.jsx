@@ -12,7 +12,7 @@ import { useModalContext } from "../modal/ModalContext";
 const Adv = () => {
     const { t } = useTranslation();
     const posts = useSelector(allPostsState$);
-    const postsByLang = posts.data.filter(post => post.lang===localStorage.getItem("i18nextLng"))
+    const postsByLang = posts.data.filter(post => post.lang===localStorage.getItem("i18nextLng").slice(0,2));
     const { openModal, destroyModal } = useModalContext();
 
     const donate = useCallback(async (e) => {
@@ -32,7 +32,7 @@ const Adv = () => {
     }, []);
     return (
         <div className="adv">
-            <div className="adv__donate box-shadow ">
+            <div className="adv__donate">
                 <p className="adv__donate-content">{t("you_love_piora_and_want_to_help_us")}</p>
                 <Link to="/" className="adv__donate-link">
                     <button className="adv__donate-button" onClick={donate}>
@@ -41,7 +41,7 @@ const Adv = () => {
                     </button>
                 </Link>
             </div>
-            <div className="adv__widget box-shadow ">
+            <div className="adv__widget">
                 <p className="adv__widget-title">{t("maybeyoulike")}</p>
                 <div className="adv__widget-content">
                     {postsByLang.slice(0, 5).map((post) => (
@@ -73,30 +73,35 @@ const Adv = () => {
                     ))}
                 </div>
             </div>
-            <div className="adv__contact box-shadow ">
+            <div className="adv__contact">
                 <p className="adv__contact-heading">{t("link")}</p>
                 <div className="adv__contact-social">
                     <ul className="adv__contact-social-list">
                         <li className="adv__contact-social-item"></li>
                         <Link
-                            to="https://facebook.com/profile.php?id=100089642546736"
+                            to="https://github.com/pi-apps/ora"
                             className="adv__contact-social-link"
                         >
-                            <i className="adv__contact-social-icon fb bx bxl-facebook-square"></i>
-                            <span className="adv__contact-social-text">Fanpage Piora</span>
+                            <i className="adv__contact-social-icon fb bx bxl-github"></i>
+                            <span className="adv__contact-social-text">Github Ora PiOS</span>
                         </Link>
 
                         <li className="adv__contact-item">
                             <Link to="https://www.youtube.com/@pioraofficial" className="adv__contact-social-link">
                                 <i className=" adv__contact-social-icon yt bx bxl-youtube"></i>
-                                <span className="adv__contact-social-text">Piora Youtube</span>
+                                <span className="adv__contact-social-text">Ora Official</span>
                             </Link>
                         </li>
-
+                        <li className="adv__contact-item">
+                            <Link to="pi://brainstorm.pi/project/63d84891a7014301d5d2ed17" className="adv__contact-social-link">
+                                <i className="adv__contact-social-icon chat bx bxs-rocket"></i>
+                                <span className="adv__contact-social-text">Ora on Brainstorm</span>
+                            </Link>
+                        </li>
                         <li className="adv__contact-item">
                             <Link to="mailto:contact@piora.space" className="adv__contact-social-link">
                                 <i className="adv__contact-social-icon chat bx bxs-conversation"></i>
-                                <span className="adv__contact-social-text">Feedback Piora</span>
+                                <span className="adv__contact-social-text">Feedback Ora</span>
                             </Link>
                         </li>
                     </ul>

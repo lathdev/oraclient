@@ -12,7 +12,6 @@ const Login = () => {
     const [errMessage, setErrMessage] = useState(null);
     const piB = isPiBrowser();
     const loginSuccess = useSelector(userState$);
-
     const { t } = useTranslation();
 
     let navigate = useNavigate();
