@@ -633,7 +633,7 @@ const Post = () => {
                  <Link onClick={() => setSortCmt("vote")}>Hot</Link>
              </li>
              <li className={`comment__nav-item ${sortCmt==="new" ? "active" : ""}`}>
-                 <Link onClick={() => setSortCmt("new")}>New</Link>
+                 <Link onClick={() => setSortCmt("new")}>{t("new")}</Link>
              </li>
          </ul>
      </div>

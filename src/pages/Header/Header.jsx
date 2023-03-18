@@ -96,7 +96,8 @@ const Header = () => {
         checkCurrentUser();
     }, [checkCurrentUser]);
     const handleShow = () => setShowCategory(!showCategory);
-    const handleShowNotify = () => setShowNotify(!showNotify);
+    const handleShowNotify = () => {setShowNotify(!showNotify); 
+        console.log(showNotify) }
     const handleShowDropDown = () => setShowDropDown(!showDropDown);
     const getAllNotifications = useCallback(async () => {
         const token = localStorage.getItem("token");
@@ -358,8 +359,8 @@ const Header = () => {
                                                     </button>
                                                 </Link>
                                             </li>
-                                            <li className="header__icon-top-wrapper" onClick={handleShowNotify}>
-                                                <button className="icon-notify">
+                                            <li className="header__icon-top-wrapper">
+                                                <button className="icon-notify" onClick={() => setShowNotify(showNotify => !showNotify)}>
                                                     <i className=" header__icon header__icon-top bx bx-bell"></i>
                                                     {countNotifications === 0 ? (
                                                         ""
@@ -372,7 +373,7 @@ const Header = () => {
                                                         <div className="header__notify-container">
                                                             
                                                             <header className="header__notify-header">
-                                                                <h3>{t("notification")}</h3>
+                                                                <h4>{t("notification")}</h4>
                                                          
                                                             </header>
                                                          

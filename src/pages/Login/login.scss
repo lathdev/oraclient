@@ -2,6 +2,7 @@
 .login {
     width: 400px;
     margin: 0 auto;
+    padding: 12px;
     height: 100%;
     transform: translateY(50%);
     &__logo {
@@ -20,15 +21,16 @@
         gap: 15px 0;
         margin-bottom: 15px;
         &-input {
-            height: 40px;
+            border-radius: 9px;
+            height: 45px;
             padding: 8px 6px;
             font-size: 16px;
             vertical-align: middle;
             border: 1px solid rgb(229, 229, 229, 1);
         }
         &-button {
+            border-radius: 9px;
             background: #2fb5fa;
-            border-radius: 3px;
             color: #fff;
             border: 0;
             padding: 13px 18px;
@@ -53,7 +55,7 @@
             line-height: 30px;
         }
         &.link {
-            color: #bb30bb;
+            color: #4b83e5;
             margin-bottom: 15px;
         }
     }

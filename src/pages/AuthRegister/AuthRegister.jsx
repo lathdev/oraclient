@@ -110,7 +110,7 @@ const AuthRegister = () => {
                                     <form className="auth__logging-email" onSubmit={handleSubmit}>
                                         <div className="auth__logging-email-sending">
                                             <div className="piauth">
-                                                <button type="submit" value="Xác nhận" onClick={handleAuthMail}>
+                                                <button type="submit" value="Xác nhận" style={{borderRadius:"9px", height:"40px"}} onClick={handleAuthMail}>
                                                     {t("sign_up_with_pi_browser")}
                                                 </button>
                                             </div>

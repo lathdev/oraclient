@@ -12,6 +12,7 @@ const Comment = ({ comment, postId, isAdmin, currentUser, slug }) => {
     const [reply, setReply] = useState({});
     const [replies, setReplies] = useState([]);
     const [activeReply, setActiveReply] = useState(false);
+    const [activeEdit, setActiveEdit] = useState(false);
     const [voteCountUpdate, setVoteCountUpdate] = useState([]);
     const [isUserCmt, setIsUserCmt] = useState(false);
     let date = new Date(comment.createdAt);
@@ -64,6 +65,10 @@ const Comment = ({ comment, postId, isAdmin, currentUser, slug }) => {
         }
     }, [comment.voteCount]);
     const handelVisible = () => setActiveReply(!activeReply);
+    const handelVisibleEdit = () => {
+        setActiveEdit(!activeEdit);
+        setReply(comment);
+    }
     const handleSumit = useCallback((e) => {
         e.preventDefault();
     }, []);
@@ -121,6 +126,29 @@ const Comment = ({ comment, postId, isAdmin, currentUser, slug }) => {
             } catch (err) {}
         },
         [comment._id]
+    );
+    const handleEdit = useCallback(
+        async (e) => {
+            e.preventDefault();
+            try {
+                const token = localStorage.getItem("token");
+                const option = {
+                    method: "put",
+                    url: `/api/v1/comment/edit`,
+                    data: {
+                        commentId: comment._id,
+                        content: reply.content
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                const res = await axios(option);
+                if (res.data.data) window.location.reload(false);
+               
+            } catch (err) {}
+        },
+        [comment._id, reply]
     );
     const replyNotofication = useCallback(async () => {
         if (newReply) {
@@ -182,18 +210,53 @@ const Comment = ({ comment, postId, isAdmin, currentUser, slug }) => {
                         <p style={{padding:"10px"}} onClick={handelVisible}>{t("reply")}</p>
                         { isAdmin||isUserCmt ? (
                            <div> <Link to={`/`}
-                           onClick={handleDelete}
-                          >
-                        {t("delete")}
-                  </Link></div>
+                                onClick={handleDelete}
+                            >
+                                {t("delete")}
+                            </Link></div>
+                           
                         ) : (
                             ""
                         )}
-                      
+                        {isUserCmt ? (
+                         <div onClick={handelVisibleEdit} style={{padding:"8px"}}>
+                            
+                         {t("edit")}
+                         
+                     </div> )
+                        : ("") 
+                        }
+                    
                        
                     </div>
                 </div>
+                
             </div>
+            {activeEdit ? (
+                <div className="action-reply">
+                    <div className="reply-comment">
+                        <div className="reply-comment-form">
+                            <form action="" className="comment__form" onSubmit={handleSumit}>
+                                <textarea
+                                    className="comment__form-data"
+                                    value={reply.content}
+                                    onChange={(e) =>
+                                        setReply({
+                                            ...reply,
+                                            content: e.target.value,
+                                        })
+                                    }
+                                ></textarea>
+                                <div className="comment__form-actions" onClick={handleEdit}>
+                                    <div className="comment__form-actions-submit">{t("send")}</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
             {activeReply ? (
                 <div className="action-reply">
                     <div className="reply-comment">

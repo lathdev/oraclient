@@ -7,6 +7,8 @@ const Reply = ({ reply, visible, currentUser, isAdmin }) => {
     const [voteCountReply, setVoteCountReply] = useState(null);
     const [voteCountReplyUpdate, setVoteCountReplyUpdate] = useState([]);
     const [isUserCmt, setIsUserCmt] = useState(false);
+    const [activeEdit, setActiveEdit] = useState(false);
+    const [edit, setEdit] = useState({});
     const { t } = useTranslation();
     useEffect(() => {
         if (reply.voteCount) {
@@ -50,6 +52,34 @@ const Reply = ({ reply, visible, currentUser, isAdmin }) => {
         },
         [reply._id]
     );
+    const handelVisibleEdit = () => {
+        setActiveEdit(!activeEdit);
+        setEdit(reply)
+    }
+    const handleEdit = useCallback(
+        async (e) => {
+            e.preventDefault();
+            try {
+                const token = localStorage.getItem("token");
+                const option = {
+                    method: "put",
+                    url: `/api/v1/reply/reply/edit/`,
+                    data: {
+                        replyId: reply._id, 
+                        content: edit.content
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                const res = await axios(option);
+                if (res.data.data) window.location.reload(false);
+               
+            } catch (err) {}
+        },
+        [edit]
+    );
+   
     useEffect(() => {
         if (voteCountReplyUpdate) {
             setVoteCountReply(voteCountReplyUpdate.length);
@@ -104,11 +134,45 @@ const Reply = ({ reply, visible, currentUser, isAdmin }) => {
                         ) : (
                             ""
                         )}
+                          {isUserCmt ? (
+                         <div onClick={handelVisibleEdit} style={{padding:"8px"}}>
+                            
+                         {t("edit")}
+                         
+                     </div> )
+                        : ("") 
+                        }
                         </div>
                     </div>
                 </div>
             </div>
+            {activeEdit ? (
+                <div className="">
+                    <div className="reply-comment">
+                        <div className="reply-comment-form">
+                            <form action="" className="comment__form">
+                                <textarea
+                                    className="comment__form-data"
+                                    value={edit.content}
+                                    onChange={(e) => 
+                                        setEdit({
+                                            ...edit,
+                                            content: e.target.value,
+                                        })
+                                     }
+                                ></textarea>
+                                <div className="comment__form-actions" onClick={handleEdit}>
+                                    <div className="comment__form-actions-submit">{t("send")}</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
         </div>
+        
     );
 };
 
