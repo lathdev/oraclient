@@ -628,14 +628,14 @@ const Header = () => {
                                     <div className="header__menu-navbar">
                                         <ul className="header__menu-list" ref={listRef}>
                                         <li className="header__menu-item">
-                                                    <Link to={`/category/`} className="header__menu-link">
-                                                        All
+                                                    <Link to={`/category`} className="header__menu-link">
+                                                        {t("All")}
                                                     </Link>
                                                 </li>
                                             {categorise.data.map((e, i) => (
                                                 <li key={i._id} className="header__menu-item">
                                                     <Link to={`/category/${e.slug}`} className="header__menu-link">
-                                                        {e.name}
+                                                        {t(e.name)}
                                                     </Link>
                                                 </li>
                                                 
@@ -647,7 +647,7 @@ const Header = () => {
                                         className="header__menu-category-icon right"
                                         onClick={() => {
                                             if (isMobile) {
-                                                listRef.current.style.transform = `translateX(-60px)`;
+                                                listRef.current.style.transform = `translateX(-130px)`;
                                             }
                                         }}
                                     >

@@ -38,7 +38,7 @@
         color: rgba(160, 174, 192, 1);
         font-style: italic;
         word-wrap: break-word;
-        overflow-wrap: break-word;
+        overflow-wrap: break-all;
     }
 
     &-content {
@@ -392,11 +392,8 @@
         margin-left: auto;
         margin-right: auto;
         background-color: rgba($white, 1);
-        border: 1px solid rgba(234, 248, 255, 1);
-        border-radius: 1.25rem;
-        box-shadow: 0 10px 15px -3px rgba(47, 181, 250, 0.05), 0 4px 6px -2px rgba(47, 181, 250, 0.025);
         border: 1px solid rgba(226, 232, 240, 1);
-        border-radius: 3px;
+        border-radius: 12px;
     }
     &__form {
         position: relative;
@@ -471,4 +468,8 @@
 .tip-post {
    margin-right: 10px;
    
+}
+.ce-paragraph {
+    word-break: break-word;
+    display: inline-block;
 }

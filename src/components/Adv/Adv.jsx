@@ -36,8 +36,8 @@ const Adv = () => {
                 <p className="adv__donate-content">{t("you_love_piora_and_want_to_help_us")}</p>
                 <Link to="/" className="adv__donate-link">
                     <button className="adv__donate-button" onClick={donate}>
-                        <i className="bx bx-donate-heart  adv__donate-icon"></i>
-                        Donate
+                    <img src="/icons/tip_white.png" alt="" width="20px"/>
+                       <span> {t("donate")}</span>
                     </button>
                 </Link>
             </div>

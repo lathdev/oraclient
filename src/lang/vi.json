@@ -21,7 +21,7 @@
     "read": "đọc",
     "content_allowed": "Nội quy",
     "policy": "PHÁP LÝ",
-    "you_love_piora_and_want_to_help_us": "Bạn yêu mến Piora và muốn ủng hộ chúng mình?",
+    "you_love_piora_and_want_to_help_us": "Bạn yêu mến Piora và muốn ủng hộ nền tảng?",
     "donate": "Ủng hộ",
     "MAY_BE_GOOD_FOR_YOU": "DÀNH CHO BẠN",
     "welcome_to_piora": "Chào mừng bạn đến với Piora",
@@ -110,5 +110,15 @@
     "markasread": "Đánh dấu đã đọc",
     "insertpitip": "Nhập số lượng Pi ủng hộ:",
     "limittime": "Để tránh giao dịch spam làm nghẽn hệ thống, bạn chỉ có thể rút Pi một lần trong ngày",
-    "confirmback": "Bạn thật sự muốn rời khỏi? Những gì bạn đã viết sẽ không được lưu"
+    "confirmback": "Bạn thật sự muốn rời khỏi? Những gì bạn đã viết sẽ không được lưu",
+    "All": "Tất cả",
+    "Finance": "Tài chính",
+    "Beauty": "Làm đẹp",
+    "Travel": "Du lịch",
+    "Other": "Khác",
+    "Food": "Ăn uống",
+    "Tech": "Công nghệ",
+    "Ora | Social Network for Pioneers": "Ora | Mạng xã hội dành cho Pioneer",
+    "Write - Share - Connect - Earn Pi": "Viết - Chia sẻ - Kết nối - Nhận Pi",
+    "Start": "Bắt đầu"
 }

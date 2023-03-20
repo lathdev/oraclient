@@ -89,7 +89,7 @@ const CategoryItem = () => {
                     ></div>
                     <div className="category__header-container">
                         <div className="category__header-info">
-                            <p className="category__header-title">{data.name}</p>
+                            <p className="category__header-title">{t(data.name)}</p>
                             {isFollow ? (
                                 <div onClick={() => window.location.reload(false)}>
                                     <button className="button-page" type="submit" onClick={handleSubmit}>
@@ -114,7 +114,7 @@ const CategoryItem = () => {
                         <div className="row">
                             <div className="col l-8">
                                 <div className="category__content">
-                                    {postItem.slice(0, 1).map((e, i) => (
+                                    {/* {postItem.slice(0, 1).map((e, i) => (
                                         <div className="category__content-post">
                                             <div className="category__content-post-img">
                                                 <img
@@ -128,14 +128,14 @@ const CategoryItem = () => {
                                             </div>
                                             <div className="category__content-post-details">
                                                 <div className="category__content-post-details-heading flex-box">
-                                                    <div>
+                                                
                                                         <Link to="/">
                                                             <span className="title-category">{e.category.name}</span>
                                                         </Link>
                                                         <span className="time-read">
                                                             4 {t("min")} {t("read")}
                                                         </span>
-                                                    </div>
+                                                   
                                                     <div>
                                                         <svg
                                                             _ngcontent-serverapp-c41=""
@@ -177,7 +177,7 @@ const CategoryItem = () => {
                                                                     />
                                                                 </Link>
                                                             </div>
-                                                            <div>
+                                                            
                                                                 <Link to={`/user/${e.author.userName}`}>
                                                                     <p className="post-username">
                                                                         {e.author.displayName
@@ -186,7 +186,7 @@ const CategoryItem = () => {
                                                                     </p>
                                                                 </Link>
                                                                 <DatePost date={e.createdAt}></DatePost>
-                                                            </div>
+                                                            
                                                         </div>
                                                         <div className="flex-gap-20">
                                                             <div>
@@ -215,7 +215,7 @@ const CategoryItem = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
+                                    ))} */}
                                     <div className="category__content-filter">
                                         <Filter posts={postItem} />
                                     </div>

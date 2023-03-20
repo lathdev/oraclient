@@ -450,8 +450,8 @@ const User = () => {
                                                   <p>{t("do_you_love_this_author")}</p>
                                                   <div className="adv__donate-link">
                                                       <button className="adv__donate-button" onClick={tip}>
-                                                          <i className="bx bx-donate-heart  adv__donate-icon"></i>
-                                                          {t("donate")}
+                                                      <img src="/icons/tip_white.png" alt="" width="20px"/>
+                                                        <span>  {t("donate")}</span>
                                                       </button>
                                                   </div>
                                               </div>

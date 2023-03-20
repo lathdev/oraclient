@@ -475,14 +475,14 @@ const Post = () => {
                         <div className="flex-align-gap-10">
                             {isUser ? (
                                 <Link to={`/post/update/${path}`}>
-                                    <span className="button-data edit">Edit</span>
+                                    <span className="button-data edit">{t("edit")}</span>
                                 </Link>
                             ) : (
                                 ""
                             )}
                             {isUser || isAdmin ? (
                                 <button className="btn-delete" onClick={handleClickDelete}>
-                                    <span className="button-data delete">Delete</span>
+                                    <span className="button-data delete">{t("delete")}</span>
                                 </button>
                             ) : (
                                 ""
@@ -665,11 +665,11 @@ const Post = () => {
                 <div className="modal__delete">
                     <div className="modal__delete-container">
                         <div className="modal__delete-main">
-                            <header className="modal__delete-header">Delete</header>
+                            <header className="modal__delete-header">{t("delete")}</header>
                             <main className="modal__delete-content">Do you want to delete post?</main>
                             <footer className="modal__delete-footer">
                                 <button onClick={handleDelete} className="modal__delete-button delete">
-                                    DELETE?
+                                {t("delete")}
                                 </button>
                                 <button onClick={handleClickDelete} className="modal__delete-button cancle">
                                     Cancel

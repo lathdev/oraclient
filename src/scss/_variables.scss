@@ -281,7 +281,8 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
+    border-radius: 9px;
+    height: 32px;
     cursor: pointer;
     padding: 0.5rem 1rem;
     &.edit {

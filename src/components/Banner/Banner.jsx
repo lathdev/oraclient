@@ -3,8 +3,9 @@ import S from "./Banner.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userState$ } from "../../redux/selectors";
-
+import { useTranslation } from "react-i18next";
 function Banner() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const currentUser = useSelector(userState$);
 
@@ -19,11 +20,11 @@ function Banner() {
         <div className={S.Banner}>
             <div className={S.Container}>
                 <div className={S.Top}>
-                    <h1 className={S.H1}>Ora | Social Network for Pioneers</h1>
-                    <p className={S.Para}>Write - Share - Connect - Earn Pi</p>
+                    <h1 className={S.H1}>{t("Ora | Social Network for Pioneers")}</h1>
+                    <p className={S.Para}>{t("Write - Share - Connect - Earn Pi")}</p>
                 </div>
                 <button className={S.Button} onClick={handleGetStarted}>
-                    Start
+                   {t("Start")}
                 </button>
             </div>
         </div>

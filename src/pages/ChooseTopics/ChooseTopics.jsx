@@ -75,7 +75,7 @@ const ChooseTopics = () => {
                                             active ? (active.some((id) => id === category._id) ? "active" : "") : ""
                                         }`}
                                     >
-                                        <p className="topics__content-text">{category.name}</p>
+                                        <p className="topics__content-text">{t(category.name)}</p>
                                     </div>
                                 </div>
                             ))}
