@@ -85,7 +85,7 @@ const CategoryItem = () => {
                 <header className="category__header">
                     <div
                         className="category__header-background"
-                        style={{ backgroundImage: `url(${data.attachment})` }}
+                        style={{ backgroundImage: `url(/images/${slug}.png)` }}
                     ></div>
                     <div className="category__header-container">
                         <div className="category__header-info">
