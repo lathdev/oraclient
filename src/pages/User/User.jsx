@@ -30,6 +30,7 @@ const User = () => {
     const { username } = useParams();
     const [postsSaved, setPostsSaved] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [pi, setPi] = useState(null);
     const timestamp = (date) => {
         const Timing = new Date(date)
        return Timing.getTime();
@@ -114,13 +115,41 @@ const User = () => {
                     onTipPi={(pi) => {
                         if (userPi) {
                             donatePi(`to ${userPi}`, pi, { To: "Piora" });
+                            setPi(pi);
                             destroyModal();
+
                         }
                     }}
                 />
             );
         }
     }
+
+    const tipNotofication = useCallback(async () => {
+        if (pi) {
+            const token = localStorage.getItem("token");
+            try {
+                const option = {
+                    method: "post",
+                    url: `/api/v1/notifications/`,
+                    data: {
+                        tip: pi,
+                        user: currentUser.user._id
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+              
+               const note = await axios(option);
+               console.log("tip", pi, note);
+            } catch (err) {}
+        }
+    }, [pi, currentUser]);
+    useEffect(() => {
+        tipNotofication();
+    }, [tipNotofication]);
+
     const handelUnFlow = useCallback(
         async (e) => {
             const token = localStorage.getItem("token");

@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const Notifications = ({ notification }) => {
+    const {t} = useTranslation();
     let date = new Date(notification.createdAt);
     return notification.post ? 
     notification.comment ? 
-    notification.reply ?  (
+    notification.reply ?
+     (
         <li className={`header__notify-item ${notification.isRead ? "" : "active"}`}>
         <Link to={`/post/${notification.post.slug}?notiId=${notification._id}`} className={`header__notify-link`}>
             <div className="header__notify-menu">
@@ -30,7 +33,7 @@ const Notifications = ({ notification }) => {
                                     : notification.parentId.userName}{" "}
                             </b>
                         </span>
-                        <span>reply your comment on post: </span>
+                        <span>{t("replyyourcommentonpost")}</span>
                         <q className="header__notify-strong header__notify-content">
                             <b className="">{notification.post.title}</b>
                         </q>
@@ -73,7 +76,7 @@ const Notifications = ({ notification }) => {
                                     : notification.parentId.userName}{" "}
                             </b>
                         </span>
-                        <span>comment on post: </span>
+                        <span>{t("commentonpost")} </span>
                         <q className="header__notify-strong header__notify-content">
                             <b className="">{notification.post.title}</b>
                         </q>
@@ -117,7 +120,7 @@ const Notifications = ({ notification }) => {
                                         : notification.parentId.userName}{" "}
                                 </b>
                             </span>
-                            <span>writed a new post: </span>
+                            <span>{t("writedanewpost")} </span>
                             <q className="header__notify-strong header__notify-content">
                                 <b className="">{notification.post.title}</b>
                             </q>
@@ -133,7 +136,46 @@ const Notifications = ({ notification }) => {
                 </div>
             </Link>
         </li>
-    ) : (
+    ) : 
+    notification.tip ? (
+        <li className={`header__notify-item ${notification.isRead ? "" : "active"}`}>
+               <Link to={`/user/${notification.parentId.userName}`}>
+                    <div className="header__notify-menu">
+                        <div className="header__notify-image">
+                            <Link to={`/user/${notification.parentId.userName}`}>
+                                <img
+                                    src={
+                                        notification.parentId.avatar
+                                            ? `https://${notification.parentId.avatar.slice(7)}`
+                                            : "/icons/avatar.png"
+                                    }
+                                    alt=""
+                                    className="header__notify-img"
+                                />
+                            </Link>
+                        </div>
+                        <div className="header__notify-info">
+                            <div className="header__notify-info-container">
+                                <span className="header__notify-strong">
+                                    <b>
+                                        {notification.parentId.displayName
+                                            ? notification.parentId.displayName
+                                            : notification.parentId.userName}{" "}
+                                    </b>
+                                </span>
+                                <span>{t("tipyou")} {notification.tip} Pi</span>
+
+                            </div>
+                        </div>
+                        <div className="header__notify-icon">
+                            <i className=" bx bx-dots-horizontal-rounded"></i>
+                        </div>
+                    </div>
+                    </Link>
+            </li>
+         ) :
+    (
+
         <li className={`header__notify-item ${notification.isRead ? "" : "active"}`}>
             <Link
                 to={`/user/${notification?.parentId?.userName}?notiId=${notification._id}`}
@@ -156,7 +198,7 @@ const Notifications = ({ notification }) => {
                                         : notification?.parentId?.userName}{" "}
                                 </b>
                             </span>
-                            <span> follow you </span>
+                            <span> {t("followyou")} </span>
                         </div>
                     </div>
                     <i className=" header__notify-icon bx bx-dots-horizontal-rounded"></i>

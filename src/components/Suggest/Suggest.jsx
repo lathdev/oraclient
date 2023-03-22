@@ -53,7 +53,7 @@ const Suggest = () => {
                                         <div className="suggest__content-details-heading">
                                             <div>
                                                 <Link to={`/category/${pinPost?.category.slug}`}>
-                                                    <span className="title-category">{pinPost?.category.name}</span>
+                                                    <span className="title-category">{t(pinPost?.category.name)}</span>
                                                 </Link>
                                                 <span className="time-read">4 min read</span>
                                             </div>
@@ -183,7 +183,7 @@ const Suggest = () => {
                                                                     <div>
                                                                         <Link to={`/category/${post.category.slug}`}>
                                                                             <span className="title-category">
-                                                                                {post.category.name}
+                                                                                {t(post.category.name)}
                                                                             </span>
                                                                         </Link>
                                                                         <span className="time-read">6 min read</span>

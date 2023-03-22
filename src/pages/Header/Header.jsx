@@ -589,7 +589,7 @@ const Header = () => {
                                                                     src={e.attachment}
                                                                     alt=""
                                                                 />
-                                                                <span className="header__cate-text">{e.name}</span>
+                                                                <span className="header__cate-text">{t(e.name)}</span>
                                                             </div>
                                                         </Link>
                                                     </div>

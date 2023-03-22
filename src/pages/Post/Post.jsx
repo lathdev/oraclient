@@ -45,6 +45,7 @@ const Post = () => {
     const [newComment, setNewComment] = useState(null);
     const [isVote, setIsVote] = useState(false);
     const [isUnVote, setIsUnVote] = useState(false);
+    const [pi, setPi] = useState(0);
     const timestamp = (date) => {
         const Timing = new Date(date)
        return Timing.getTime();
@@ -96,21 +97,47 @@ const Post = () => {
         if (!piB) return alert(t("notPiBrowser"));
         else {
             const res = await axios.get(`/api/v1/posts/${path}`);
-
             const userPi = res.data.post.author.userName;
-
+            const postId = res.data.post._id
             openModal(
                 <ModalTipPi
                     onTipPi={(pi) => {
                         if (userPi) {
                             donatePi(`to ${userPi}`, pi, { To: "Piora" });
+                            setPi(pi);
                             destroyModal();
                         }
                     }}
                 />
             );
         }
+
     }
+    const tipNotofication = useCallback(async () => {
+        if (pi) {
+            const token = localStorage.getItem("token");
+            try {
+                const option = {
+                    method: "post",
+                    url: `/api/v1/notifications/`,
+                    data: {
+                        tip: pi,
+                        user: authPost._id,
+                    },
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+              
+               const note = await axios(option);
+               console.log("tip", pi, note);
+            } catch (err) {}
+        }
+    }, [pi, authPost]);
+    useEffect(() => {
+        tipNotofication();
+    }, [tipNotofication]);
+  
 
     const handleUnVote = useCallback(
         async (e) => {
@@ -440,7 +467,7 @@ const Post = () => {
                 <div className="post__details-auth">
                     <div className="post__details-category">
                         <Link to={`/category/${categoryPost.slug}`}>
-                            <span className="post__details-category-name">{categoryPost.name}</span>
+                            <span className="post__details-category-name">{t(categoryPost.name)}</span>
                         </Link>
                     </div>
                     <div className="post__details-title">
@@ -570,11 +597,11 @@ const Post = () => {
                                     ""
                                 ) : active ? (
                                     <button className="btn-fl followed" onClick={handleUnFlow}>
-                                        Following
+                                        {t("following")}
                                     </button>
                                 ) : (
                                     <button className="btn-fl follow" onClick={handleFlow}>
-                                        Follow
+                                        {t("follow")}
                                     </button>
                                 )}
                             </div>
@@ -584,17 +611,17 @@ const Post = () => {
                     <div className="category__item">
                         <div className="catergory__info">
                             <Link className="name-main" to={`/category/${categoryPost.slug}`}>
-                                <span>{categoryPost.name}</span>
+                                <span>{t(categoryPost.name)}</span>
                             </Link>
                             <p>/{categoryPost.slug}</p>
                         </div>
                         {activeCate ? (
                             <button className="btn-fl followed" onClick={handleUnFlowCategory}>
-                                Following
+                                 {t("following")}
                             </button>
                         ) : (
                             <button className="btn-fl follow" onClick={handleFlowCategory}>
-                                Follow
+                                {t("follow")}
                             </button>
                         )}
                     </div>

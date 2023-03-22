@@ -110,5 +110,10 @@
     "markasread": "Mark all as read",
     "insertpitip": "Enter tip amount:",
     "limittime": "To avoid spam transactions causing system overload, you can only withdraw Pi once a day",
-    "confirmback": "Are you sure you want to leave? All provided data will be lost!"
+    "confirmback": "Are you sure you want to leave? All provided data will be lost!",
+    "replyyourcommentonpost": "reply your comment on post: ",
+    "commentonpost": "comment on post:",
+    "writedanewpost": "writed a new post:",
+    "tipyou": "tip you",
+    "followyou": "followed you"
 }

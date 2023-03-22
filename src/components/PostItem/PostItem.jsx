@@ -7,7 +7,9 @@ import { userState$ } from "../../redux/selectors/";
 import { useSelector } from "react-redux";
 import DatePost from "../DatePost/DatePost";
 import useMediaQuery from "../../hooks/useMedia";
+import { useTranslation } from "react-i18next";
 const PostItem = ({ post }) => {
+    const { t } = useTranslation();
     let date = new Date();
     const currentUser = useSelector(userState$);
     const [datePost, setDatePost] = useState(null);
@@ -113,7 +115,7 @@ const PostItem = ({ post }) => {
                             <div className="filter__content-heading">
                                 <div>
                                     <Link to={`/category/${post.category.slug}`}>
-                                        <span className="title-category">{post.category.name}</span>
+                                        <span className="title-category">{t(post.category.name)}</span>
                                     </Link>
                                     <span className="time-read">4 min read</span>
                                 </div>
@@ -236,7 +238,7 @@ const PostItem = ({ post }) => {
                             <div className="filter__content-heading">
                                 <div>
                                     <Link to={`/category/${post.category.slug}`}>
-                                        <span className="title-category">{post.category.name}</span>
+                                        <span className="title-category">{t(post.category.name)}</span>
                                     </Link>
                                     <DatePost date={post.createdAt}></DatePost>
                                 </div>
