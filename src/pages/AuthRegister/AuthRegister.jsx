@@ -42,13 +42,16 @@ const AuthRegister = () => {
             if (!piB) return alert(t("notPiBrowser"))
             else {
                 const userPi = await Pisdk();
-                setisUserPi(userPi.username);
-                setEMail({ email: `${userPi.username}` });
+                setisUserPi(userPi.user.username);
+                setEMail({ email: `${userPi.user.username}` });
     
                 const option = {
                     method: "post",
                     url: `/api/v1/auth/send`,
-                    data: { email: `${userPi.username}` },
+                    data: { 
+                        email: `${userPi.user.username}`,
+                        accessToken: userPi.accessToken
+                 },
                 };
     
                 const response = await axios(option);

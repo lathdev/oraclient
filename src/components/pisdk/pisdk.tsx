@@ -54,7 +54,7 @@ export async function Pisdk() {
     try {
         const scopes = ["username", "payments"];
         let authResult: AuthResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
-        return authResult.user;
+        return authResult;
     } catch (err) {
         alert(err);
     }

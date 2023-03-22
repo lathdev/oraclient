@@ -35,7 +35,8 @@ const Login = () => {
             const userPi = await Pisdk();
 
             if (userPi) {
-                dispatch(actions.login.loginPiRequest({ piUser: userPi.username, accessToken: userPi.uid }));
+                console.log(userPi)
+                dispatch(actions.login.loginPiRequest({ piUser: userPi.user.username, accessToken: userPi.accessToken }));
             }
         } catch (err) {
             dispatch(actions.login.loginFailure());

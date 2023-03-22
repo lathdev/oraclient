@@ -51,6 +51,7 @@ const ResetPassword = () => {
         });
     };
     let navigate = useNavigate();
+
    const AuthPi = useCallback(async (e) => {
     if (!piB) alert("Please use Pi Browser")
        else { try {
@@ -59,12 +60,12 @@ const ResetPassword = () => {
             const userPi = await Pisdk();
 
             if (userPi) {
-             setPiAcc(userPi.username);
+             setPiAcc(userPi.user.username);
                 const option = {
                     method: "put",
                     url: `/api/v1/auth/resetpassword`,
-                    data: { email: `${userPi.username}`,
-                    accessToken: userPi.uid
+                    data: { email: `${userPi.user.username}`,
+                    accessToken: userPi.accessToken
                  },
                 };
     
