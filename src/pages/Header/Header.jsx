@@ -269,7 +269,7 @@ const Header = () => {
        if (userPi) { const option = {
             method: "post",
             url: `/api/v1/auth/send`,
-            data: { email: `${userPi.username}` },
+            data: { email: `${userPi.user.username}` },
         };
   const res = await axios(option); 
   console.log(res.data.data)
